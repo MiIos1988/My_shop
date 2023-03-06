@@ -1,72 +1,127 @@
-import { useFormik } from 'formik';
-import { userData } from '../../service/authService';
-import * as Yup from "yup"
-
-const registerSchema = Yup.object({
-    email: Yup.string().required(),
-    password: Yup.string().required(),
-    confirmPassword: Yup.string().required(),
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required(),
-    phone: Yup.number().required(),
-    city: Yup.string().required()
-
-})
-
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { userData } from "../../service/authService";
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const RegisterComponent = () => {
-    const formik = useFormik({
-        initialValues: {
-            email: '',
-            password: '',
-            confirmPassword: '',
-            firstName: '',
-            lastName: '',
-            phone: '',
-            city: '',
-        },
-        onSubmit: values => {
-            console.log(values)
-            userData(values).then(res => console.log("working backend"))
-                .catch(error => console.log(error));
-        },
-    })
-    return (
-        <>
-            <form className='col-4 offset-4 mt-4' onSubmit={formik.handleSubmit} >
-                <div className="mb-3">
-                    <label htmlFor="email" className="form-label">Email</label>
-                    <input type="email" className="form-control" name={"email"} value={formik.values.email} onChange={formik.handleChange} id="email" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" name={"password"} value={formik.values.password} onChange={formik.handleChange} id="password" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="confirmPassword" className="form-label">Confirm password</label>
-                    <input type="password" className="form-control" name={"confirmPassword"} value={formik.values.confirmPassword} onChange={formik.handleChange} id="confirmPassword" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="firstName" className="form-label">First name</label>
-                    <input type="text" className="form-control" name={"firstName"} value={formik.values.firstName} onChange={formik.handleChange} id="firstName" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="lastName" className="form-label">Last name</label>
-                    <input type="text" className="form-control" name={"lastName"} value={formik.values.lastName} onChange={formik.handleChange} id="lastName" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="phone" className="form-label">Phone</label>
-                    <input type="text" className="form-control" name={"phone"} value={formik.values.phone} onChange={formik.handleChange} id="phone" />
-                </div>
-                <div className="mb-3">
-                    <label htmlFor="city" className="form-label">City</label>
-                    <input type="text" className="form-control" name={"city"} value={formik.values.city} onChange={formik.handleChange} id="city" />
-                </div>
+  const [isRegister, setIsRegister] = useState(false);
 
-                <button type="submit" className="btn btn-primary">Register</button>
-            </form>
-        </>
-    )
-}
+  const SignUpSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+    username: Yup.string()
+      .min(4, "Too Short!")
+      .max(30, "Too Long!")
+      .required("Required"),
+    password: Yup.string().min(2, "Too Short!").required("Required"),
+    confirmPassword: Yup.string()
+      .required()
+      .oneOf([Yup.ref("password")], "Your passwords do not match."),
+    firstName: Yup.string().required(),
+    lastName: Yup.string().required(),
+    phone: Yup.string().required().min(2, "Too Short!"),
+    city: Yup.string().required(),
+  });
+
+  const navigate = useNavigate();
+
+  return (
+    <>
+      {!isRegister ? (
+        <div className="col-4 offset-4">
+          <h1>Register</h1>
+          <Formik
+            initialValues={{
+              email: "",
+              username: "",
+              password: "",
+              confirmPassword: "",
+              firstName: "",
+              lastName: "",
+              phone: "",
+              city: "",
+            }}
+            validationSchema={SignUpSchema}
+            onSubmit={(values) => {
+              // same shape as initial values
+              console.log(values);
+              userData(values)
+                .then((res) => {
+                  console.log("working backend");
+                  setIsRegister(true);
+                })
+                .catch((error) => console.log(error));
+            }}
+          >
+            <Form>
+              <Field
+                className="form-control my-2"
+                name="email"
+                type="email"
+                placeholder="Email"
+              />
+              <ErrorMessage name="email" />
+              <Field
+                className="form-control my-2"
+                name="username"
+                type="text"
+                placeholder="Username"
+              />
+              <ErrorMessage name="username" />
+              <Field
+                className="form-control my-2"
+                name="password"
+                type="password"
+                placeholder="Password"
+              />
+              <ErrorMessage name="password" />
+              <Field
+                className="form-control my-2"
+                name="confirmPassword"
+                type="password"
+                placeholder="Confirm password"
+              />
+              <ErrorMessage name="confirmPassword" />
+              <Field
+                className="form-control my-2"
+                name="firstName"
+                type="text"
+                placeholder="First name"
+              />
+              <ErrorMessage name="firstName" />
+              <Field
+                className="form-control my-2"
+                name="lastName"
+                type="text"
+                placeholder="Last name"
+              />
+              <ErrorMessage name="lastName" />
+              <Field
+                className="form-control my-2"
+                name="phone"
+                type="text"
+                placeholder="Phone"
+              />
+              <ErrorMessage name="phone" />
+              <Field
+                className="form-control my-2"
+                name="city"
+                type="text"
+                placeholder="City"
+              />
+              <ErrorMessage name="city" />
+
+              <button className="btn btn-primary my-2" type="submit">
+                Register
+              </button>
+            </Form>
+          </Formik>
+        </div>
+      ) : (
+        <div>Go to the email and click on the link</div>
+      )}
+    </>
+  );
+};
 
 export default RegisterComponent;
