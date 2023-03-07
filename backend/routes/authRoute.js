@@ -4,11 +4,11 @@ const registerValidation = require("../validation/registerValidation");
 const authRoute = express.Router();
 const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
+const jwt = require("jsonwebtoken")
 
-// uuohpdctlngdhdvl
 
 authRoute.post("/register", registerValidation, async (req, res) => {
-  req.body.password = bcrypt.hashSync("name", 10);
+  req.body.password = bcrypt.hashSync(req.body.password, 10);
   try {
     const newUser = await UserModel.create(req.body);
     newUser.save();
@@ -40,6 +40,25 @@ authRoute.post("/register", registerValidation, async (req, res) => {
   }
 });
 
+authRoute.post("/login", (req, res) => {
+  const body = req.body
+  UserModel.findOne({ email: body.email }).then(data => {
+
+    if (!data) { res.status(417).send("Email is not valid") }
+    else if (!bcrypt.compareSync(body.password, data.password)) {
+      res.status(417).send("Password is not valid");
+    } else {
+      let ts = new Date().getTime()
+      let token = jwt.sign({ ...data, ts }, "log");
+      data.password = undefined;
+      data.isAdmin = undefined;
+      data.isActive = undefined;
+      // console.log(data)
+      res.send({ data, token })
+    }
+  })
+    .catch(err => console.log(err))
+})
 authRoute.put("/active:id", (req, res) => {
   console.log(req.params.id)
   req.send("ok")

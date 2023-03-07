@@ -1,6 +1,8 @@
+import LoginComponent from "../components/login/LoginComponent"
+
 const LoginPageComponent = () => {
     return (
-        <h1>Login</h1>
+        <LoginComponent />
     )
 }
 

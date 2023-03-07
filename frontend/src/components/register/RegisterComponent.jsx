@@ -1,7 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { userData } from "../../service/authService";
 import * as Yup from "yup";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 
 const RegisterComponent = () => {
@@ -44,7 +44,7 @@ const RegisterComponent = () => {
                         validationSchema={SignUpSchema}
                         onSubmit={(values) => {
                             // same shape as initial values
-                            console.log(values);
+                            // console.log(values);
                             userData(values)
                                 .then((res) => {
                                     console.log("working backend");
@@ -118,7 +118,11 @@ const RegisterComponent = () => {
                     </Formik>
                 </div>
             ) : (
+                <>
                 <div>Go to the email and click on the link</div>
+                <Link to>Link sent in email</Link>
+                </>
+                
             )}
         </>
     );
