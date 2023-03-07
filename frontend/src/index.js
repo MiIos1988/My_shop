@@ -5,14 +5,23 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import router from './routes/routes';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux'
+import userSlicer from './redux/userSlicer';
 
 const route = createBrowserRouter(router);
+
+const store = configureStore({
+  reducer: { userSlicer }
+})
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
-    <RouterProvider router={route} />
+    <Provider store={store}>
+      <RouterProvider router={route} />
+    </Provider>
   </React.StrictMode>
 );
 

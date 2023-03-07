@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
 const NavbarComponent = () => {
+  const store = useSelector(state => state.userSlicer)
+  console.log(store)
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
