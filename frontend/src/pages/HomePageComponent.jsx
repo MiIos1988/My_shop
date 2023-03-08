@@ -1,7 +1,7 @@
 
 const HomePageComponent = () => {
     return (
-        <h1 className="display-5">Work</h1>
+        <h1 className="display-5">Home page</h1>
     )
 }
 

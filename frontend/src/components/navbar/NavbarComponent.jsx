@@ -1,9 +1,13 @@
-import { useSelector } from "react-redux"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { removeUser } from "../../redux/userSlicer"
 
 const NavbarComponent = () => {
-  const store = useSelector(state => state.userSlicer)
-  console.log(store)
+  const dispatch = useDispatch()
+  const userStore = useSelector((store) => store.userSlicer.user);
+
+  const onLogout = () => dispatch(removeUser())
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -25,8 +29,21 @@ const NavbarComponent = () => {
                 User
               </Link>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><Link className="dropdown-item" to={"/register"}>Register</Link></li>
-                <li><Link className="dropdown-item" to={"/login"}>Login</Link></li>
+                {
+                  !userStore?.email ? (
+                    <>
+                      <li><Link className="dropdown-item" to={"/register"}>Register</Link></li>
+                      <li><Link className="dropdown-item" to={"/login"}>Login</Link></li>
+                    </>
+                  ) : (
+                    <>
+                      <li><Link className="dropdown-item" to={"/"}>Profile</Link></li>
+                      <li><Link className="dropdown-item" to={"/"} onClick={onLogout}>Logout</Link></li>
+                    </>
+                  )
+                }
+
+
               </ul>
             </li>
 

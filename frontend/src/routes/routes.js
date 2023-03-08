@@ -4,6 +4,7 @@ import HomePageComponent from "../pages/HomePageComponent";
 import LoginPageComponent from "../pages/LoginPageComponent";
 import RegisterPageComponent from "../pages/RegisterPageComponent";
 
+
 const router = [
   {
     path: "/",
@@ -19,6 +20,10 @@ const router = [
       },
       {
         path: "activation-account/:activationId",
+        element: <ActivationAccountPageComponent />,
+      },
+      {
+        path: "active",
         element: <ActivationAccountPageComponent />,
       },
       {

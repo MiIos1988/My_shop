@@ -1,13 +1,23 @@
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { userActive } from "../service/authService";
 
 const ActivationAccountPageComponent = () => {
     const params = useParams()
     const userId = params.activationId;
-const navigate = useNavigate()
+    const navigate = useNavigate()
+    // console.log("active", userId)
 
-    userActive(userId).then( data => navigate("/login"))
-    .catch( error => console.log("Problem in activation email."));
+    useEffect(() => {
+        userActive({ "id": userId }).then(data => {
+            navigate("/")
+        })
+            .catch(error => console.log("Problem in activation email."));
+    }, []
+    )
+
+
+    return <h1>Work</h1>
 
 
 

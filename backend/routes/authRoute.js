@@ -19,23 +19,23 @@ authRoute.post("/register", registerValidation, async (req, res) => {
       // port: 587,
       // secure: false,
       auth: {
-        user: "vojvoda19881@gmail.com", // generated ethereal user
-        pass: "uuohpdctlngdhdvl", // generated ethereal password
+        user: "sudimac1988@gmail.com",
+        pass: "cwnepxwqdvygkzzq",
 
       },
 
     });
     let info = await transporter.sendMail({
-      from: ' "test" "vojvoda19881@gmail.com"', // sender address
-      to: req.body.email, // list of receivers
-      subject: "Test email", // Subject line
-      text: "Hello world?", // plain text body
+      from: ' "test" "vojvoda19881@gmail.com"',
+      to: req.body.email,
+      subject: "Test email",
       html: `<h2 style="color: red">Please confirm registration </h2>
             <p>Click on link</p>
             <a  href="http://localhost:3000/activation-account/${newUser?._id}" target="_blank">Go to WebSite</a>    `,
     });
     res.send("Send email")
-  } catch {
+  }
+  catch {
     res.status(416).send("Error creating new user");
   }
 });
@@ -59,9 +59,10 @@ authRoute.post("/login", (req, res) => {
   })
     .catch(err => console.log(err))
 })
-authRoute.put("/active:id", (req, res) => {
-  console.log(req.params.id)
-  req.send("ok")
+authRoute.post("/active", (req, res) => {
+  console.log("body---", req.body)
+  console.log("hed---", req.header)
+  res.send("ok");
 })
 
 module.exports = authRoute;
