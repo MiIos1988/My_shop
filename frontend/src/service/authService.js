@@ -4,7 +4,7 @@ export const userData = (data) => axios.post("/auth/register", data);
 
 export const loginData = (data) => axios.post("/auth/login", data);
 
-export const userActive = (id) => axios.post("/auth/active", id);
+export const userActive = (id) => axios.put("/auth/active", id);
 
 export const setUserInLocalStorage = (user) => localStorage.setItem("my_user", JSON.stringify(user));
 

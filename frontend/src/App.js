@@ -7,8 +7,8 @@ import { saveUser } from "./redux/userSlicer";
 
 axios.defaults.baseURL = "http://localhost:5050/api"
 axios.interceptors.request.use((config) => {
-  if (localStorage.hasOwenProperty("my_token")) {
-    config.headers.Authorization.localStorage.getItem("my_token")
+  if (localStorage.hasOwnProperty("my_token")) {
+    config.headers.Authorization = localStorage.getItem("my_token")
   }
   return config;
 })

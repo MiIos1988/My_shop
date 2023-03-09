@@ -19,8 +19,8 @@ authRoute.post("/register", registerValidation, async (req, res) => {
       // port: 587,
       // secure: false,
       auth: {
-        user: "sudimac1988@gmail.com",
-        pass: "cwnepxwqdvygkzzq",
+        user: "vojvoda19881@gmail.com",
+        pass: "tzuhspkfqkzbsbes",
 
       },
 
@@ -59,10 +59,14 @@ authRoute.post("/login", (req, res) => {
   })
     .catch(err => console.log(err))
 })
-authRoute.post("/active", (req, res) => {
+authRoute.put("/active", (req, res) => {
   console.log("body---", req.body)
-  console.log("hed---", req.header)
-  res.send("ok");
+  // const filter = { name: 'Jean-Luc Picard' };
+  const update = { isActive: true };
+  UserModel.findOneAndUpdate(req.body, update)
+    .then(data => res.send("ok"))
+    .catch(err => console.log(err))
+
 })
 
 module.exports = authRoute;
