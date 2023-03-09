@@ -47,6 +47,8 @@ authRoute.post("/login", (req, res) => {
     if (!data) { res.status(417).send("Email is not valid") }
     else if (!bcrypt.compareSync(body.password, data.password)) {
       res.status(417).send("Password is not valid");
+    } else if (!body.isActive) {
+      res.status(418).send("You must activate your account. Go to the email and click on the link.");
     } else {
       let ts = new Date().getTime()
       let token = jwt.sign({ ...data, ts }, "log");
