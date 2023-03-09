@@ -9,3 +9,5 @@ export const userActive = (id) => axios.put("/auth/active", id);
 export const setUserInLocalStorage = (user) => localStorage.setItem("my_user", JSON.stringify(user));
 
 export const setTokenInLocalStorage = (token) => localStorage.setItem("my_token", JSON.stringify(token));
+
+export const removeLocalStorage = (name) => localStorage.removeItem(name);

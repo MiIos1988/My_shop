@@ -2,12 +2,17 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { removeUser } from "../../redux/userSlicer"
+import { removeLocalStorage } from "../../service/authService"
 
 const NavbarComponent = () => {
   const dispatch = useDispatch()
   const userStore = useSelector((store) => store.userSlicer.user);
 
-  const onLogout = () => dispatch(removeUser())
+  const onLogout = () => {
+    removeLocalStorage("my_user")
+    removeLocalStorage("my_token")
+    dispatch(removeUser())
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
