@@ -52,7 +52,7 @@ const NavbarComponent = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               ></Link>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                 {!userStore?.email ? (
                   <>
                     <li>
@@ -87,7 +87,7 @@ const NavbarComponent = () => {
               </ul>
             </li>
           </ul>
-          <div className="dropdown searchDrop">
+          <div className="dropdown searchDrop ">
             <button
               className="btn btn-secondary searchBtn"
               type="button"
@@ -95,12 +95,12 @@ const NavbarComponent = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              
+
             </button>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenu2">
               <form className="d-flex">
                 <input
-                  className="form-control me-2"
+                  className="form-control me-2 searchInp mx-2"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
