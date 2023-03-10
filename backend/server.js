@@ -10,7 +10,7 @@ mongoose
     "mongodb+srv://mongo:mongo@cluster0.gbtuujv.mongodb.net/?retryWrites=true&w=majority"
   )
   .then((data) => console.log("MongoDB is connecting..."))
-  .catch((error) => console.log("Error when connecting to  the MongoDB"));
+  .catch((error) => console.log(error));
 
 app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));

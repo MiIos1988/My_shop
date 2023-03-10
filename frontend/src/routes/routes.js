@@ -1,9 +1,9 @@
+import AuthGuardComponent from "../guard/AuthGuardComponent";
 import App from "../App";
 import ActivationAccountPageComponent from "../pages/ActivationAccountPageComponent";
 import HomePageComponent from "../pages/HomePageComponent";
 import LoginPageComponent from "../pages/LoginPageComponent";
 import RegisterPageComponent from "../pages/RegisterPageComponent";
-
 
 const router = [
   {
@@ -16,7 +16,11 @@ const router = [
       },
       {
         path: "register",
-        element: <RegisterPageComponent />,
+        element: (
+          <AuthGuardComponent>
+            <RegisterPageComponent />
+          </AuthGuardComponent>
+        ),
       },
       {
         path: "activation-account/:activationId",
@@ -28,7 +32,11 @@ const router = [
       },
       {
         path: "login",
-        element: <LoginPageComponent />,
+        element: (
+          <AuthGuardComponent>
+            <LoginPageComponent />
+          </AuthGuardComponent>
+        ),
       },
     ],
   },

@@ -11,3 +11,7 @@ export const setUserInLocalStorage = (user) => localStorage.setItem("my_user", J
 export const setTokenInLocalStorage = (token) => localStorage.setItem("my_token", JSON.stringify(token));
 
 export const removeLocalStorage = (name) => localStorage.removeItem(name);
+
+
+export const isUserLogin = () => localStorage.getItem("my_user");
+export const isUserLoggedIn = () => localStorage.getItem('zu_user')

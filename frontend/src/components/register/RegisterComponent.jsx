@@ -120,7 +120,7 @@ const RegisterComponent = () => {
             ) : (
                 <>
                 <div>Go to the email and click on the link</div>
-                <Link to>Link sent in email</Link>
+                <Link to={"/"}>Back in Home</Link>
                 </>
                 
             )}

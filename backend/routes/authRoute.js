@@ -47,7 +47,7 @@ authRoute.post("/login", (req, res) => {
     if (!data) { res.status(417).send("Email is not valid") }
     else if (!bcrypt.compareSync(body.password, data.password)) {
       res.status(417).send("Password is not valid");
-    } else if (!body.isActive) {
+    } else if (!data.isActive) {
       res.status(418).send("You must activate your account. Go to the email and click on the link.");
     } else {
       let ts = new Date().getTime()
@@ -62,11 +62,11 @@ authRoute.post("/login", (req, res) => {
     .catch(err => console.log(err))
 })
 authRoute.put("/active", (req, res) => {
-  console.log("body---", req.body)
-  // const filter = { name: 'Jean-Luc Picard' };
   const update = { isActive: true };
   UserModel.findOneAndUpdate(req.body, update)
-    .then(data => res.send("ok"))
+    .then(data => {
+      res.send("ok")
+    })
     .catch(err => console.log(err))
 
 })
