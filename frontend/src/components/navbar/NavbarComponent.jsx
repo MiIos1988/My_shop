@@ -32,7 +32,7 @@ const NavbarComponent = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto" >
             <li className="nav-item">
               <Link className="nav-link" aria-current="page" to={"/"}>
                 Home
@@ -43,7 +43,9 @@ const NavbarComponent = () => {
                 Link
               </Link>
             </li>
-            <li className="nav-item dropdown user">
+            
+          </ul>
+          <div className="nav-item dropdown user">
               <Link
                 className="nav-link "
                 to="#"
@@ -85,8 +87,7 @@ const NavbarComponent = () => {
                   </>
                 )}
               </ul>
-            </li>
-          </ul>
+            </div>
           <div className="dropdown searchDrop ">
             <button
               className="btn btn-secondary searchBtn"
