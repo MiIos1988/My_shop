@@ -4,6 +4,7 @@ import ActivationAccountPageComponent from "../pages/ActivationAccountPageCompon
 import HomePageComponent from "../pages/HomePageComponent";
 import LoginPageComponent from "../pages/LoginPageComponent";
 import RegisterPageComponent from "../pages/RegisterPageComponent";
+import ShopPageComponent from "../pages/ShopPageComponent";
 
 const router = [
   {
@@ -38,6 +39,10 @@ const router = [
           </AuthGuardComponent>
         ),
       },
+      {
+        path: "shop",
+        element: <ShopPageComponent/>
+      }
     ],
   },
 ];

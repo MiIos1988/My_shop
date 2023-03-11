@@ -43,16 +43,10 @@ const NavbarComponent = () => {
             </li>
             
             <li className="nav-item dropdown">
-          <Link className="nav-link dropdown-toggle animate__animated animate__backInLeft" to={"/"} id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <Link className="nav-link animate__animated animate__backInLeft" to={"/"} >
           Shop
           </Link>
-          <div className="dropdown-menu ulDiv" aria-labelledby="navbarDropdown">
-            <ul className="d-flex navUl">
-            <li><Link className="dropdown-item" to={"/"}>Action</Link></li>
-            <li><Link className="dropdown-item" to={"/"}>Another action</Link></li>
-            <li><Link className="dropdown-item" to={"/"}>Something else here</Link></li>
-            </ul>
-          </div>
+          
         </li>
             <li className="nav-item">
               <Link className="nav-link animate__animated animate__backInRight" aria-current="page" to={"/"}>

@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const authRoute = require("./routes/authRoute");
 const mongoose = require("mongoose");
+const productRoute = require("./routes/productRoute");
 const portNumber = 5050;
 
 mongoose
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/auth", authRoute);
+app.use("/api/product", productRoute);
 
 app.listen(portNumber, (error) => {
   error
