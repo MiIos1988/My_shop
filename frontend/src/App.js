@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import NavbarComponent from "./components/navbar/NavbarComponent";
+import TopHeaderComponent from "./components/topHaderComponent/TopHeaderComponent";
 import { saveUser } from "./redux/userSlicer";
 
 axios.defaults.baseURL = "http://localhost:5050/api"
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <>
+    <TopHeaderComponent/>
       <NavbarComponent />
       <Outlet />
     </>
