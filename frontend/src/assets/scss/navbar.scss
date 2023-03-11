@@ -1,5 +1,7 @@
-.user {
-  width: 40px;
+.navbar{
+
+  .user {
+    width: 40px;
   height: 40px;
   background-image: url(../image/sprite.png);
   background-position: -55px -755px;
@@ -13,6 +15,15 @@
 
 .user:hover {
   background-position: -5px -755px;
+}
+.navUl{
+  list-style: none;
+  
+}
+.ulDiv{
+  border-radius: 0;
+  border-bottom: 2px solid #000;
+  top: 60px !important;
 }
 
 .searchDrop {
@@ -38,4 +49,27 @@
 .searchInp {
   width: 200px !important;
   
+}
+.basket{
+  background-color: #000;
+  height: 100%;
+
+  p{
+    color: #FFF;
+    
+  }
+} 
+.basketImg{
+  width: 40px;
+  height: 83px;
+  background-image: url(../image/sprite.png);
+  background-position: -55px -630px;
+  transition: all .5s;
+  margin-right: 20px;
+  
+  &:hover{
+    background-position: 0 -630px
+  }
+}
+
 }

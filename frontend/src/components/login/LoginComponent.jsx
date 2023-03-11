@@ -27,7 +27,7 @@ const LoginComponent = () => {
     }
 
     return (
-        <>
+        <div className="my-5">
             <Formik initialValues={{
                 email: '',
                 password: '',
@@ -56,7 +56,7 @@ const LoginComponent = () => {
                 </Form>
             </Formik>
 
-        </>
+        </div>
     )
 
 }
