@@ -1,18 +1,24 @@
-
 function ProductComponent(props) {
-const {imgUrl, title, price} = props;
+  const { imgUrl, title, price } = props;
   return (
-    <div className=" d-flex flex-column product">
+    <>
+      <div className="col-3 d-flex flex-column product mt-4">
         <div className="border border-secondary imgSection">
-            <img src="https://img.gigatron.rs/img/products/large/image62a1c9c93df50.png" alt="product" />
+          <img
+            src={imgUrl}
+            alt="product"
+          />
         </div>
         <div className="priceSection">
-        <p>LOGITECH Bežična tastatura MX Mechanical Graphite US</p>
-        <p>200</p>
-        <button>Add To Cart</button>
+          <p className="title">
+            {title}
+          </p>
+          <p className="price">${price}</p>
+          <button className="btn btn-secondary addBtn">Add To Cart</button>
         </div>
-    </div>
-  )
+      </div>
+    </>
+  );
 }
 
-export default ProductComponent
+export default ProductComponent;

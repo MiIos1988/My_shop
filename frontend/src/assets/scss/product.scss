@@ -1,9 +1,29 @@
-.product{
-    width: 25%;
-    min-height: 441.5px;
+.product {
+  //   width: 25%;
+  //   min-height: 441.5px;
 
-    img{
-        width: 100%;
-        padding: 0 15px;
+  img {
+    width: 100%;
+    height: 100%;
+    padding: 0 15px;
+    object-fit: cover;
+  }
+  .imgSection {
+    height: 270px;
+  }
+  .priceSection {
+    .title {
+      padding: 10px;
+      margin: 0;
     }
+    .price {
+      font-size: 1.5rem;
+      margin: 0;
+      padding-left: 10px;
+    }
+    .addBtn {
+      display: block;
+      margin: 10px auto;
+    }
+  }
 }
