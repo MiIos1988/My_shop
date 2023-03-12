@@ -7,27 +7,25 @@ const ProductListComponent = () => {
   const [product, setProduct] = useState([]);
   const [pagination, setPagination] = useState({
     start: 0,
-    perPage: 8,
+    perPage: 24,
   });
   const [arrayPagination, setArrayPagination] = useState([]);
-  const [allNumberPagination, setAllNumberPagination] = useState(null);
+  const selectArray = [4, 8, 16, 24, 48];
 
   useEffect(() => {
     getProductData(pagination)
       .then((res) => {
         let numberPagination = res.data.countQuery;
-        setAllNumberPagination(numberPagination);
         setProduct(res.data.data);
         const paginationAllNumber = Math.ceil(
           numberPagination / pagination.perPage
         );
-        console.log(paginationAllNumber);
         setArrayPagination(
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [pagination.perPage]);
 
   return (
     <>
@@ -43,30 +41,62 @@ const ProductListComponent = () => {
           );
         })}
       </div>
-      <nav className="row " aria-label="Page navigation example">
-        <ul className="pagination justify-content-center">
-          <li className="page-item">
-            <Link className="page-link" to="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </Link>
-          </li>
-          {arrayPagination?.map((el, index) => {
-            return (
-              <li key={index} className="page-item">
-                <Link className="page-link" to="#">
-                  {el}
-                </Link>
-              </li>
-            );
-          })}
+      <div className="row ">
+        <div className="col-2 offset-2">
+          <div className="dropdown">
+            <button
+              className="btn btn-secondary dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton1"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Per Page: {pagination.perPage}
+            </button>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+              {selectArray.map((el, index) => {
+                return (
+                  <li key={index}>
+                    <Link
+                      className="dropdown-item"
+                      onClick={() => {
+                        setPagination({ ...pagination, perPage: el });
+                      }}
+                      to="#"
+                    >
+                      {el}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+        <nav className="col-8" aria-label="Page navigation example">
+          <ul className="pagination justify-content-start">
+            <li className="page-item">
+              <Link className="page-link" to="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </Link>
+            </li>
+            {arrayPagination?.map((el, index) => {
+              return (
+                <li key={index} className="page-item">
+                  <Link className="page-link" to="#">
+                    {el}
+                  </Link>
+                </li>
+              );
+            })}
 
-          <li className="page-item">
-            <Link className="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
+            <li className="page-item">
+              <Link className="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </>
   );
 };
