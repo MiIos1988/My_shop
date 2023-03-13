@@ -6,7 +6,6 @@ productRoute.post("/get-product", async (req, res) => {
   const countQuery = await ProductModel.where({}).countDocuments();
   let pagination = req.body;
   console.log(pagination)
-  console.log(pagination)
   ProductModel.find({})
     .skip(pagination.start * pagination.perPage)
     .limit(pagination.perPage)
