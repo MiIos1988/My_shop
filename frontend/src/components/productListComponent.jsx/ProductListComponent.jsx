@@ -7,7 +7,8 @@ const ProductListComponent = () => {
   const [product, setProduct] = useState([]);
   const [pagination, setPagination] = useState({
     start: 0,
-    perPage: 24,
+    perPage: 12,
+    allPag: 1
   });
   const [arrayPagination, setArrayPagination] = useState([]);
   const selectArray = [4, 8, 16, 24, 48];
@@ -20,12 +21,13 @@ const ProductListComponent = () => {
         const paginationAllNumber = Math.ceil(
           numberPagination / pagination.perPage
         );
+        setPagination({ ...pagination, allPag: paginationAllNumber })
         setArrayPagination(
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
       })
       .catch((err) => console.log(err));
-  }, [pagination.perPage]);
+  }, [pagination.perPage, pagination.start]);
 
   return (
     <>
@@ -62,7 +64,7 @@ const ProductListComponent = () => {
                       onClick={() => {
                         setPagination({ ...pagination, perPage: el });
                       }}
-                      to="#"
+
                     >
                       {el}
                     </Link>
@@ -75,14 +77,24 @@ const ProductListComponent = () => {
         <nav className="col-8" aria-label="Page navigation example">
           <ul className="pagination justify-content-start">
             <li className="page-item">
-              <Link className="page-link" to="#" aria-label="Previous">
+              <Link className="page-link" to="#" aria-label="Previous" onClick={() => {
+                if (pagination.start === 0) {
+                  setPagination({ ...pagination, start: 0 });
+                } else {
+                  setPagination({ ...pagination, start: pagination.start - 1 });
+                }
+              }}>
                 <span aria-hidden="true">&laquo;</span>
               </Link>
             </li>
             {arrayPagination?.map((el, index) => {
               return (
                 <li key={index} className="page-item">
-                  <Link className="page-link" to="#">
+                  <Link className="page-link" onClick={() => {
+                    {
+                      setPagination({ ...pagination, start: el - 1 });
+                    }
+                  }}>
                     {el}
                   </Link>
                 </li>
@@ -90,7 +102,17 @@ const ProductListComponent = () => {
             })}
 
             <li className="page-item">
-              <Link className="page-link" href="#" aria-label="Next">
+              <Link className="page-link" href="#" aria-label="Next" onClick={() => {
+                console.log(pagination.start)
+                console.log(pagination.allPag)
+                console.log(pagination.start >= pagination.allPag)
+                if (pagination.start + 1 > pagination.allPag) {
+                  setPagination({ ...pagination, start: pagination.allPag });
+                } else {
+                  setPagination({ ...pagination, start: pagination.start + 1 });
+                }
+
+              }}>
                 <span aria-hidden="true">&raquo;</span>
               </Link>
             </li>
