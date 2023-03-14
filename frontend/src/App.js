@@ -26,11 +26,11 @@ function App() {
 
 
   return (
-    <>
-    <TopHeaderComponent/>
+    <div className="container-fluid p-0">
+      <TopHeaderComponent />
       <NavbarComponent />
       <Outlet />
-    </>
+    </div>
   );
 }
 

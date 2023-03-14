@@ -1,7 +1,10 @@
+import HomeSliderComponent from "../components/homeSliderComponent/HomeSliderComponent"
 
 const HomePageComponent = () => {
     return (
-        <h1 className="display-5">Home page</h1>
+        <>
+            <HomeSliderComponent />
+        </>
     )
 }
 
