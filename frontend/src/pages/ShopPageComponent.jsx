@@ -1,10 +1,12 @@
+import HeaderImageComponent from "../components/headerImageComponent/HeaderImageComponent"
 import ProductListComponent from "../components/productListComponent.jsx/ProductListComponent"
 
 
 const ShopPageComponent = () => {
   return (
     <div>
-      <ProductListComponent/>
+      <HeaderImageComponent title={"Shop"} link={"shop"} />
+      <ProductListComponent />
     </div>
   )
 }

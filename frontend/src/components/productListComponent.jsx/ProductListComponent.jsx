@@ -11,8 +11,8 @@ const ProductListComponent = () => {
     allPag: 1
   });
   const [arrayPagination, setArrayPagination] = useState([]);
-  const selectArray = [4, 8, 16, 24, 48];
-  const [active, setActive ] = useState(1)
+  const selectArray = [4, 8, 12, 16, 24, 48];
+  const [active, setActive] = useState(1)
 
   useEffect(() => {
     getProductData(pagination)
@@ -21,10 +21,10 @@ const ProductListComponent = () => {
         setProduct(res.data.data);
         const paginationAllNumber = Math.ceil(
           numberPagination / pagination.perPage
-          );
-          // console.log(paginationAllNumber )
+        );
+        // console.log(paginationAllNumber )
         let copyPagination = { ...pagination, allPag: paginationAllNumber };
-          setPagination(copyPagination)
+        setPagination(copyPagination)
         setArrayPagination(
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
@@ -65,7 +65,11 @@ const ProductListComponent = () => {
                     <Link
                       className="dropdown-item"
                       onClick={() => {
-                        setPagination({ ...pagination, perPage: el });
+                        setPagination({
+                          ...pagination, perPage: el,
+                          start: 0
+                        });
+                        setActive(1)
                       }}
 
                     >
@@ -90,12 +94,12 @@ const ProductListComponent = () => {
               </Link>
             </li>
             {arrayPagination?.map((el, index) => {
-              
+
               return (
                 <li key={index} className={`page-item ${el === active ? "active" : ""}`} onClick={(e) => {
                   {
                     setPagination({ ...pagination, start: el - 1 });
-                    setActive(Number( e.target.text));
+                    setActive(Number(e.target.text));
                   }
                 }}>
                   <Link className="page-link" >
@@ -107,9 +111,9 @@ const ProductListComponent = () => {
 
             <li className="page-item">
               <Link className="page-link" href="#" aria-label="Next" onClick={() => {
-                if (pagination.start + 1< pagination.allPag) {
-                setPagination({ ...pagination, start: pagination.start + 1 });
-                setActive(active + 1);
+                if (pagination.start + 1 < pagination.allPag) {
+                  setPagination({ ...pagination, start: pagination.start + 1 });
+                  setActive(active + 1);
                 }
 
               }}>
