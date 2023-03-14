@@ -18,7 +18,7 @@ const NavbarComponent = () => {
 
   return (
     // <div className="container-fluid mt-5">
-    <nav className=" navbar navbar-expand-lg navbar-light bg-light border border-secondary  m-auto py-0">
+    <nav className=" navbar navbar-expand-lg navbar-light bg-light border border-secondary mx-5 m-auto py-0">
       <Link className="navbar-brand" to={"/"}>
         <img className="py-3 px-5" src={logo} alt="" />
       </Link>
