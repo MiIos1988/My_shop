@@ -37,12 +37,14 @@ const ProductListComponent = () => {
       <div className="row container d-flex m-auto flex-wrap">
         {product?.map((el, index) => {
           return (
-            <ProductComponent
-              key={index}
-              imgUrl={el.imgUrl}
-              title={el.title}
-              price={el.price}
-            />
+            <div className={"col-3"} key={index}>
+              <ProductComponent
+                imgUrl={el.imgUrl}
+                title={el.title}
+                price={el.price}
+              />
+            </div>
+
           );
         })}
       </div>

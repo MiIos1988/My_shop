@@ -1,8 +1,8 @@
 function ProductComponent(props) {
   const { imgUrl, title, price } = props;
   return (
-    <>
-      <div className="col-3 d-flex flex-column product mt-4">
+   
+      <div className=" d-flex flex-column product mt-4">
         <div className="border border-secondary imgSection">
           <img
             src={imgUrl}
@@ -17,7 +17,7 @@ function ProductComponent(props) {
           <button className="btn btn-secondary addBtn">Add To Cart</button>
         </div>
       </div>
-    </>
+   
   );
 }
 
