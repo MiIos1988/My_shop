@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { getProductData } from "../../service/productService";
 import ProductComponent from "./component/ProductComponent";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { toggleLoader } from "../../redux/loaderSlicer";
 
 const ProductListComponent = () => {
   const [product, setProduct] = useState([]);
@@ -13,8 +15,10 @@ const ProductListComponent = () => {
   const [arrayPagination, setArrayPagination] = useState([]);
   const selectArray = [4, 8, 12, 16, 24, 48];
   const [active, setActive] = useState(1)
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(toggleLoader(true))
     getProductData(pagination)
       .then((res) => {
         let numberPagination = res.data.countQuery;
@@ -28,6 +32,7 @@ const ProductListComponent = () => {
         setArrayPagination(
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
+        dispatch(toggleLoader(false))
       })
       .catch((err) => console.log(err));
   }, [pagination.perPage, pagination.start, pagination.allPag]);

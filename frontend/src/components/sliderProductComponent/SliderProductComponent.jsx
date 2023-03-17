@@ -8,12 +8,20 @@ import { FreeMode, Navigation } from "swiper";
 import { getProductData } from "../../service/productService";
 import { useEffect, useState } from "react";
 import ProductComponent from "../productListComponent.jsx/component/ProductComponent";
+import { toggleLoader } from "../../redux/loaderSlicer";
+import { useDispatch } from "react-redux";
 
 const SliderProductComponent = () => {
   const [product, setProduct] = useState([])
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getProductData({ start: 0, perPage: 16 }).then(res => setProduct(res.data.data))
+    dispatch(toggleLoader(true))
+    getProductData({ start: 0, perPage: 16 }).then(res => {
+      setProduct(res.data.data)
+      dispatch(toggleLoader(false))
+    })
+
       .catch(err => console.log(err))
   }, []
   )

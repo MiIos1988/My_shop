@@ -8,11 +8,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux'
 import userSlicer from './redux/userSlicer';
+import loaderSlicer from './redux/loaderSlicer';
 
 const route = createBrowserRouter(router);
 
 const store = configureStore({
-  reducer: { userSlicer }
+  reducer: { userSlicer, loaderSlicer },
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
