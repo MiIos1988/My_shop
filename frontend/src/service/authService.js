@@ -12,6 +12,6 @@ export const setTokenInLocalStorage = (token) => localStorage.setItem("my_token"
 
 export const removeLocalStorage = (name) => localStorage.removeItem(name);
 
-
 export const isUserLogin = () => localStorage.getItem("my_user");
-export const isUserLoggedIn = () => localStorage.getItem('zu_user')
+
+export const isAdmin = () => isUserLogin() && JSON.parse(localStorage.getItem("my_user"))?.isAdmin;

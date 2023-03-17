@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { saveUser } from "../../redux/userSlicer";
-import { loginData, setTokenInLocalStorage, setUserInLocalStorage } from "../../service/authService";
+import { isAdmin, loginData, setTokenInLocalStorage, setUserInLocalStorage } from "../../service/authService";
 
 
 
@@ -21,7 +21,7 @@ const LoginComponent = () => {
             setUserInLocalStorage(res.data.data);
             setTokenInLocalStorage(res.data.token);
             dispatch(saveUser(res.data.data))
-            navigate("/")
+            isAdmin() ? navigate("/dashboard") : navigate("/")
         })
             .catch(err => console.log(err))
     }

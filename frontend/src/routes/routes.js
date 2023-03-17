@@ -5,6 +5,8 @@ import HomePageComponent from "../pages/HomePageComponent";
 import LoginPageComponent from "../pages/LoginPageComponent";
 import RegisterPageComponent from "../pages/RegisterPageComponent";
 import ShopPageComponent from "../pages/ShopPageComponent";
+import AdminPageComponent from "../pages/admin/AdminPageComponent";
+import { AdminGuardComponent } from "../guard/AdminGuardComponent";
 
 const router = [
   {
@@ -41,7 +43,15 @@ const router = [
       },
       {
         path: "shop",
-        element: <ShopPageComponent/>
+        element: <ShopPageComponent />
+      },
+      {
+        path: "dashboard",
+        element: (
+        <AdminGuardComponent>
+          <AdminPageComponent />
+        </AdminGuardComponent>
+        )
       }
     ],
   },
