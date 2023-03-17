@@ -45,16 +45,17 @@ const router = [
         path: "shop",
         element: <ShopPageComponent />
       },
-      {
-        path: "dashboard",
-        element: (
-        <AdminGuardComponent>
-          <AdminPageComponent />
-        </AdminGuardComponent>
-        )
-      }
+      
     ],
   },
+  {
+    path: "dashboard",
+    element: (
+    <AdminGuardComponent>
+      <AdminPageComponent />
+    </AdminGuardComponent>
+    )
+  }
 ];
 
 export default router;

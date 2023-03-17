@@ -1,9 +1,8 @@
-
 const AdminPageComponent = () => {
 
     return (
         <>
-            <h1>Dashboard</h1>
+            <h1>DASHBOARD</h1>
         </>
     )
 }
