@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { getImageUrl } from "../../service/productService";
-
+import { useDispatch } from "react-redux";
+import { toggleLoader } from "../../redux/loaderSlicer";
 
 
 const CreateProductComponent = () => {
@@ -12,6 +13,8 @@ const CreateProductComponent = () => {
         imgUrl: ''
     })
     const [image, setImage] = useState('');
+    const [productImage, setProductImage] = useState('');
+    const dispatch = useDispatch();
 
     const copyProduct = { ...product };
 
@@ -21,13 +24,30 @@ const CreateProductComponent = () => {
     }
 
     const addImage = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        dispatch(toggleLoader(true))
         const data = new FormData();
         data.append("file", image);
         data.append("upload_preset", "my_shop");
         data.append("cloud_name", "drsg0huwp");
-        getImageUrl(data)
+        // getImageUrl(data).then(res => console.log(res))
+        // .catch(err => console.log(err))
+        fetch("https://api.cloudinary.com/v1_1/drsg0huwp/image/upload", {
+            method: "post",
+            body: data
+        }).then(res => res.json())
+        .then(res => {setProduct({...product,
+        imgUrl: res.url})
+        setProductImage(res.url);
+        dispatch(toggleLoader(false))
+        })
+        .catch(err => console.log(err))
     }
+
+    const createProduct = (e) => {
+        e.preventDefault()
+        console.log(product)
+    } 
 
     return (
         <div className="container  createProduct">
@@ -46,11 +66,15 @@ const CreateProductComponent = () => {
                         </select><br />
                         <input type="file" name="imgUrl" className="form-control" onChange={e => setImage(e.target.files[0])} /><br />
                         <div className="addImage d-flex align-items-center">
-                            <div className="imageField border d-flex justify-content-center align-items-center">Image</div><br />
-                            <button className="btn btn-warning " onClick={(e) => addImage(e)}>Add image</button>
+                            <div className="imageField border d-flex justify-content-center align-items-center">
+                            {
+                                    !productImage ? " Image" : <img src={productImage} />
+                                }
+                               </div><br />
+                            <button className="btn btn-warning " onClick={(e) => addImage(e)}>Confirm image</button>
                         </div><br />
 
-                        <button className="btn btn-secondary form-control">ADD PRODUCT</button>
+                        <button className="btn btn-secondary form-control" onClick={createProduct}>ADD PRODUCT</button>
                     </form>
                 </div>
             </div>
