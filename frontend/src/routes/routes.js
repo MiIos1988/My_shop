@@ -8,6 +8,7 @@ import ShopPageComponent from "../pages/ShopPageComponent";
 import AdminPageComponent from "../pages/admin/AdminPageComponent";
 import { AdminGuardComponent } from "../guard/AdminGuardComponent";
 import CreateProductComponent from "../pages/admin/CreateProductComponent";
+import ShowAllProduct from "../pages/admin/ShowAllProduct";
 
 const router = [
   {
@@ -60,6 +61,10 @@ const router = [
       {
         path: "create-product",
         element: <CreateProductComponent />
+      },
+      {
+        path: "show-product",
+        element: <ShowAllProduct/>
       }
     ]
   }

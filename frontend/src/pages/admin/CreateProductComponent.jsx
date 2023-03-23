@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { getImageUrl } from "../../service/productService";
+import { addProductData, getImageUrl } from "../../service/productService";
 import { useDispatch } from "react-redux";
 import { toggleLoader } from "../../redux/loaderSlicer";
 
@@ -14,7 +14,10 @@ const CreateProductComponent = () => {
     })
     const [image, setImage] = useState('');
     const [productImage, setProductImage] = useState('');
+    let validation = false;
+
     const dispatch = useDispatch();
+
 
     const copyProduct = { ...product };
 
@@ -36,18 +39,39 @@ const CreateProductComponent = () => {
             method: "post",
             body: data
         }).then(res => res.json())
-        .then(res => {setProduct({...product,
-        imgUrl: res.url})
-        setProductImage(res.url);
-        dispatch(toggleLoader(false))
-        })
-        .catch(err => console.log(err))
+            .then(res => {
+                setProduct({
+                    ...product,
+                    imgUrl: res.url
+                })
+                setProductImage(res.url);
+                dispatch(toggleLoader(false))
+            })
+            .catch(err => console.log(err))
+    }
+
+    const validateInputProduct = () => {
+        for (const key in product) {
+            if (product[key] === "") {
+                alert(`Field ${key} must be filled!`)
+                return
+            }
+        }
+        validation = true;
     }
 
     const createProduct = (e) => {
         e.preventDefault()
-        console.log(product)
-    } 
+        validateInputProduct()
+        if (!validation) {
+            return
+        } else {
+            addProductData(product)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+        }
+
+    }
 
     return (
         <div className="container  createProduct">
@@ -67,10 +91,10 @@ const CreateProductComponent = () => {
                         <input type="file" name="imgUrl" className="form-control" onChange={e => setImage(e.target.files[0])} /><br />
                         <div className="addImage d-flex align-items-center">
                             <div className="imageField border d-flex justify-content-center align-items-center">
-                            {
+                                {
                                     !productImage ? " Image" : <img src={productImage} />
                                 }
-                               </div><br />
+                            </div><br />
                             <button className="btn btn-warning " onClick={(e) => addImage(e)}>Confirm image</button>
                         </div><br />
 
