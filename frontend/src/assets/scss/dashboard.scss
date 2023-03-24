@@ -9,6 +9,7 @@
     .imageField {
         width: 100px;
         height: 100px;
+        position: relative;
 
         & img {
             width: 100%;
@@ -20,6 +21,12 @@
     .addImage button {
         height: 40px;
         margin-left: 10px;
+    }
+
+    .btnImg {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 
 }
