@@ -10,7 +10,7 @@ const AdminPageComponent = () => {
             <div className="row dashboard">
                 <div className="sidebar col-2 border">
                     <SidebarDashboardComponent />
-                    <LoaderComponent/>
+                    <LoaderComponent />
                 </div>
 
                 <div className="col-10">

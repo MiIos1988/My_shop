@@ -9,11 +9,11 @@ function ProductComponent(props) {
   const navigate = useNavigate()
 
   const deleteProduct = () => {
-    console.log(id);
-    deleteProductData(id).then(res => {
-      navigate("/dashboard")
-    })
-      .catch(err => console.log(err))
+
+    deleteProductData(id).then(data => navigate("/dashboard"))
+      .catch(err => console.log("error", err))
+
+
 
   }
 

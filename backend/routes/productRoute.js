@@ -26,8 +26,11 @@ productRoute.post("/add-product", async (req, res) => {
 })
 
 productRoute.delete("/product", (req, res) => {
-  ProductModel.deleteOne(req.query).then(data => res.send(ok))
+  console.log(req.query)
+  ProductModel.findOneAndRemove(req.query)
+    .then(data => res.send("ok"))
     .catch(err => console.log(err))
+
 })
 
 
