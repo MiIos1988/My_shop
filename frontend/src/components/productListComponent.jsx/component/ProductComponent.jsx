@@ -12,9 +12,10 @@ function ProductComponent(props) {
 
     deleteProductData(id).then(data => navigate("/dashboard"))
       .catch(err => console.log("error", err))
+  }
 
-
-
+  const editProduct = () => {
+    navigate(`/dashboard/create-edit-product/${id}`)
   }
 
   return (
@@ -37,7 +38,7 @@ function ProductComponent(props) {
           dashboard ? (
             <div className="d-flex justify-content-center">
               <button className="btn btn-danger me-2" onClick={deleteProduct}>Delate</button>
-              <button className="btn btn-warning">Edit</button>
+              <button className="btn btn-warning" onClick={editProduct}>Edit</button>
             </div>
           ) :
             <button className="btn btn-secondary addBtn">Add To Cart</button>

@@ -59,13 +59,18 @@ const router = [
     ),
     children: [
       {
-        path: "create-product",
+        path: "create-edit-product",
+        element: <CreateProductComponent />
+      },
+      {
+        path: 'create-edit-product/:id',
         element: <CreateProductComponent />
       },
       {
         path: "show-product",
-        element: <ShowAllProduct/>
-      }
+        element: <ShowAllProduct />
+      },
+
     ]
   }
 ];

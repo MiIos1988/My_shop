@@ -5,17 +5,30 @@ const productRoute = express.Router();
 productRoute.post("/get-product", async (req, res) => {
   const countQuery = await ProductModel.where({}).countDocuments();
   let pagination = req.body;
-  // console.log(pagination)
   ProductModel.find({})
     .skip(pagination.start * pagination.perPage)
     .limit(pagination.perPage)
     .then((data) => {
       res.send({ data, countQuery });
+    })
+    .catch(err => console.log(err))
+});
+
+productRoute.get("/get-one-product/:id", (req, res) => {
+  ProductModel.findOne({ _id: req.params.id })
+    .then((data) => {
+      res.send({ data });
     });
 });
 
-productRoute.post("/add-product", async (req, res) => {
+productRoute.put("/edit-product", (req, res) => {
   console.log(req.body)
+  ProductModel.findOneAndUpdate({ _id: req.body._id }, req.body)
+    .then((data) => res.send("ok"))
+    .catch(err => console.log(err));
+});
+
+productRoute.post("/add-product", async (req, res) => {
   try {
     const newProduct = await ProductModel.create(req.body);
     newProduct.save();
@@ -26,7 +39,6 @@ productRoute.post("/add-product", async (req, res) => {
 })
 
 productRoute.delete("/product", (req, res) => {
-  console.log(req.query)
   ProductModel.findOneAndRemove(req.query)
     .then(data => res.send("ok"))
     .catch(err => console.log(err))
