@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { userData } from "../../service/userService";
+import { isActive, userData } from "../../service/userService";
 
 const UsersDashboardComponent = () => {
     const [allUser, setAllUser] = useState([]);
@@ -11,7 +11,9 @@ const UsersDashboardComponent = () => {
     );
 
     const changeIsActive = (e, id) => {
-        console.log(e.target.checked, id)
+        let checked = e.target.checked;
+        isActive({checked, id}).then(res => console.log(res))
+        .catch(err => console.log(err))
         
     }
 
@@ -24,7 +26,7 @@ const UsersDashboardComponent = () => {
     <tr>
       <th scope="col">#</th>
       <th scope="col">Username</th>
-      <th scope="col">Name</th>
+      <th scope="col">Full ame</th>
       <th scope="col">Email</th>
       <th scope="col">Phone</th>
       <th scope="col">City</th>

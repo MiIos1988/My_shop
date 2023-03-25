@@ -7,6 +7,10 @@ userRoute.get("/get-all-users", (req, res) => {
     .catch(err => console.log(err))
 })
 
+userRoute.put("/is-active", (req, res) => {
+    UserModel.findOneAndUpdate({_id: req.body.id}, {isActive: req.body.checked}).then(data => res.send("ok"))
+    .catch(err => res.send(err))
+})
 
 
 

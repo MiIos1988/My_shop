@@ -1,6 +1,6 @@
 // import ModalWarningComponent from "../../../pages/admin/ModalWarningComponent";
 
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { deleteProductData } from "../../../service/productService";
 
 function ProductComponent(props) {
@@ -23,10 +23,13 @@ function ProductComponent(props) {
     <div className=" d-flex flex-column product mt-4">
 
       <div className="border border-secondary imgSection">
+        <Link to={`/show-product?id=${id}`}>
         <img
           src={imgUrl}
           alt="product"
         />
+        </Link>
+        
       </div>
       <div className="priceSection">
         <p className="title">
