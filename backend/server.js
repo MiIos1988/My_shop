@@ -4,6 +4,7 @@ const cors = require("cors");
 const authRoute = require("./routes/authRoute");
 const mongoose = require("mongoose");
 const productRoute = require("./routes/productRoute");
+const userRoute = require("./routes/userRoute");
 const portNumber = 5050;
 
 mongoose
@@ -19,6 +20,7 @@ app.use(cors());
 
 app.use("/api/auth", authRoute);
 app.use("/api/product", productRoute);
+app.use("/api/user", userRoute);
 
 app.listen(portNumber, (error) => {
   error

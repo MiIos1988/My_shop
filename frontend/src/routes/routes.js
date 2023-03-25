@@ -9,6 +9,7 @@ import AdminPageComponent from "../pages/admin/AdminPageComponent";
 import { AdminGuardComponent } from "../guard/AdminGuardComponent";
 import CreateProductComponent from "../pages/admin/CreateProductComponent";
 import ShowAllProduct from "../pages/admin/ShowAllProduct";
+import UsersDashboardComponent from "../pages/admin/UsersDashboardComponent";
 
 const router = [
   {
@@ -69,6 +70,10 @@ const router = [
       {
         path: "show-product",
         element: <ShowAllProduct />
+      },
+      {
+        path: "all-users",
+        element: <UsersDashboardComponent/>
       },
 
     ]

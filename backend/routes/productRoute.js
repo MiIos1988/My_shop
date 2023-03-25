@@ -22,7 +22,6 @@ productRoute.get("/get-one-product/:id", (req, res) => {
 });
 
 productRoute.put("/edit-product", (req, res) => {
-  console.log(req.body)
   ProductModel.findOneAndUpdate({ _id: req.body._id }, req.body)
     .then((data) => res.send("ok"))
     .catch(err => console.log(err));

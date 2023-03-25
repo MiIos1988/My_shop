@@ -100,11 +100,6 @@ const CreateProductComponent = () => {
             .catch(err => console.log(err))
     }
 
-    const deleteImage = (e) => {
-        e.preventDefault();
-        setImage("")
-    }
-
     return (
         <div className="container  createProduct">
             <div className="row d-flex align-items-center mt-5">
@@ -124,7 +119,7 @@ const CreateProductComponent = () => {
                         <div className="addImage d-flex align-items-center">
                             <div className="imageField border d-flex justify-content-center align-items-center">
                                 {
-                                    params.id ? (<><img src={product.imgUrl} /><button className="btnImg" onClick={deleteImage}>X</button> </>) : (!productImage ? " Image" : <img src={productImage} />)
+                                    params.id ? <img src={product.imgUrl} /> : (!productImage ? " Image" : <img src={productImage} />)
                                 }
                             </div><br />
                             <button className="btn btn-warning " onClick={(e) => addImage(e)}>Confirm image</button>
