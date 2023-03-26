@@ -18,5 +18,59 @@
         padding-bottom: 15px;
         margin-bottom: 15px;
     }
+    .counter svg{
+        font-size: 1.5rem;
+    }
+    .reduce,
+    .increase{
+        cursor: pointer;
+    }
 
+    .productAction{
+        border-bottom: 1px dashed black;
+    }
+
+    .productAction div{
+       cursor: pointer;
+
+       &:hover{
+        background-color: black;
+        color: white;
+       }
+    }
+    .socialNetwork a{
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        background-image: url("../image/sprite.png");
+    }
+    .fb{
+        background-color: #3b579d;
+        background-position: -5px -55px;
+
+        &:hover{
+            background-color: white;
+            background-position: -55px -55px;
+        }
+    }
+    .tw{
+        background-color: #38a1f3;
+        background-position: -5px -105px;
+        margin: 0 10px;
+
+        &:hover{
+            background-color: white;
+            background-position: -55px -105px;
+        }
+    }
+    .in{
+        background-color: #c8232c;
+        background-position: -5px -305px;
+
+        &:hover{
+            background-color: white;
+            background-position: -55px -305px;
+        }
+    }
+    
 }
