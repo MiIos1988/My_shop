@@ -100,6 +100,7 @@ const ProductListComponent = (props) => {
                 if (pagination.start > 0) {
                   setPagination({ ...pagination, start: pagination.start - 1 });
                   setActive(active - 1);
+                  window.scrollTo(0, 0);
                 }
               }}>
                 <span aria-hidden="true">&laquo;</span>
@@ -112,6 +113,7 @@ const ProductListComponent = (props) => {
                   {
                     setPagination({ ...pagination, start: el - 1 });
                     setActive(Number(e.target.text));
+                    window.scrollTo(0, 0);
                   }
                 }}>
                   <Link className="page-link" >
@@ -126,6 +128,7 @@ const ProductListComponent = (props) => {
                 if (pagination.start + 1 < pagination.allPag) {
                   setPagination({ ...pagination, start: pagination.start + 1 });
                   setActive(active + 1);
+                  window.scrollTo(0, 0);
                 }
 
               }}>
