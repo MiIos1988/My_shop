@@ -34,18 +34,22 @@ const ShowProductComponent = () => {
     quantity > 1 ? setQuantity((prev) => prev - 1) : setQuantity(1);
   };
 
+  const mouseMoveIn = (e) => {
+    setZoomOut(true)
+      setMoveX(e.clientX - e.target.offsetLeft);
+      setMoveY(e.clientY - e.target.offsetTop);
+  }
+
+  const mouseMoveExit = () => {
+    setZoomOut(false)
+  }
+
   return (
     <div className="container d-flex my-5 row mx-auto showProduct">
-      <div onMouseLeave={
-        console.log('work')
-      } className="imageProduct border col-5" onMouseMove={e => {
-        setZoomOut(true)
-        setMoveX(e.clientX - e.target.offsetLeft);
-        setMoveY(e.clientY - e.target.offsetTop);
-        // console.log(x, y)
-
-      }}>
-        <img src={product?.imgUrl} alt="" style={zoomOut ? { transformOrigin: `${moveX}px ${moveY}px`, transform: "scale(2)" } : { transformOrigin: "center", transform: "scale()" }} />
+      <div className="imageProduct border col-5" 
+      onMouseMove={mouseMoveIn} onMouseLeave={mouseMoveExit}
+      >
+        <img src={product?.imgUrl} alt="" style={zoomOut ? { transformOrigin: `${moveX}px ${moveY}px`, transform: "scale(2)" } : { transformOrigin: "center", transform: "scale(1)" }} />
       </div>
       <div className="infoProduct col-5 offset-1 ">
         <h2>{product?.title}</h2>
