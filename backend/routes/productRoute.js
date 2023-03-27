@@ -18,7 +18,8 @@ productRoute.get("/get-one-product/:id", (req, res) => {
   ProductModel.findOne({ _id: req.params.id })
     .then((data) => {
       res.send({ data });
-    });
+    })
+    .catch(err => res.status(421).send(err))
 });
 
 productRoute.put("/edit-product", (req, res) => {

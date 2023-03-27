@@ -44,10 +44,10 @@ const SliderProductComponent = () => {
           return <SwiperSlide key={index}>
             <div className="d-flex flex-column ">
               <div className="pr1 mt-5" >
-                <ProductComponent imgUrl={product[index]?.imgUrl} title={product[index]?.title} price={product[index]?.price} />
+                <ProductComponent imgUrl={product[index]?.imgUrl} title={product[index]?.title} price={product[index]?.price} id={product[index]?._id} />
               </div>
               <div className="pr2 ">
-                <ProductComponent imgUrl={product[index + 8]?.imgUrl} title={product[index + 7]?.title} price={product[index + 8]?.price} />
+                <ProductComponent imgUrl={product[index + 8]?.imgUrl} title={product[index + 7]?.title} price={product[index + 8]?.price} id={product[index + 8]?._id} />
               </div>
               {/* </div> */}
             </div>

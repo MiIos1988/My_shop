@@ -11,11 +11,17 @@ const ShowProductComponent = () => {
   const [queryParams] = useSearchParams();
   const [product, setProduct] = useState();
   const [quantity, setQuantity] = useState(1);
+  const [moveX, setMoveX] = useState();
+  const [moveY, setMoveY] = useState();
+  const [zoomOut, setZoomOut] = useState(false);
+
 
   useEffect(() => {
     const id = queryParams.get("id");
     getOneProductData(id)
-      .then((res) => setProduct(res.data.data))
+      .then((res) => {
+        setProduct(res.data.data)
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -30,8 +36,16 @@ const ShowProductComponent = () => {
 
   return (
     <div className="container d-flex my-5 row mx-auto showProduct">
-      <div className="imageProduct border col-5">
-        <img src={product?.imgUrl} alt="" />
+      <div onMouseLeave={
+        console.log('work')
+      } className="imageProduct border col-5" onMouseMove={e => {
+        setZoomOut(true)
+        setMoveX(e.clientX - e.target.offsetLeft);
+        setMoveY(e.clientY - e.target.offsetTop);
+        // console.log(x, y)
+
+      }}>
+        <img src={product?.imgUrl} alt="" style={zoomOut ? { transformOrigin: `${moveX}px ${moveY}px`, transform: "scale(2)" } : { transformOrigin: "center", transform: "scale()" }} />
       </div>
       <div className="infoProduct col-5 offset-1 ">
         <h2>{product?.title}</h2>
