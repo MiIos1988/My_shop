@@ -11,3 +11,7 @@ export const editProductData = (data) => axios.put("/product/edit-product", data
 export const addProductData = (data) => axios.post("/product/add-product", data);
 
 export const deleteProductData = (id) => axios.delete("/product/product?_id=" + id);
+
+export const setProductInLocalStorage = (data) => localStorage.setItem("cartProduct", JSON.stringify(data));
+
+export const getProductInLocalStorage = () =>JSON.parse(localStorage.getItem("cartProduct")) ;

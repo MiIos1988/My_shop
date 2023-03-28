@@ -62,6 +62,11 @@
     width: 200px !important;
 
   }
+  .basketAll:hover{
+    .cardDropdown{
+      display: block;
+    }
+  }
 
   .basket {
     background-color: #000;

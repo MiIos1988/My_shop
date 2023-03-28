@@ -1,10 +1,15 @@
 // import ModalWarningComponent from "../../../pages/admin/ModalWarningComponent";
 
 import { Link, useNavigate } from "react-router-dom";
-import { deleteProductData } from "../../../service/productService";
+import { deleteProductData, getProductInLocalStorage, setProductInLocalStorage } from "../../../service/productService";
 
 function ProductComponent(props) {
-  const { imgUrl, title, price, id, description, dashboard } = props;
+  const { imgUrl, title, price, id, dashboard } = props;
+  const cartProduct = {
+    cart: [],
+    totalCount: 0,
+    totalPrice: 0,
+  };
 
   const navigate = useNavigate()
 
@@ -17,6 +22,22 @@ function ProductComponent(props) {
   const editProduct = () => {
     navigate(`/dashboard/create-edit-product/${id}`)
   }
+  const fillObject = () => {
+    cartProduct.cart.push({ imgUrl, title, price, id });
+    cartProduct.totalCount = 1;
+    cartProduct.totalPrice = price;
+  }
+
+  const addInObject = () => {
+    console.log("fill")
+  }
+
+  const addToCart = () => {
+    const arrayInLocalStorage = getProductInLocalStorage();
+    console.log(arrayInLocalStorage)
+    !arrayInLocalStorage ? fillObject() : addInObject()
+    setProductInLocalStorage(cartProduct)
+  }
 
   return (
 
@@ -24,12 +45,12 @@ function ProductComponent(props) {
 
       <div className="border border-secondary imgSection">
         <Link to={`/show-product?id=${id}`}>
-        <img
-          src={imgUrl}
-          alt="product"
-        />
+          <img
+            src={imgUrl}
+            alt="product"
+          />
         </Link>
-        
+
       </div>
       <div className="priceSection">
         <p className="title">
@@ -44,7 +65,7 @@ function ProductComponent(props) {
               <button className="btn btn-warning" onClick={editProduct}>Edit</button>
             </div>
           ) :
-            <button className="btn btn-secondary addBtn">Add To Cart</button>
+            <button className="btn btn-secondary addBtn" onClick={addToCart}>Add To Cart</button>
         }
       </div>
     </div>

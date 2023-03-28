@@ -164,9 +164,12 @@ const NavbarComponent = () => {
             </form>
           </ul>
         </div>
-        <div className="basket d-flex px-3">
-          <div className="basketImg "></div>
-          <p className="align-self-center m-0">Cart - 0</p>
+        <div className="basketAll">
+          <div className="basket d-flex px-3">
+            <div className="basketImg "></div>
+            <p className="align-self-center m-0">Cart - 0</p>
+          </div>
+          <div className="cardDropdown border">No Product Add In Cart</div>
         </div>
       </div>
     </nav>
