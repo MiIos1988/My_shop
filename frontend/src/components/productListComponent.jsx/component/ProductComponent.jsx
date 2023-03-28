@@ -1,15 +1,13 @@
 // import ModalWarningComponent from "../../../pages/admin/ModalWarningComponent";
 
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { addToCart } from "../../../redux/cartSlicer";
 import { deleteProductData, getProductInLocalStorage, setProductInLocalStorage } from "../../../service/productService";
 
 function ProductComponent(props) {
   const { imgUrl, title, price, id, dashboard } = props;
-  const cartProduct = {
-    cart: [],
-    totalCount: 0,
-    totalPrice: 0,
-  };
+  const dispatch = useDispatch();
 
   const navigate = useNavigate()
 
@@ -22,21 +20,13 @@ function ProductComponent(props) {
   const editProduct = () => {
     navigate(`/dashboard/create-edit-product/${id}`)
   }
-  const fillObject = () => {
-    cartProduct.cart.push({ imgUrl, title, price, id });
-    cartProduct.totalCount = 1;
-    cartProduct.totalPrice = price;
-  }
 
-  const addInObject = () => {
-    console.log("fill")
-  }
+  const addProductInCart = () => {
+    // const arrayInLocalStorage = getProductInLocalStorage();
+    // console.log(arrayInLocalStorage)
+    // !arrayInLocalStorage ? fillObject() : addInObject()
+    dispatch(addToCart({id, imgUrl,title, price}));
 
-  const addToCart = () => {
-    const arrayInLocalStorage = getProductInLocalStorage();
-    console.log(arrayInLocalStorage)
-    !arrayInLocalStorage ? fillObject() : addInObject()
-    setProductInLocalStorage(cartProduct)
   }
 
   return (
@@ -65,7 +55,7 @@ function ProductComponent(props) {
               <button className="btn btn-warning" onClick={editProduct}>Edit</button>
             </div>
           ) :
-            <button className="btn btn-secondary addBtn" onClick={addToCart}>Add To Cart</button>
+            <button className="btn btn-secondary addBtn" onClick={addProductInCart}>Add To Cart</button>
         }
       </div>
     </div>
