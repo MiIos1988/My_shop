@@ -6,12 +6,16 @@ import "animate.css";
 import logo from "../../assets/image/logo-zurea.jpg";
 
 const NavbarComponent = () => {
-
-
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userSlicer.user);
-  const cartSlicer = useSelector(store => store.cartSlicer);
-  // console.log(cartSlicer)
+  const cartSlicer = useSelector((store) => store.cartSlicer);
+  console.log(cartSlicer.cart);
+
+  let subtotal = 0
+
+  cartSlicer.cart.map((el, index) => {
+    subtotal += el.quantity*el.price
+  })
 
   const onLogout = () => {
     removeLocalStorage("my_user");
@@ -171,9 +175,46 @@ const NavbarComponent = () => {
         <div className="basketAll">
           <div className="basket d-flex px-3">
             <div className="basketImg "></div>
-            <p className="align-self-center m-0">Cart - {!cartSlicer.cart.length ? 0 : cartSlicer.cart.length}</p>
+            <p className="align-self-center m-0">
+              Cart - {!cartSlicer.cart.length ? 0 : cartSlicer.cart.length}
+            </p>
           </div>
-          <div className="cardDropdown border">No Product Add In Cart</div>
+          <div className="cardDropdown border">
+            {!cartSlicer.cart.length ? (
+             <div className="p-2">
+              No Product Add In Cart
+             </div> 
+            ) : (
+              <div>
+                <p className="m-0 p-2 text-start">Your Cart: {cartSlicer.cart.length} Items</p>
+                <hr className="m-1"/>
+                <div className="d-flex flex-column">
+                  {cartSlicer.cart.map((el, index) => {
+                    return (<div key={index}>
+                    <div className="productCart d-flex align-items-center justify-content-between" >
+                        <img className="  " src={el.imgUrl} alt="" />
+                        <p className="mb-0">{el.title.length > 15 ? el.title.substring(0,15) + "..." : el.title}</p>
+                        <div className="quantity">
+                          <p className="m-0">{el.quantity} X</p>
+                          <p>$ {el.price}</p>
+                        </div>
+                      </div>
+                      <hr className="m-1"/>
+                    </div>
+                      
+                    );
+                  })}
+                </div>
+                <div className="d-flex justify-content-between px-3">
+                <p className="m-0 p-2 "><dt>Subtotal </dt></p>
+                <p className="m-0 py-2">${subtotal}</p>
+                </div>
+                <div className="btnField">
+                  <button className="btn btn-light">View Cart</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>

@@ -25,13 +25,13 @@ const cartSlicer = createSlice({
                 copyArray.push(action.payload)
                 state.cart = [...copyArray];
                 state.totalCount = state.cart.length
-                console.log(JSON.stringify(state))
+                // console.log(JSON.stringify(state))
             } else {
-                console.log("working")
-                // state.cart.find(el => {
-                //     el.id === action.payload.id
-                // })
+                state.cart.map(el => el.id === action.payload.id &&  el.quantity++)
+                        // console.log(JSON.stringify(state))
+                    
             }
+            
 
         }
     }

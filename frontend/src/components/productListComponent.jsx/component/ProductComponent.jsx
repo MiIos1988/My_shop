@@ -22,9 +22,6 @@ function ProductComponent(props) {
   }
 
   const addProductInCart = () => {
-    // const arrayInLocalStorage = getProductInLocalStorage();
-    // console.log(arrayInLocalStorage)
-    // !arrayInLocalStorage ? fillObject() : addInObject()
     dispatch(addToCart({id, imgUrl,title, price, quantity: 1}));
 
   }
