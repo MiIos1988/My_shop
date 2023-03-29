@@ -6,8 +6,12 @@ import "animate.css";
 import logo from "../../assets/image/logo-zurea.jpg";
 
 const NavbarComponent = () => {
+
+
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userSlicer.user);
+  const cartSlicer = useSelector(store => store.cartSlicer);
+  // console.log(cartSlicer)
 
   const onLogout = () => {
     removeLocalStorage("my_user");
@@ -167,7 +171,7 @@ const NavbarComponent = () => {
         <div className="basketAll">
           <div className="basket d-flex px-3">
             <div className="basketImg "></div>
-            <p className="align-self-center m-0">Cart - 0</p>
+            <p className="align-self-center m-0">Cart - {!cartSlicer.cart.length ? 0 : cartSlicer.cart.length}</p>
           </div>
           <div className="cardDropdown border">No Product Add In Cart</div>
         </div>

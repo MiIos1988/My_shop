@@ -25,7 +25,7 @@ function ProductComponent(props) {
     // const arrayInLocalStorage = getProductInLocalStorage();
     // console.log(arrayInLocalStorage)
     // !arrayInLocalStorage ? fillObject() : addInObject()
-    dispatch(addToCart({id, imgUrl,title, price}));
+    dispatch(addToCart({id, imgUrl,title, price, quantity: 1}));
 
   }
 

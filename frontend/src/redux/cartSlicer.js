@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    productData: {
-        cart: [],
-        totalCount: 0,
-        totalPrice: 0   }
+
+    cart: [],
+    totalCount: 0,
+    totalPrice: 0
+
+
+
 }
 
 const cartSlicer = createSlice({
@@ -13,10 +16,23 @@ const cartSlicer = createSlice({
 
     reducers: {
         addToCart(state, action) {
-           const copyState = action.payload
-            state.productData.cart = [...copyState]
-            // state.productData.totalCount = cart.length
-            console.log(state.productData.totalCount.length)
+            let exist = state.cart.find(el => {
+                return el.id === action.payload.id
+            })
+
+            if (!exist) {
+                let copyArray = [...state.cart];
+                copyArray.push(action.payload)
+                state.cart = [...copyArray];
+                state.totalCount = state.cart.length
+                console.log(JSON.stringify(state))
+            } else {
+                console.log("working")
+                // state.cart.find(el => {
+                //     el.id === action.payload.id
+                // })
+            }
+
         }
     }
 });
