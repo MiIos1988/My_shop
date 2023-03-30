@@ -1,27 +1,36 @@
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 
 
 const QuantityProductComponent = (props) => {
- const { quantity, setQuantity} = props
 
+  const {cartShop, quantity, setQuantity} = props
+  const[quantityCart, setQuantityCart] = useState(quantity)
+  useEffect(() => {
+    
+    console.log(quantity)
+  },[]
+  )
  const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
-    console.log(quantity);
+   !cartShop ? setQuantity((prev) => prev + 1) : setQuantityCart((prev) => prev + 1)
   };
 
   const reduceQuantity = () => {
-    quantity > 1 ? setQuantity((prev) => prev - 1) : setQuantity(1);
+    (!cartShop ? quantity : quantityCart)> 1 ? (!cartShop ? setQuantity((prev) => prev - 1) : setQuantityCart((prev) => prev - 1)) : (!cartShop ? setQuantity(1) : setQuantityCart(1));
   };
 
     return (
-        <div className="quantity d-flex mb-4">
-          <p className="m-0 lh-lg">Quantity </p>
-          <div className="counter d-flex ps-4">
+        <div className={`quantity d-flex mb-${!cartShop ? 4 : 0}`}>
+          {
+            !cartShop && <p className="m-0 lh-lg">Quantity </p>
+          }
+          
+          <div className={`counter d-flex ps-${!cartShop ? 4 : 0}`}>
             <div className="border p-2 reduce" onClick={reduceQuantity}>
               <MdKeyboardArrowDown />
             </div>
-            <div className="border py-2 px-4 ">{quantity}</div>
+            <div className="border py-2 px-4 ">{!cartShop ? quantity : quantityCart}</div>
             <div className="border p-2 increase" onClick={increaseQuantity}>
               <MdKeyboardArrowUp />
             </div>
