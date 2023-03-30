@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getOneProductData } from "../../service/productService";
-import { MdKeyboardArrowDown } from "react-icons/md";
-import { MdKeyboardArrowUp } from "react-icons/md";
+
 import { SlBasket } from "react-icons/sl";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { TbArrowsCross } from "react-icons/tb";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlicer";
+import QuantityProductComponent from "./component/QuantityProductComponent";
 
 const ShowProductComponent = () => {
   const [queryParams] = useSearchParams();
@@ -14,24 +16,20 @@ const ShowProductComponent = () => {
   const [moveX, setMoveX] = useState();
   const [moveY, setMoveY] = useState();
   const [zoomOut, setZoomOut] = useState(false);
+  const dispatch = useDispatch();
+
+  let idParams = queryParams.get("id");
 
   useEffect(() => {
-    const id = queryParams.get("id");
+    let id = queryParams.get("id");
     getOneProductData(id)
       .then((res) => {
         setProduct(res.data.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [idParams]);
 
-  const increaseQuantity = () => {
-    setQuantity((prev) => prev + 1);
-    console.log(quantity);
-  };
-
-  const reduceQuantity = () => {
-    quantity > 1 ? setQuantity((prev) => prev - 1) : setQuantity(1);
-  };
+  
 
   const mouseMoveIn = (e) => {
     setZoomOut(true);
@@ -42,6 +40,11 @@ const ShowProductComponent = () => {
   const mouseMoveExit = () => {
     setZoomOut(false);
   };
+
+  const addProductInCart = () => {
+    dispatch(addToCart({ id: product._id, imgUrl: product.imgUrl, title: product.title, price: product.price, quantity: quantity }));
+
+  }
 
   return (
     <div className="container d-flex my-5 row mx-auto showProduct">
@@ -56,9 +59,9 @@ const ShowProductComponent = () => {
           style={
             zoomOut
               ? {
-                  transformOrigin: `${moveX}px ${moveY}px`,
-                  transform: "scale(2)",
-                }
+                transformOrigin: `${moveX}px ${moveY}px`,
+                transform: "scale(2)",
+              }
               : { transformOrigin: "center", transform: "scale(1)" }
           }
         />
@@ -67,20 +70,11 @@ const ShowProductComponent = () => {
         <h2>{product?.title}</h2>
         <p className="price">${product?.price}</p>
         <p className="description">{product?.description}</p>
-        <div className="quantity d-flex mb-4">
-          <p className="m-0 lh-lg">Quantity </p>
-          <div className="counter d-flex ps-4">
-            <div className="border p-2 reduce" onClick={reduceQuantity}>
-              <MdKeyboardArrowDown />
-            </div>
-            <div className="border py-2 px-4 ">{quantity}</div>
-            <div className="border p-2 increase" onClick={increaseQuantity}>
-              <MdKeyboardArrowUp />
-            </div>
-          </div>
-        </div>
+
+        <QuantityProductComponent  quantity={quantity} setQuantity={setQuantity} />
+
         <div className="productAction d-flex fs-5 mb-3 pb-3">
-          <div className="border p-2">
+          <div className="border p-2" onClick={addProductInCart}>
             <SlBasket /> Add to cart
           </div>
           <div className="border p-2 mx-2">

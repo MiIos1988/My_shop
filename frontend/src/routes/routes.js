@@ -11,6 +11,7 @@ import CreateProductComponent from "../pages/admin/CreateProductComponent";
 import ShowAllProduct from "../pages/admin/ShowAllProduct";
 import UsersDashboardComponent from "../pages/admin/UsersDashboardComponent";
 import ShowProductComponent from "../components/showProductComponent/ShowProductComponent";
+import CartShopPage from "../pages/CartShopPage";
 
 const router = [
   {
@@ -51,7 +52,11 @@ const router = [
       },
       {
         path: "show-product",
-        element: <ShowProductComponent/>
+        element: <ShowProductComponent />
+      },
+      {
+        path: "cart-shop",
+        element: <CartShopPage />
       },
 
     ],
@@ -66,7 +71,7 @@ const router = [
     children: [
       {
         path: "",
-        element: <UsersDashboardComponent/>
+        element: <UsersDashboardComponent />
       },
       {
         path: "create-edit-product",

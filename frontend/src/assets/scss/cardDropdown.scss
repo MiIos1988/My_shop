@@ -10,30 +10,43 @@
     display: none;
     z-index: 10;
 
-    .productCart{
-        // border-bottom: 1px solid black;
-        // padding: 5px;
+    .productCart {
+        color: black;
 
-        img{
+        img {
             height: 50px;
             width: 50px;
             object-fit: cover;
             margin-left: 10px;
         }
     }
-    .quantity{
+
+    .quantity {
         margin-right: 10px;
     }
-    .btnField{
+
+    .btnField {
         background-color: #222;
 
-        button{
+        button {
             width: 90%;
             margin: 20px;
-            &:hover{
+
+            &:hover {
                 background-color: black;
                 color: white;
             }
         }
+    }
+
+    .productLink {
+        text-decoration: none;
+
+    }
+
+    .removeProduct {
+        border-radius: 50%;
+
+
     }
 }

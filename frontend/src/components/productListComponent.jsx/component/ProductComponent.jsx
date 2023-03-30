@@ -8,11 +8,9 @@ import { deleteProductData, getProductInLocalStorage, setProductInLocalStorage }
 function ProductComponent(props) {
   const { imgUrl, title, price, id, dashboard } = props;
   const dispatch = useDispatch();
-
   const navigate = useNavigate()
 
   const deleteProduct = () => {
-
     deleteProductData(id).then(data => navigate("/dashboard"))
       .catch(err => console.log("error", err))
   }
@@ -22,12 +20,10 @@ function ProductComponent(props) {
   }
 
   const addProductInCart = () => {
-    dispatch(addToCart({id, imgUrl,title, price, quantity: 1}));
-
+    dispatch(addToCart({ id, imgUrl, title, price, quantity: 1 }));
   }
-
+  
   return (
-
     <div className=" d-flex flex-column product mt-4">
 
       <div className="border border-secondary imgSection">
