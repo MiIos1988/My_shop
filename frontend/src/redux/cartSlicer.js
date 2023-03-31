@@ -23,16 +23,19 @@ const cartSlicer = createSlice({
                 state.totalCount = state.cart.length
             } else {
                 let allQuantity = action.payload.quantity;
-                console.log(allQuantity)
                 state.cart.map(el => el.id === action.payload.id && (el.quantity = allQuantity))
             }
         },
         removeProduct(state, action) {
             let index = state.cart.findIndex(el => el.id === action.payload)
             state.cart.splice(index, 1);
+        },
+        changeQuantity(state, action) {
+            state.cart.map(el => el.id === action.payload.id && (el.quantity = action.payload.quantityCart))
         }
+
     }
 });
 
-export const { addToCart, removeProduct } = cartSlicer.actions;
+export const { addToCart, removeProduct, changeQuantity } = cartSlicer.actions;
 export default cartSlicer.reducer;
