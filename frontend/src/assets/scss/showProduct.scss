@@ -84,4 +84,60 @@
         }
     }
 
+
+}
+
+.modalDialog {
+    position: absolute;
+    // width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: rgba($color: #000000, $alpha: .15);
+
+    .modalField {
+        width: 80%;
+        margin: auto;
+        background-color: aliceblue;
+
+        .header {
+            background-color: #4cbb6c;
+
+            svg {
+                color: white;
+                font-size: 2rem;
+            }
+
+            p {
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+
+        .product {
+            height: 40vh;
+
+            .imageField {
+                width: 33%;
+                padding: 10px;
+            }
+
+            .titleField {
+                width: 27%;
+                padding: 10px;
+            }
+
+            .endField {
+                // width: 100%;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+            }
+        }
+    }
 }
