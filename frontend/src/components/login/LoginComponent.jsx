@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { saveUser } from "../../redux/userSlicer";
 import { isAdmin, loginData, setTokenInLocalStorage, setUserInLocalStorage } from "../../service/authService";
@@ -52,7 +52,8 @@ const LoginComponent = () => {
                     />
                     <ErrorMessage name="email" />
 
-                    <button className="btn btn-primary" type="submit">Login</button>
+                    <button className="btn btn-primary" type="submit">Login</button><br /><br />
+                    <Link to={"/register"} className="text-reset text-decoration-none">If you don't have an account, register</Link>
                 </Form>
             </Formik>
 

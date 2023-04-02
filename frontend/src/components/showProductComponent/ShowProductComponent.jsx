@@ -18,6 +18,7 @@ const ShowProductComponent = () => {
   const [moveY, setMoveY] = useState();
   const [zoomOut, setZoomOut] = useState(false);
   const dispatch = useDispatch();
+  const [viewModal, setViewModal] =  useState(false);
 
   let idParams = queryParams.get("id");
 
@@ -44,15 +45,11 @@ const ShowProductComponent = () => {
 
   const addProductInCart = () => {
     dispatch(addToCart({ id: product._id, imgUrl: product.imgUrl, title: product.title, price: product.price, quantity: quantity }));
-    openModal()
+    setViewModal(true)
 
   }
-
-  const openModal = () => {
-    console.log("work")
-  }
-
-  return (
+  
+   return (
     <>
       <div className="container d-flex my-5 row mx-auto showProduct">
         <div
@@ -110,7 +107,9 @@ const ShowProductComponent = () => {
           </div>
         </div>
       </div>
-      <ModalProductComponent product={product} quantity={quantity}/>
+      <div className={viewModal ? "d-block ": "d-none"}>
+      <ModalProductComponent product={product} quantity={quantity} setViewModal={setViewModal}/>
+      </div>
     </>
   );
 };

@@ -12,6 +12,8 @@ import ShowAllProduct from "../pages/admin/ShowAllProduct";
 import UsersDashboardComponent from "../pages/admin/UsersDashboardComponent";
 import ShowProductComponent from "../components/showProductComponent/ShowProductComponent";
 import CartShopPage from "../pages/CartShopPage";
+import CheckoutPayComponent from "../components/checkoutPayComponent/CheckoutPayComponent";
+import PayGuardComponent from "../guard/PayGuardComponent";
 
 const router = [
   {
@@ -48,17 +50,24 @@ const router = [
       },
       {
         path: "shop",
-        element: <ShopPageComponent />
+        element: <ShopPageComponent />,
       },
       {
         path: "show-product",
-        element: <ShowProductComponent />
+        element: <ShowProductComponent />,
       },
       {
         path: "cart-shop",
-        element: <CartShopPage />
+        element: <CartShopPage />,
       },
-
+      {
+        path: "checkout",
+        element: (
+          <PayGuardComponent>
+            <CheckoutPayComponent />
+          </PayGuardComponent>
+        ),
+      },
     ],
   },
   {
@@ -71,22 +80,22 @@ const router = [
     children: [
       {
         path: "",
-        element: <UsersDashboardComponent />
+        element: <UsersDashboardComponent />,
       },
       {
         path: "create-edit-product",
-        element: <CreateProductComponent />
+        element: <CreateProductComponent />,
       },
       {
-        path: 'create-edit-product/:id',
-        element: <CreateProductComponent />
+        path: "create-edit-product/:id",
+        element: <CreateProductComponent />,
       },
       {
         path: "show-product",
-        element: <ShowAllProduct />
+        element: <ShowAllProduct />,
       },
-    ]
-  }
+    ],
+  },
 ];
 
 export default router;

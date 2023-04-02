@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import QuantityProductComponent from "../components/showProductComponent/component/QuantityProductComponent"
 import { removeProduct } from "../redux/cartSlicer";
 
@@ -57,6 +58,7 @@ const CartShopPage = () => {
                     </tr>
                 </tfoot>
             </table>
+            <Link className="btn btn-dark payBtn col-6 offset-6 p-2" to={"/checkout"}>Pay products</Link>
         </div>
     )
 }
