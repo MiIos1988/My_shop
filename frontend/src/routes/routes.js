@@ -14,6 +14,7 @@ import ShowProductComponent from "../components/showProductComponent/ShowProduct
 import CartShopPage from "../pages/CartShopPage";
 import CheckoutPayComponent from "../components/checkoutPayComponent/CheckoutPayComponent";
 import PayGuardComponent from "../guard/PayGuardComponent";
+import PayProductComponent from "../components/payProductComponent/PayProductComponent";
 
 const router = [
   {
@@ -67,6 +68,12 @@ const router = [
             <CheckoutPayComponent />
           </PayGuardComponent>
         ),
+        children: [
+          {
+            path: "pay-product",
+            element: <PayProductComponent />
+          }
+        ]
       },
     ],
   },

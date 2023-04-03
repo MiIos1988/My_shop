@@ -33,7 +33,6 @@ const CheckoutPayComponent = () => {
     enableReinitialize: true,
     validationSchema: SignUpSchema,
     onSubmit: (values) => {
-    //   alert(JSON.stringify(values, null, 2));
     console.log(values)
     },
   });
