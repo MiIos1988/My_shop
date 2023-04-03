@@ -1,15 +1,17 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { saveUser } from "../../redux/userSlicer";
 import { isAdmin, loginData, setTokenInLocalStorage, setUserInLocalStorage } from "../../service/authService";
+import { useEffect } from "react";
 
 
 
 const LoginComponent = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const LoginSchema = Yup.object().shape({
         email: Yup.string().email("Invalid email").required("Required"),
@@ -21,7 +23,7 @@ const LoginComponent = () => {
             setUserInLocalStorage(res.data.data);
             setTokenInLocalStorage(res.data.token);
             dispatch(saveUser(res.data.data))
-            isAdmin() ? navigate("/dashboard") : navigate("/")
+            isAdmin() ? navigate("/dashboard") : navigate(-1);
         })
             .catch(err => console.log(err))
     }
