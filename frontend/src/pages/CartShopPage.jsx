@@ -1,14 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import QuantityProductComponent from "../components/showProductComponent/component/QuantityProductComponent"
-import { removeProduct } from "../redux/cartSlicer";
+import { addTotalPrice, removeProduct } from "../redux/cartSlicer";
 
 const CartShopPage = () => {
 
     const cartSlicer = useSelector((store) => store.cartSlicer.cart);
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        const totalPrice =   cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
+        dispatch(addTotalPrice(totalPrice));
+    },[]
+    )
 
     return (
         <div className="container mt-5 cartShop">
@@ -52,8 +58,8 @@ const CartShopPage = () => {
                     <tr>
                         <td colSpan="3" className="text-end pe-5"><b>Total for pay:</b></td>
                         <td ><b>{
-                            cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
-
+                           cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
+                           
                         }</b></td>
                     </tr>
                 </tfoot>

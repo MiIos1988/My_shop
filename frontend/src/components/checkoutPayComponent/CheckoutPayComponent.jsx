@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { isUserLogin } from "../../service/authService";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const CheckoutPayComponent = () => {
 
     const [loginUser, setLoginUser] = useState()
+    const navigate = useNavigate();
 
     useEffect(() => {
       let user = isUserLogin()
@@ -33,7 +35,7 @@ const CheckoutPayComponent = () => {
     enableReinitialize: true,
     validationSchema: SignUpSchema,
     onSubmit: (values) => {
-    console.log(values)
+    navigate("/checkout/pay-product");
     },
   });
 
@@ -96,6 +98,7 @@ const CheckoutPayComponent = () => {
         /><br/>
         <button type="submit" className="form-control btn btn-primary">Continue payment</button>
       </form>
+      <Outlet/>
     </div>
   );
 };

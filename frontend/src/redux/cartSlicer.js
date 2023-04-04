@@ -32,10 +32,13 @@ const cartSlicer = createSlice({
         },
         changeQuantity(state, action) {
             state.cart.map(el => el.id === action.payload.id && (el.quantity = action.payload.quantityCart))
+        },
+        addTotalPrice(state, action){
+            state.totalPrice = action.payload
         }
 
     }
 });
 
-export const { addToCart, removeProduct, changeQuantity } = cartSlicer.actions;
+export const { addToCart, removeProduct, changeQuantity, addTotalPrice } = cartSlicer.actions;
 export default cartSlicer.reducer;
