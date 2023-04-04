@@ -1,0 +1,143 @@
+.showProduct {
+    .imageProduct {
+        padding: 0;
+        height: 50vh;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .price {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .description {
+        font-size: 1rem;
+        color: #7a7a7a;
+        border-bottom: 1px dashed black;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+    }
+
+    .counter svg {
+        font-size: 1.5rem;
+    }
+
+    .reduce,
+    .increase {
+        cursor: pointer;
+    }
+
+    .productAction {
+        border-bottom: 1px dashed black;
+    }
+
+    .productAction div {
+        cursor: pointer;
+
+        &:hover {
+            background-color: black;
+            color: white;
+        }
+    }
+
+    .socialNetwork a {
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        background-image: url("../image/sprite.png");
+    }
+
+    .fb {
+        background-color: #3b579d;
+        background-position: -5px -55px;
+
+        &:hover {
+            background-color: white;
+            background-position: -55px -55px;
+        }
+    }
+
+    .tw {
+        background-color: #38a1f3;
+        background-position: -5px -105px;
+        margin: 0 10px;
+
+        &:hover {
+            background-color: white;
+            background-position: -55px -105px;
+        }
+    }
+
+    .in {
+        background-color: #c8232c;
+        background-position: -5px -305px;
+
+        &:hover {
+            background-color: white;
+            background-position: -55px -305px;
+        }
+    }
+
+
+}
+
+.modalDialog {
+    position: absolute;
+    // width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: rgba($color: #000000, $alpha: .15);
+
+    .modalField {
+        width: 80%;
+        margin: auto;
+        background-color: aliceblue;
+
+        .header {
+            background-color: #4cbb6c;
+
+            svg {
+                color: white;
+                font-size: 2rem;
+            }
+
+            p {
+                color: white;
+                font-size: 1.5rem;
+            }
+        }
+
+        .product {
+            height: 40vh;
+
+            .imageField {
+                width: 33%;
+                padding: 10px;
+            }
+
+            .titleField {
+                width: 27%;
+                padding: 10px;
+            }
+
+            .endField {
+                // width: 100%;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+            }
+        }
+    }
+}

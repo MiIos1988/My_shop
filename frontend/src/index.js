@@ -9,11 +9,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux'
 import userSlicer from './redux/userSlicer';
 import loaderSlicer from './redux/loaderSlicer';
+import cartSlicer from './redux/cartSlicer';
 
 const route = createBrowserRouter(router);
 
 const store = configureStore({
-  reducer: { userSlicer, loaderSlicer },
+  reducer: { userSlicer, loaderSlicer, cartSlicer },
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

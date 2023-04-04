@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .sidebar,
 .outlet{
    height: 100vh;
@@ -9,3 +10,37 @@
         width: 100%;
     }
 }
+=======
+.dashboard {
+    height: 100vh;
+
+    .sidebar a {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .imageField {
+        width: 100px;
+        height: 100px;
+        position: relative;
+
+        & img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .addImage button {
+        height: 40px;
+        margin-left: 10px;
+    }
+
+    .btnImg {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+}
+>>>>>>> newBranch

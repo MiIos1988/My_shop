@@ -5,9 +5,9 @@ const productSChema = new Mongoose.Schema({
   title: { type: String },
   description: { type: String },
   price: { type: Number },
-  rating: { type: Number },
+  rating: { type: Number, default: 0 },
   userId: { type: String },
-  allRatings: { type: Array },
+  allRatings: { type: Array, default: [] },
 });
 
 const ProductModel = Mongoose.model("product", productSChema);

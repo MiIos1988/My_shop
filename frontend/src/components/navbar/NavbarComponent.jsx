@@ -1,19 +1,33 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { removeUser } from "../../redux/userSlicer";
 import { removeLocalStorage } from "../../service/authService";
 import "animate.css";
 import logo from "../../assets/image/logo-zurea.jpg";
+import { removeProduct } from "../../redux/cartSlicer";
 
 const NavbarComponent = () => {
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userSlicer.user);
+  const cartSlicer = useSelector((store) => store.cartSlicer);
+  const navigate = useNavigate()
+
+  let subtotal = 0
+
+  cartSlicer.cart.map((el, index) => {
+    subtotal += el.quantity * el.price
+  })
 
   const onLogout = () => {
     removeLocalStorage("my_user");
     removeLocalStorage("my_token");
     dispatch(removeUser());
   };
+
+  const removeInCart = (event, el) => {
+    event.preventDefault();
+    dispatch(removeProduct(el.id))
+  }
 
   return (
     // <div className="container-fluid mt-5">
@@ -164,9 +178,53 @@ const NavbarComponent = () => {
             </form>
           </ul>
         </div>
-        <div className="basket d-flex px-3">
-          <div className="basketImg "></div>
-          <p className="align-self-center m-0">Cart - 0</p>
+        <div className="basketAll">
+          <div className="basket d-flex px-3">
+            <div className="basketImg "></div>
+            <p className="align-self-center m-0">
+              Cart - {!cartSlicer.cart.length ? 0 : cartSlicer.cart.length}
+            </p>
+          </div>
+          <div className="cardDropdown border">
+            {!cartSlicer.cart.length ? (
+              <div className="p-2">
+                No Product Add In Cart
+              </div>
+            ) : (
+              <div>
+                <p className="m-0 p-2 text-start">Your Cart: {cartSlicer.cart.length} Items</p>
+                <hr className="m-1" />
+                <div className="d-flex flex-column">
+                  {cartSlicer.cart.map((el, index) => {
+                    return (<div key={index}>
+                      <Link className="productLink" to={`/show-product?id=${el.id}`}>
+                        <div className="productCart d-flex align-items-center justify-content-around" >
+                          <img className="  " src={el.imgUrl} alt="" />
+                          <p className="mb-0">{el.title.length > 20 ? el.title.substring(0, 15) + "..." : el.title}</p>
+                          <div className="quantity">
+                            <p className="m-0">{el.quantity} X</p>
+                            <p className="m-0">$ {el.price}</p>
+                          </div>
+                          <button className="removeProduct" onClick={(event) => removeInCart(event, el)}>X</button>
+                        </div>
+                      </Link>
+
+                      <hr className="m-1" />
+                    </div>
+
+                    );
+                  })}
+                </div>
+                <div className="d-flex justify-content-between px-3">
+                  <p className="m-0 p-2 "><dt>Subtotal </dt></p>
+                  <p className="m-0 py-2">${subtotal}</p>
+                </div>
+                <div className="btnField">
+                  <button className="btn btn-light" onClick={() => navigate("/cart-shop")}>View Cart</button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </nav>

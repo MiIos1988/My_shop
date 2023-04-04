@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleLoader } from "../../redux/loaderSlicer";
 
-const ProductListComponent = () => {
+const ProductListComponent = (props) => {
+  const { dashboard } = props;
   const [product, setProduct] = useState([]);
   const [pagination, setPagination] = useState({
     start: 0,
@@ -43,10 +44,14 @@ const ProductListComponent = () => {
         {product?.map((el, index) => {
           return (
             <div className={"col-3"} key={index}>
+
               <ProductComponent
                 imgUrl={el.imgUrl}
                 title={el.title}
                 price={el.price}
+                id={el._id}
+                dashboard={dashboard}
+              // description={el.description}
               />
             </div>
 
@@ -95,6 +100,7 @@ const ProductListComponent = () => {
                 if (pagination.start > 0) {
                   setPagination({ ...pagination, start: pagination.start - 1 });
                   setActive(active - 1);
+                  window.scrollTo(0, 0);
                 }
               }}>
                 <span aria-hidden="true">&laquo;</span>
@@ -107,6 +113,7 @@ const ProductListComponent = () => {
                   {
                     setPagination({ ...pagination, start: el - 1 });
                     setActive(Number(e.target.text));
+                    window.scrollTo(0, 0);
                   }
                 }}>
                   <Link className="page-link" >
@@ -121,6 +128,7 @@ const ProductListComponent = () => {
                 if (pagination.start + 1 < pagination.allPag) {
                   setPagination({ ...pagination, start: pagination.start + 1 });
                   setActive(active + 1);
+                  window.scrollTo(0, 0);
                 }
 
               }}>
