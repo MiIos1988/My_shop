@@ -22,7 +22,7 @@ const PaymentElementsComponent = ({ ck }) => {
   return (
     <>
       {stripe && (
-        <div className="row container mt-5">
+        <div className="container mt-5">
         <div className=" col-6 offset-3">
           <PaymentElement /><br />
           <button onClick={onPay} className="btn btn-primary form-control">Pay </button>
