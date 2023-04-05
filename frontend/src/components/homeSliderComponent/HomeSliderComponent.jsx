@@ -24,13 +24,13 @@ const HomeSliderComponent = () => {
         className="mySwiper m-5 "
       >
         <SwiperSlide>
-          <div className="slideField d-flex">
+          <div className="slideField ">
             <div className="imgField">
               <img src={img1} alt="img" />
             </div>
             <div className="linkField d-flex ms-auto me-auto align-items-center">
               <div>
-                <h1 className="mb-3">GO TO THE SHOP</h1>
+                <h1 className="mb-3 display-5">GO TO THE SHOP</h1>
                 <Link to={"/shop"} className="btn btn-dark">SHOP NOW</Link>
               </div>
             </div>
@@ -43,7 +43,7 @@ const HomeSliderComponent = () => {
             </div>
             <div className="linkField d-flex ms-auto me-auto align-items-center">
               <div>
-                <h1 className="mb-3">GO TO THE SHOP</h1>
+                <h1 className="mb-3 display-5">GO TO THE SHOP</h1>
                 <Link to={"/shop"} className="btn btn-dark">SHOP NOW</Link>
               </div>
             </div>
