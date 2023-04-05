@@ -7,7 +7,9 @@
     }
 
     .swiper-button-prev {
-        left: 92% !important;
+        position: absolute;
+        left: calc(100% - 100px) !important;
+        margin-right: 10px;
     }
 
     .swiper-button-prev,
@@ -17,7 +19,6 @@
         padding: 15px !important;
         width: 25px;
         height: 25px;
-        // padding: 5px;
     }
 
     .swiper-button-next:after,
@@ -25,5 +26,12 @@
         font-size: 16px !important;
         font-weight: 600;
         color: #111
+    }
+    .product{
+        @media (max-width: 500px) { 
+            margin-left: 10%;
+            margin-right: 10%;
+            text-align: center;
+        }
     }
 }
