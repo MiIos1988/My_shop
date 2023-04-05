@@ -9,8 +9,8 @@ import "swiper/css/navigation";
 
 // import required modules
 import { Navigation } from "swiper";
-import img1 from "../../assets/image/slider_img_1.jpg";
-import img2 from "../../assets/image/slider_img_2.jpg";
+import img1 from "../../assets/image/slider-img1.jpg";
+import img2 from "../../assets/image/slider-img2.jpg";
 
 const HomeSliderComponent = () => {
   return (
@@ -24,14 +24,30 @@ const HomeSliderComponent = () => {
         className="mySwiper m-5 "
       >
         <SwiperSlide>
-          <Link to={"/shop"}>
-            <img src={img1} alt="img" />
-          </Link>
+          <div className="d-flex sliderDiv">
+            <div className="imgDiv">
+              <img src={img1} alt="img" />
+            </div>
+            <div className="titleDiv d-flex  align-items-center ps-5">
+              <div>
+                <h1>GO TO DO CONTACT</h1><br />
+                <Link to={"/shop"} className="btn btn-dark" >SHOP NOW</Link>
+              </div>
+            </div>
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-          <Link to={"/shop"}>
-            <img src={img2} alt="img" />
-          </Link>
+          <div className="d-flex sliderDiv">
+            <div className="imgDiv">
+              <img src={img2} alt="img" />
+            </div>
+            <div className="titleDiv d-flex  align-items-center ps-5">
+              <div>
+                <h1>GO TO DO SHOP</h1><br />
+                <Link to={"/shop"} className="btn btn-dark" >SHOP NOW</Link>
+              </div>
+            </div>
+          </div>
         </SwiperSlide>
       </Swiper>
     </>
