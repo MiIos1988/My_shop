@@ -51,9 +51,9 @@ const ShowProductComponent = () => {
   
    return (
     <>
-      <div className="container d-flex my-5 row mx-auto showProduct">
+      <div className="container d-flex my-5 mx-auto showProduct">
         <div
-          className="imageProduct border col-5"
+          className="imageProduct border col-md-5"
           onMouseMove={mouseMoveIn}
           onMouseLeave={mouseMoveExit}
         >
@@ -70,7 +70,7 @@ const ShowProductComponent = () => {
             }
           />
         </div>
-        <div className="infoProduct col-5 offset-1 ">
+        <div className="infoProduct col-md-5 ms-3">
           <h2>{product?.title}</h2>
           <p className="price">${product?.price}</p>
           <p className="description">{product?.description}</p>

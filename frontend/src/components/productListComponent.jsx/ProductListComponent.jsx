@@ -43,7 +43,7 @@ const ProductListComponent = (props) => {
       <div className="row container d-flex m-auto flex-wrap">
         {product?.map((el, index) => {
           return (
-            <div className={"col-3"} key={index}>
+            <div className={"col-xl-3 col-lg-4 col-sm-6"} key={index}>
 
               <ProductComponent
                 imgUrl={el.imgUrl}
@@ -58,8 +58,7 @@ const ProductListComponent = (props) => {
           );
         })}
       </div>
-      <div className="row mt-5">
-        <div className="col-2 offset-2">
+      <div className="mt-5 d-flex justify-content-center paginationField">
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"
@@ -92,8 +91,7 @@ const ProductListComponent = (props) => {
               })}
             </ul>
           </div>
-        </div>
-        <nav className="col-8" aria-label="Page navigation example">
+        <nav  aria-label="Page navigation example " className="paginationNav">
           <ul className="pagination justify-content-start">
             <li className="page-item">
               <Link className="page-link" to="#" aria-label="Previous" onClick={() => {

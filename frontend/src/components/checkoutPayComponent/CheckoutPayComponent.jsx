@@ -41,7 +41,9 @@ const CheckoutPayComponent = () => {
 
   return (
     <div className="container">
-      <form onSubmit={formik.handleSubmit} className="col-6 offset-3 mt-5">
+      <div className="row justify-content-center">
+
+      <form onSubmit={formik.handleSubmit} className="col-md-6  mt-5">
         <label htmlFor="firstName">First Name</label>
         <input
         className="form-control"
@@ -68,12 +70,12 @@ const CheckoutPayComponent = () => {
           type="email"
           onChange={formik.handleChange}
           value={formik.values.email || ""}
-        /><br/>
+          /><br/>
         <label htmlFor="email">Phone</label>
         <input
         className="form-control"
-          id="phone"
-          name="phone"
+        id="phone"
+        name="phone"
           type="text"
           onChange={formik.handleChange}
           value={formik.values.phone || ""}
@@ -95,9 +97,10 @@ const CheckoutPayComponent = () => {
           type="text"
           onChange={formik.handleChange}
           value={formik.values.city || ""}
-        /><br/>
+          /><br/>
         <button type="submit" className="form-control btn btn-primary">Continue payment</button>
       </form>
+          </div>
       <Outlet/>
     </div>
   );

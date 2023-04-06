@@ -28,8 +28,8 @@ const RegisterComponent = () => {
     return (
         <>
             {!isRegister ? (
-                <div className="col-4 offset-4">
-                    <h1>Register</h1>
+                <>
+                <h1 className="text-center mt-3">Register</h1>
                     <Formik
                         initialValues={{
                             email: "",
@@ -53,7 +53,8 @@ const RegisterComponent = () => {
                                 .catch((error) => console.log(error));
                         }}
                     >
-                        <Form>
+                            <div className="row justify-content-center mx-2">
+                        <Form className="col-lg-4">
                             <Field
                                 className="form-control my-2"
                                 name="email"
@@ -111,12 +112,13 @@ const RegisterComponent = () => {
                             />
                             <ErrorMessage name="city" />
 
-                            <button className="btn btn-primary my-2" type="submit">
+                            <button className="btn btn-primary my-2 form-control" type="submit">
                                 Register
                             </button>
                         </Form>
-                    </Formik>
                 </div>
+                    </Formik>
+                    </>
             ) : (
                 <>
                 <div>Go to the email and click on the link</div>
