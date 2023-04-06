@@ -21,7 +21,7 @@ const HomeSliderComponent = () => {
         spaceBetween={30}
         navigation={true}
         modules={[Navigation]}
-        className="mySwiper m-5 "
+        className="mySwiper mx-md-5 my-5 "
       >
         <SwiperSlide>
           <div className="slideField ">
@@ -37,7 +37,7 @@ const HomeSliderComponent = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-        <div className="slideField d-flex">
+          <div className="slideField d-flex">
             <div className="imgField">
               <img src={img2} alt="img" />
             </div>

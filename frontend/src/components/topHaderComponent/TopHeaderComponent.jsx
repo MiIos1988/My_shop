@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 const TopHeaderComponent = () => {
 
   return (
-    <div className="bg-dark mb-4" >
-      <div className="d-flex justify-content-between mx-4">
+    <div className="bg-dark mb-4 topHeader" >
+      <div className="topHeaderDiv d-flex justify-content-between mx-4">
         <div className="freeShop text-white my-auto "><p className="mb-0">Free Shipping On Order Over $99</p> </div>
         <div className="rightDiv d-flex ">
           <div className="dropdown">

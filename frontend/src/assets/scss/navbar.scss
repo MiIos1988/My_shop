@@ -1,6 +1,10 @@
 .navbar {
+
   // width: 1830px;
-  
+  .navBtn {
+    margin-right: 10px;
+  }
+
 
   .navigationLink {
 
@@ -62,8 +66,9 @@
     width: 200px !important;
 
   }
-  .basketAll:hover{
-    .cardDropdown{
+
+  .basketAll:hover {
+    .cardDropdown {
       display: block;
     }
   }
@@ -91,4 +96,48 @@
     }
   }
 
+  .moreUl {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  @media (max-width: 576px) {
+
+    .navLogo {
+      margin-right: 0;
+
+      img {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+    }
+
+    .navUl {
+      text-align: center;
+    }
+
+    .moreUl {
+      flex-direction: column;
+      text-align: center;
+      // border-bottom: 1px solid #fff;
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .userSearch {
+      justify-content: center;
+      padding-bottom: 5px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .navUl {
+      text-align: center;
+    }
+
+    .userSearch {
+      justify-content: center;
+      padding-bottom: 5px;
+    }
+  }
 }

@@ -31,12 +31,12 @@ const NavbarComponent = () => {
 
   return (
     // <div className="container-fluid mt-5">
-    <nav className=" navbar navbar-expand-lg navbar-light bg-light border border-secondary mx-5 m-auto py-0">
-      <Link className="navbar-brand" to={"/"}>
+    <nav className="navDiv navbar navbar-expand-lg navbar-light bg-light border border-secondary mx-md-5 m-auto py-0">
+      <Link className="navbar-brand navLogo" to={"/"}>
         <img className="py-3 px-5" src={logo} alt="" />
       </Link>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler navBtn"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#navbarSupportedContent"
@@ -47,7 +47,7 @@ const NavbarComponent = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto ">
+        <ul className="navbar-nav me-auto mb-2 mb-lg-0 mx-auto navUl">
           <li className="nav-item">
             <Link
               className="navigationLink nav-link animate__animated animate__backInLeft"
@@ -91,7 +91,7 @@ const NavbarComponent = () => {
               className="dropdown-menu ulDiv"
               aria-labelledby="navbarDropdown"
             >
-              <ul className="d-flex navUl">
+              <ul className="d-flex moreUl">
                 <li>
                   <Link className="dropdown-item" to={"/"}>
                     Action
@@ -111,72 +111,74 @@ const NavbarComponent = () => {
             </div>
           </li>
         </ul>
-        <div className="nav-item dropdown user">
-          <Link
-            className="nav-link "
-            to="#"
-            id="navbarDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          ></Link>
-          <ul
-            className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown "
-            aria-labelledby="navbarDropdown"
-          >
-            {!userStore?.email ? (
-              <>
-                <li>
-                  <Link className="dropdown-item" to={"/register"}>
-                    Register
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to={"/login"}>
-                    Login
-                  </Link>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link className="dropdown-item" to={"/"}>
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link className="dropdown-item" to={"/"} onClick={onLogout}>
-                    Logout
-                  </Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </div>
-        <div className="dropdown searchDrop ">
-          <button
-            className="btn btn-secondary searchBtn"
-            type="button"
-            id="dropdownMenu2"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          ></button>
-          <ul
-            className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown px-2"
-            aria-labelledby="dropdownMenu2"
-          >
-            <form className="d-flex">
-              <input
-                className="form-control me-2 searchInp "
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
-            </form>
-          </ul>
+        <div className="userSearch d-flex">
+          <div className="nav-item dropdown user">
+            <Link
+              className="nav-link "
+              to="#"
+              id="navbarDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></Link>
+            <ul
+              className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown "
+              aria-labelledby="navbarDropdown"
+            >
+              {!userStore?.email ? (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to={"/register"}>
+                      Register
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to={"/login"}>
+                      Login
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    <Link className="dropdown-item" to={"/"}>
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item" to={"/"} onClick={onLogout}>
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+          </div>
+          <div className="dropdown searchDrop ">
+            <button
+              className="btn btn-secondary searchBtn"
+              type="button"
+              id="dropdownMenu2"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            ></button>
+            <ul
+              className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown px-2"
+              aria-labelledby="dropdownMenu2"
+            >
+              <form className="d-flex">
+                <input
+                  className="form-control me-2 searchInp "
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
+                <button className="btn btn-outline-success" type="submit">
+                  Search
+                </button>
+              </form>
+            </ul>
+          </div>
         </div>
         <div className="basketAll">
           <div className="basket d-flex px-3">

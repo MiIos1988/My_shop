@@ -1,0 +1,13 @@
+@media (max-width: 576px) {
+    .topHeaderDiv {
+        flex-direction: column;
+
+        .freeShop {
+            text-align: center;
+        }
+
+        .rightDiv {
+            margin: auto;
+        }
+    }
+}
