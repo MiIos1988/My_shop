@@ -3,8 +3,9 @@ const UserModel = require("../models/userModels");
 const registerValidation = require("../validation/registerValidation");
 const authRoute = express.Router();
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
 const jwt = require("jsonwebtoken");
+const sendMail = require("../service/mailService");
+const htmlActivation = require("../template/mailTemplate");
 
 authRoute.post("/register", registerValidation, async (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -12,27 +13,18 @@ authRoute.post("/register", registerValidation, async (req, res) => {
     const newUser = await UserModel.create(req.body);
     newUser.save();
 
-    let transporter = nodemailer.createTransport({
-      service: "gmail",
-      // host: "smtp.gmail.com",
-      // port: 587,
-      // secure: false,
-      auth: {
-        user: "vojvoda19881@gmail.com",
-        pass: "tzuhspkfqkzbsbes",
-      },
-    });
-    let info = await transporter.sendMail({
-      from: ' "test" "vojvoda19881@gmail.com"',
-      to: req.body.email,
-      subject: "Test email",
-      html: `<h2 style="color: red">Please confirm registration </h2>
-            <p>Click on link</p>
-            <a  href="http://localhost:3000/activation-account/${newUser?._id}" target="_blank">Go to WebSite</a>    `,
-    });
-    res.send("Send email");
+    const activationMailHtml = htmlActivation(`http://localhost:3000/activation-account/${newUser?._id}`)
+    sendMail(
+      "vojvoda19881@gmail.com",
+      req.body.email,
+      "Test email",
+      activationMailHtml
+    ).then(() => res.send('User registered.'))
+      .catch(error => res.status(415).send(error))
+
+    
   } catch {
-    res.status(416).send("Error creating new user");
+      res.status(416).send("Error creating new user");
   }
 });
 

@@ -84,30 +84,6 @@
         }
     }
 }
-    @media (max-width: 768px) { 
-        .showProduct{
-            padding: 0;
-          flex-direction: column;
-          text-align: center;
-        }
-        .imageProduct{
-            margin: 1rem;
-        }
-        .infoProduct{
-            display: flex;
-            flex-direction: column;
-           .quantity{
-            justify-content: center;
-           }
-           .productAction{
-            justify-content: center;
-           }
-           .socialNetwork{
-            justify-content: center;
-           }
-        }
-      }
-
 
 .modalDialog {
     position: absolute;
@@ -160,6 +136,108 @@
                 height: 100%;
                 object-fit: fill;
             }
+
+
         }
     }
+}
+
+@media (max-width: 768px) {
+    .showProduct {
+        padding: 0;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .imageProduct {
+        margin: 1rem;
+    }
+
+    .infoProduct {
+        display: flex;
+        flex-direction: column;
+
+        .quantity {
+            justify-content: center;
+        }
+
+        .productAction {
+            justify-content: center;
+        }
+
+        .socialNetwork {
+            justify-content: center;
+        }
+    }
+
+    .modalDialog {
+        justify-content: center;
+        position: fixed;
+
+
+        .modalField {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            width: 100vw !important;
+            height: 60%;
+
+            .header p {
+                padding: 5px !important;
+            }
+        }
+
+        svg {
+            margin-left: 0 !important;
+        }
+
+        .product {
+            flex-direction: column;
+
+            .imageField {
+                width: 50%;
+                margin: auto;
+                padding: 0 !important;
+            }
+
+            .titleField {
+                border-right: 0 !important;
+                width: 100% !important;
+                text-align: center;
+                padding-bottom: 0;
+
+                .title {
+                    margin-bottom: 1rem !important;
+                    margin-top: 0 !important;
+                }
+
+                .priQu {
+                    display: flex;
+                    justify-content: space-evenly;
+                }
+            }
+
+            .endField {
+                padding: 0 5px !important;
+
+                .end {
+                    display: flex;
+                    gap: 10px;
+                    justify-content: center;
+
+                    p {
+                        margin-bottom: 0;
+                    }
+                }
+
+                .allBtn {
+                    display: flex;
+                    justify-content: space-around;
+                    margin: 1rem;
+                }
+
+            }
+
+        }
+    }
+
 }

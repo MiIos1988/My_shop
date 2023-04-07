@@ -33,9 +33,9 @@ const CartShopPage = () => {
                             return (
                                 <tr key={index}>
                                     <td >
-                                        <div className="d-flex align-middle">
+                                        <div className="cartProduct d-flex align-middle">
                                             <img src={el.imgUrl} alt="" />
-                                            <p className="m-0 px-4 align-middle">{el.title}</p>
+                                            <p className="m-0 px-4 align-middle cartP">{el.title}</p>
                                         </div>
                                     </td>
                                     <td>${el.price}</td>

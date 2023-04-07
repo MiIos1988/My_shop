@@ -12,8 +12,29 @@
     button {
         border-radius: 50%;
     }
-    .payBtn{
+
+    .payBtn {
         border-radius: 0;
         font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .cartProduct {
+        flex-direction: column;
+
+        .cartP {
+            padding: 0 !important;
+        }
+
+    }
+
+    .quantArr {
+        flex-direction: column-reverse !important;
+
+        div {
+            width: 50px;
+            padding: 1rem !important;
+        }
     }
 }

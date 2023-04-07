@@ -16,6 +16,7 @@ import CheckoutPayComponent from "../components/checkoutPayComponent/CheckoutPay
 import PayGuardComponent from "../guard/PayGuardComponent";
 import PayProductComponent from "../pages/PayPageComponent";
 import PayAllComponent from "../components/checkoutPayComponent/PayAllComponent";
+import ContactPage from "../pages/ContactPage";
 
 const router = [
   {
@@ -43,6 +44,10 @@ const router = [
         element: <ActivationAccountPageComponent />,
       },
       {
+        path: "contact",
+        element: <ContactPage />
+      },
+      {
         path: "login",
         element: (
           <AuthGuardComponent>
@@ -66,7 +71,7 @@ const router = [
         path: "checkout",
         element: (
           <PayGuardComponent>
-            <PayAllComponent/>
+            <PayAllComponent />
           </PayGuardComponent>
         ),
         children: [

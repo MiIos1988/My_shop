@@ -28,7 +28,7 @@ const QuantityProductComponent = (props) => {
         !cartShop && <p className="m-0 lh-lg">Quantity </p>
       }
 
-      <div className={`counter d-flex ps-${!cartShop ? 4 : 0}`}>
+      <div className={`counter d-flex quantArr ps-${!cartShop ? 4 : 0}`}>
         <div className="border p-2 reduce" onClick={reduceQuantity}>
           <MdKeyboardArrowDown />
         </div>

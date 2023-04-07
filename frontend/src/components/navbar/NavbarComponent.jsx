@@ -66,15 +66,7 @@ const NavbarComponent = () => {
               Shop
             </Link>
           </li>
-          <li className="nav-item">
-            <Link
-              className="navigationLink nav-link animate__animated animate__backInRight"
-              aria-current="page"
-              to={"/"}
-            >
-              Watch
-            </Link>
-          </li>
+
 
           <li className="nav-item dropdown">
             <Link
@@ -85,7 +77,7 @@ const NavbarComponent = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              More
+              Category
             </Link>
             <div
               className="dropdown-menu ulDiv"
@@ -109,6 +101,15 @@ const NavbarComponent = () => {
                 </li>
               </ul>
             </div>
+          </li>
+          <li className="nav-item">
+            <Link
+              className="navigationLink nav-link animate__animated animate__backInRight"
+              aria-current="page"
+              to={"/contact"}
+            >
+              Contact
+            </Link>
           </li>
         </ul>
         <div className="userSearch d-flex">
