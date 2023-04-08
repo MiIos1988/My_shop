@@ -20,13 +20,15 @@ const UsersDashboardComponent = () => {
     return (
         <div className="container-fluid">
     <h1 className=" container mt-5">Users</h1>
+<div className="table-responsive-md">
+
 
 <table className="table table-striped mt-3">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Username</th>
-      <th scope="col">Full ame</th>
+      <th scope="col">Full name</th>
       <th scope="col">Email</th>
       <th scope="col">Phone</th>
       <th scope="col">City</th>
@@ -55,6 +57,7 @@ const UsersDashboardComponent = () => {
     
   </tbody>
 </table>
+</div>
         </div>
     )
 }

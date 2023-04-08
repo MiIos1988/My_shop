@@ -31,4 +31,9 @@
     }
 
 }
+@media (max-width: 576px) { 
+    .addImage{
+        flex-direction: column;
+    }
+ }
 

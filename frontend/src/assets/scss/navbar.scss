@@ -30,6 +30,11 @@
   .user:hover {
     background-position: -5px -755px;
   }
+  .userDropdown{
+    right: -100px !important;
+    left: auto;
+    top: 150% !important;
+  }
 
   .navUl {
     list-style: none;
@@ -48,6 +53,11 @@
     background-image: url(../image/sprite.png);
     background-position: -55px -705px;
     transition: all .5s;
+  }
+  .searchDropdown{
+    right: auto;
+    left: -150px !important;
+    top: 150% !important;
   }
 
   .searchDrop:hover {
@@ -149,6 +159,14 @@
   @media (max-width: 576px) {
     .cardDropdown{
       width: 100%;
+    }
+  }
+  @media (max-width: 992px) {
+    .userDropdown{
+      top: 100% !important;
+    }
+    .searchDropdown{
+      top: 100% !important;
     }
   }
 }

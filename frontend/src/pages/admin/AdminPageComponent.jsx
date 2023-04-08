@@ -8,12 +8,12 @@ const AdminPageComponent = () => {
     return (
         <div className="container-fluid " >
             <div className="row dashboard">
-                <div className="sidebar col-2 border">
+                <div className="sidebar col-md-2 border">
                     <SidebarDashboardComponent />
                     <LoaderComponent />
                 </div>
 
-                <div className="col-10">
+                <div className="col-md-10">
                     <Outlet />
                 </div>
             </div>

@@ -103,8 +103,8 @@ const CreateProductComponent = () => {
     return (
         <div className="container  createProduct">
             <div className="row d-flex align-items-center mt-5">
-                <h1 className="mb-5">{!params.id ? "CREATE PRODUCT" : "EDIT PRODUCT"}</h1>
-                <div className=" col-6 offset-3">
+                <h1 className="mb-5 text-center">{!params.id ? "CREATE PRODUCT" : "EDIT PRODUCT"}</h1>
+                <div className=" col-md-6 mx-auto">
                     <form >
                         <input type="text" name="title" className="form-control" placeholder="Title" defaultValue={params.id ? product.title : ""} onChange={handleChange} /><br />
                         <textarea name="description" className="form-control" placeholder="Description" defaultValue={params.id ? product.description : ""} onChange={handleChange}></textarea><br />

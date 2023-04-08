@@ -1,8 +1,10 @@
 import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { sendContactMail } from "../service/mailService";
 
 const ContactPage = () => {
+    const navigate = useNavigate();
 
     const SignUpSchema = Yup.object().shape({
         email: Yup.string().email("Invalid email").required("Required"),
@@ -19,6 +21,7 @@ const ContactPage = () => {
         validationSchema: SignUpSchema,
         onSubmit: (values) => {
             sendMail(values)
+            navigate("/")
         },
     });
 

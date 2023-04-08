@@ -5,12 +5,14 @@ import { removeLocalStorage } from "../../service/authService";
 import "animate.css";
 import logo from "../../assets/image/logo-zurea.jpg";
 import { removeProduct } from "../../redux/cartSlicer";
+import { useState } from "react";
 
 const NavbarComponent = () => {
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userSlicer.user);
   const cartSlicer = useSelector((store) => store.cartSlicer);
   const navigate = useNavigate()
+  const [inputSearch, setInputSearch] = useState("")
 
   let subtotal = 0
 
@@ -27,6 +29,11 @@ const NavbarComponent = () => {
   const removeInCart = (event, el) => {
     event.preventDefault();
     dispatch(removeProduct(el.id))
+  }
+
+  const searchField = (e) => {
+    e.preventDefault();
+    navigate(``)
   }
 
   return (
@@ -123,7 +130,7 @@ const NavbarComponent = () => {
               aria-expanded="false"
             ></Link>
             <ul
-              className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown "
+              className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown userDropdown"
               aria-labelledby="navbarDropdown"
             >
               {!userStore?.email ? (
@@ -164,7 +171,7 @@ const NavbarComponent = () => {
               aria-expanded="false"
             ></button>
             <ul
-              className="dropdown-menu dropdown-menu-end animate__animated animate__slideInDown px-2"
+              className="dropdown-menu dropdown-menu-start animate__animated animate__slideInDown px-2 searchDropdown"
               aria-labelledby="dropdownMenu2"
             >
               <form className="d-flex">
@@ -173,8 +180,9 @@ const NavbarComponent = () => {
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
+                  onChange={e => setInputSearch(e.target.value)}
                 />
-                <button className="btn btn-outline-success" type="submit">
+                <button className="btn btn-outline-success" onClick={e => searchField(e)}>
                   Search
                 </button>
               </form>
