@@ -23,6 +23,15 @@ productRoute.post("/search-product", async (req, res) => {
     .catch((err) => res.send(err));
 });
 
+productRoute.post("/category-product", async (req, res) => {
+  const countQuery = await ProductModel.where({
+    categoryId: req.body.category,
+  }).countDocuments();
+  ProductModel.find({ categoryId: req.body.category })
+    .then((data) => res.send({ data, countQuery }))
+    .catch((err) => res.send(err));
+});
+
 productRoute.get("/get-one-product/:id", (req, res) => {
   ProductModel.findOne({ _id: req.params.id })
     .then((data) => {

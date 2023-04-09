@@ -11,14 +11,14 @@ const NavbarComponent = () => {
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userSlicer.user);
   const cartSlicer = useSelector((store) => store.cartSlicer);
-  const navigate = useNavigate()
-  const [inputSearch, setInputSearch] = useState("")
+  const navigate = useNavigate();
+  const [inputSearch, setInputSearch] = useState("");
 
-  let subtotal = 0
+  let subtotal = 0;
 
   cartSlicer.cart.map((el, index) => {
-    subtotal += el.quantity * el.price
-  })
+    subtotal += el.quantity * el.price;
+  });
 
   const onLogout = () => {
     removeLocalStorage("my_user");
@@ -28,14 +28,18 @@ const NavbarComponent = () => {
 
   const removeInCart = (event, el) => {
     event.preventDefault();
-    dispatch(removeProduct(el.id))
-  }
+    dispatch(removeProduct(el.id));
+  };
 
   const searchField = (e) => {
     e.preventDefault();
-    navigate(`/search?search=${inputSearch}`)
-    setInputSearch('')
-  }
+    navigate(`/search?search=${inputSearch}`);
+    setInputSearch("");
+  };
+
+  const selectedCategory = (e) => {
+    navigate(`/category?category=${e.target.getAttribute("value")}`);
+  };
 
   return (
     // <div className="container-fluid mt-5">
@@ -75,7 +79,6 @@ const NavbarComponent = () => {
             </Link>
           </li>
 
-
           <li className="nav-item dropdown">
             <Link
               className="navigationLink nav-link dropdown-toggle animate__animated animate__backInRight"
@@ -91,21 +94,27 @@ const NavbarComponent = () => {
               className="dropdown-menu ulDiv"
               aria-labelledby="navbarDropdown"
             >
-              <ul className="d-flex moreUl">
-                <li>
-                  <Link className="dropdown-item" to={"/"}>
-                    Action
-                  </Link>
+              <ul className="d-flex flex-column moreUl">
+                <li
+                  className="dropdown-item"
+                  value={"6401f0a8032f552ca5fb2b9f"}
+                  onClick={(e) => selectedCategory(e)}
+                >
+                  Computer
                 </li>
-                <li>
-                  <Link className="dropdown-item" to={"/"}>
-                    Another action
-                  </Link>
+                <li
+                  className="dropdown-item"
+                  value={"62b5a9c5b56631db50071ddb"}
+                  onClick={(e) => selectedCategory(e)}
+                >
+                  Monitor
                 </li>
-                <li>
-                  <Link className="dropdown-item" to={"/"}>
-                    Something else here
-                  </Link>
+                <li
+                  className="dropdown-item"
+                  value={"62b464521253c8eb3742e51c"}
+                  onClick={(e) => selectedCategory(e)}
+                >
+                  Other
                 </li>
               </ul>
             </div>
@@ -177,14 +186,17 @@ const NavbarComponent = () => {
             >
               <form className="d-flex">
                 <input
-                value={inputSearch}
+                  value={inputSearch}
                   className="form-control me-2 searchInp "
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
-                  onChange={e => setInputSearch(e.target.value)}
+                  onChange={(e) => setInputSearch(e.target.value)}
                 />
-                <button className="btn btn-outline-success" onClick={e => searchField(e)}>
+                <button
+                  className="btn btn-outline-success"
+                  onClick={(e) => searchField(e)}
+                >
                   Search
                 </button>
               </form>
@@ -200,40 +212,59 @@ const NavbarComponent = () => {
           </div>
           <div className="cardDropdown border">
             {!cartSlicer.cart.length ? (
-              <div className="p-2">
-                No Product Add In Cart
-              </div>
+              <div className="p-2">No Product Add In Cart</div>
             ) : (
               <div>
-                <p className="m-0 p-2 text-start">Your Cart: {cartSlicer.cart.length} Items</p>
+                <p className="m-0 p-2 text-start">
+                  Your Cart: {cartSlicer.cart.length} Items
+                </p>
                 <hr className="m-1" />
                 <div className="d-flex flex-column">
                   {cartSlicer.cart.map((el, index) => {
-                    return (<div key={index}>
-                      <Link className="productLink" to={`/show-product?id=${el.id}`}>
-                        <div className="productCart d-flex align-items-center justify-content-around" >
-                          <img className="  " src={el.imgUrl} alt="" />
-                          <p className="mb-0">{el.title.length > 20 ? el.title.substring(0, 15) + "..." : el.title}</p>
-                          <div className="quantity">
-                            <p className="m-0">{el.quantity} X</p>
-                            <p className="m-0">$ {el.price}</p>
+                    return (
+                      <div key={index}>
+                        <Link
+                          className="productLink"
+                          to={`/show-product?id=${el.id}`}
+                        >
+                          <div className="productCart d-flex align-items-center justify-content-around">
+                            <img className="  " src={el.imgUrl} alt="" />
+                            <p className="mb-0">
+                              {el.title.length > 20
+                                ? el.title.substring(0, 15) + "..."
+                                : el.title}
+                            </p>
+                            <div className="quantity">
+                              <p className="m-0">{el.quantity} X</p>
+                              <p className="m-0">$ {el.price}</p>
+                            </div>
+                            <button
+                              className="removeProduct"
+                              onClick={(event) => removeInCart(event, el)}
+                            >
+                              X
+                            </button>
                           </div>
-                          <button className="removeProduct" onClick={(event) => removeInCart(event, el)}>X</button>
-                        </div>
-                      </Link>
+                        </Link>
 
-                      <hr className="m-1" />
-                    </div>
-
+                        <hr className="m-1" />
+                      </div>
                     );
                   })}
                 </div>
                 <div className="d-flex justify-content-between px-3">
-                  <p className="m-0 p-2 "><dt>Subtotal </dt></p>
+                  <p className="m-0 p-2 ">
+                    <dt>Subtotal </dt>
+                  </p>
                   <p className="m-0 py-2">${subtotal}</p>
                 </div>
                 <div className="btnField">
-                  <button className="btn btn-light" onClick={() => navigate("/cart-shop")}>View Cart</button>
+                  <button
+                    className="btn btn-light"
+                    onClick={() => navigate("/cart-shop")}
+                  >
+                    View Cart
+                  </button>
                 </div>
               </div>
             )}

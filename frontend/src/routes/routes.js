@@ -18,6 +18,7 @@ import PayProductComponent from "../pages/PayPageComponent";
 import PayAllComponent from "../components/checkoutPayComponent/PayAllComponent";
 import ContactPage from "../pages/ContactPage";
 import SearchPageComponent from "../pages/SearchPageConponent";
+import CategoryPageComponent from "../pages/CategoryPageComponent";
 
 const router = [
   {
@@ -46,11 +47,15 @@ const router = [
       },
       {
         path: "contact",
-        element: <ContactPage />
+        element: <ContactPage />,
       },
       {
         path: "search",
-        element: <SearchPageComponent/>
+        element: <SearchPageComponent />,
+      },
+      {
+        path: "category",
+        element: <CategoryPageComponent />,
       },
       {
         path: "login",
@@ -82,13 +87,13 @@ const router = [
         children: [
           {
             path: "",
-            element: <CheckoutPayComponent />
+            element: <CheckoutPayComponent />,
           },
           {
             path: "pay-product",
-            element: <PayProductComponent />
-          }
-        ]
+            element: <PayProductComponent />,
+          },
+        ],
       },
     ],
   },

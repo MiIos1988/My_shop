@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import {
+  categoryProductData,
   getProductData,
   searchProductData,
 } from "../../service/productService";
@@ -24,10 +25,12 @@ const ProductListComponent = (props) => {
 
   useEffect(() => {
     dispatch(toggleLoader(true));
-    if (!queryParams.get("search")) {
-      loadAllProducts();
-    } else {
+    if (queryParams.get("search")) {
       onSearch();
+    } else if (queryParams.get("category")) {
+      onCategory();
+    } else {
+      loadAllProducts();
     }
   }, [pagination.perPage, pagination.start, pagination.allPag, queryParams]);
 
@@ -71,6 +74,26 @@ const ProductListComponent = (props) => {
       });
   };
 
+  const onCategory = () => {
+    categoryProductData({ category: queryParams.get("category") })
+      .then((res) => {
+        let numberPagination = res.data.countQuery;
+        setProduct(res.data.data);
+        const paginationAllNumber = Math.ceil(
+          numberPagination / pagination.perPage
+        );
+        let copyPagination = { ...pagination, allPag: paginationAllNumber };
+        setPagination(copyPagination);
+        setArrayPagination(
+          Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
+        );
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        dispatch(toggleLoader(false));
+      });
+  };
+
   return (
     <>
       <div className="row container d-flex m-auto flex-wrap">
@@ -89,7 +112,7 @@ const ProductListComponent = (props) => {
         })}
       </div>
       <div className="mt-5 d-flex justify-content-center paginationField">
-        {!queryParams.get("search") && (
+        {!queryParams && (
           <div className="dropdown">
             <button
               className="btn btn-secondary dropdown-toggle"

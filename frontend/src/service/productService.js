@@ -4,6 +4,8 @@ export const getProductData = (data) => axios.post("/product/get-product", data)
 
 export const searchProductData = (data) => axios.post("/product/search-product", data);
 
+export const categoryProductData = (data) => axios.post("/product/category-product", data);
+
 export const getOneProductData = (id) => axios.get("/product/get-one-product/" + id);
 
 export const editProductData = (data) => axios.put("/product/edit-product", data);
