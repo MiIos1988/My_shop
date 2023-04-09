@@ -33,7 +33,8 @@ const NavbarComponent = () => {
 
   const searchField = (e) => {
     e.preventDefault();
-    navigate(``)
+    navigate(`/search?search=${inputSearch}`)
+    setInputSearch('')
   }
 
   return (
@@ -176,6 +177,7 @@ const NavbarComponent = () => {
             >
               <form className="d-flex">
                 <input
+                value={inputSearch}
                   className="form-control me-2 searchInp "
                   type="search"
                   placeholder="Search"

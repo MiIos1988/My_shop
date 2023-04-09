@@ -17,6 +17,7 @@ import PayGuardComponent from "../guard/PayGuardComponent";
 import PayProductComponent from "../pages/PayPageComponent";
 import PayAllComponent from "../components/checkoutPayComponent/PayAllComponent";
 import ContactPage from "../pages/ContactPage";
+import SearchPageComponent from "../pages/SearchPageConponent";
 
 const router = [
   {
@@ -46,6 +47,10 @@ const router = [
       {
         path: "contact",
         element: <ContactPage />
+      },
+      {
+        path: "search",
+        element: <SearchPageComponent/>
       },
       {
         path: "login",

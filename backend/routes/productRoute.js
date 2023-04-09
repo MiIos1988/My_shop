@@ -14,6 +14,15 @@ productRoute.post("/get-product", async (req, res) => {
     .catch(err => console.log(err))
 });
 
+productRoute.post("/search-product", (req, res) => {
+  // console.log(req.body)
+  ProductModel.find({title: {$regex: req.body.search, $options: 'i'} })
+  .then(data =>res.send(data))
+  .catch(err => res.send(err))
+
+  
+})
+
 productRoute.get("/get-one-product/:id", (req, res) => {
   ProductModel.findOne({ _id: req.params.id })
     .then((data) => {

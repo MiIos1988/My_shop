@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { getProductData } from "../../service/productService";
+import { getProductData, searchProductData } from "../../service/productService";
 import ProductComponent from "./component/ProductComponent";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 const ProductListComponent = (props) => {
+  const [queryParams] = useSearchParams();
   const { dashboard } = props;
   const [product, setProduct] = useState([]);
   const [pagination, setPagination] = useState({
@@ -20,6 +21,15 @@ const ProductListComponent = (props) => {
 
   useEffect(() => {
     dispatch(toggleLoader(true))
+    if(!queryParams.get("search")){
+      loadAllProducts()
+    }else{
+      onSearch()
+    }
+    
+  }, [pagination.perPage, pagination.start, pagination.allPag, queryParams]);
+
+  const loadAllProducts = () => {
     getProductData(pagination)
       .then((res) => {
         let numberPagination = res.data.countQuery;
@@ -36,7 +46,15 @@ const ProductListComponent = (props) => {
         dispatch(toggleLoader(false))
       })
       .catch((err) => console.log(err));
-  }, [pagination.perPage, pagination.start, pagination.allPag]);
+  }
+
+  const onSearch = () => {
+    searchProductData({search: queryParams.get("search")})
+    .then(res =>{ 
+      setProduct(res.data)
+      dispatch(toggleLoader(false))
+    })
+  }
 
   return (
     <>
