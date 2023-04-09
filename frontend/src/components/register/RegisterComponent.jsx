@@ -44,7 +44,6 @@ const RegisterComponent = () => {
                         validationSchema={SignUpSchema}
                         onSubmit={(values) => {
                             // same shape as initial values
-                            // console.log(values);
                             userData(values)
                                 .then((res) => {
                                     console.log("working backend");

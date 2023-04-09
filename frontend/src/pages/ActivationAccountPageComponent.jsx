@@ -6,11 +6,9 @@ const ActivationAccountPageComponent = () => {
     const params = useParams()
     const userId = params.activationId;
     const navigate = useNavigate()
-    // console.log("active", userId)
 
     useEffect(() => {
         userActive({ "_id": userId }).then(data => {
-            console.log(data)
             navigate("/")
         })
             .catch(error => console.log("Problem in activation email."));

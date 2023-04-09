@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { removeUser } from "../../redux/userSlicer";
-import { removeLocalStorage } from "../../service/authService";
+import { isAdminLogin, removeUser } from "../../redux/userSlicer";
+import { isAdmin, removeLocalStorage } from "../../service/authService";
 import "animate.css";
 import logo from "../../assets/image/logo-zurea.jpg";
 import { removeProduct } from "../../redux/cartSlicer";
@@ -24,6 +24,7 @@ const NavbarComponent = () => {
     removeLocalStorage("my_user");
     removeLocalStorage("my_token");
     dispatch(removeUser());
+    dispatch(isAdminLogin(false));
   };
 
   const removeInCart = (event, el) => {

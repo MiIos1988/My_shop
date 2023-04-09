@@ -48,7 +48,6 @@ authRoute.post("/login", (req, res) => {
         data.password = undefined;
         // data.isAdmin = undefined;
         data.isActive = undefined;
-        // console.log(data)
         res.send({ data, token });
       }
     })

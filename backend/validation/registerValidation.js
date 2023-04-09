@@ -37,7 +37,6 @@ const registerValidation = (req, res, next) => {
             if (data) {
               return res.status(414).send("Username is exist");
             } else {
-              console.log("ok");
               next();
             }
           })

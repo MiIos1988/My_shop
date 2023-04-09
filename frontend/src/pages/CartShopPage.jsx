@@ -44,7 +44,6 @@ const CartShopPage = () => {
                                         <div className="d-flex justify-content-between">
                                             {el.price * el.quantity}
                                             <button onClick={() => {
-                                                console.log(el.id)
                                                 dispatch(removeProduct(el.id ))
                                             }}>X</button>
                                         </div>

@@ -17,7 +17,6 @@ userRoute.put("/is-active", (req, res) => {
 
 userRoute.post("/init-payment", async(req, res) => {
     try{
-        console.log(req.body)
         const payment = await stripeObj.paymentIntents.create({
             amount: parseInt(req.body.amount),
             currency: req.body.currency,
@@ -25,7 +24,6 @@ userRoute.post("/init-payment", async(req, res) => {
                 enabled: true
             }
         })
-        console.log(payment)
         res.send(payment)
     }
     catch{err => res.send(err)}

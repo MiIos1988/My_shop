@@ -2,14 +2,13 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { saveUser } from "../../redux/userSlicer";
+import { saveUser, isAdminLogin } from "../../redux/userSlicer";
 import {
   isAdmin,
   loginData,
   setTokenInLocalStorage,
   setUserInLocalStorage,
 } from "../../service/authService";
-import { useEffect } from "react";
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
@@ -27,7 +26,10 @@ const LoginComponent = () => {
         setUserInLocalStorage(res.data.data);
         setTokenInLocalStorage(res.data.token);
         dispatch(saveUser(res.data.data));
-        isAdmin() ? navigate("/dashboard") : navigate(-1);
+        if(isAdmin()) {
+           navigate("/dashboard");
+          dispatch(isAdminLogin(true) );
+        } else {navigate(-1)}
       })
       .catch((err) => console.log(err));
   };

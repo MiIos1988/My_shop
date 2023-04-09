@@ -75,7 +75,7 @@ const ProductListComponent = (props) => {
   };
 
   const onCategory = () => {
-    categoryProductData({ category: queryParams.get("category") })
+    categoryProductData({ categoryId: queryParams.get("category"), pagination })
       .then((res) => {
         let numberPagination = res.data.countQuery;
         setProduct(res.data.data);
@@ -149,9 +149,8 @@ const ProductListComponent = (props) => {
         <nav aria-label="Page navigation example " className="paginationNav">
           <ul className="pagination justify-content-start">
             <li className="page-item">
-              <Link
+              <div
                 className="page-link"
-                to="#"
                 aria-label="Previous"
                 onClick={() => {
                   if (pagination.start > 0) {
@@ -165,7 +164,7 @@ const ProductListComponent = (props) => {
                 }}
               >
                 <span aria-hidden="true">&laquo;</span>
-              </Link>
+              </div>
             </li>
             {arrayPagination?.map((el, index) => {
               return (
@@ -175,20 +174,19 @@ const ProductListComponent = (props) => {
                   onClick={(e) => {
                     {
                       setPagination({ ...pagination, start: el - 1 });
-                      setActive(Number(e.target.text));
+                      setActive(Number(e.target.textContent));
                       window.scrollTo(0, 0);
                     }
                   }}
                 >
-                  <Link className="page-link">{el}</Link>
+                  <div className="page-link">{el}</div>
                 </li>
               );
             })}
 
             <li className="page-item">
-              <Link
+              <div
                 className="page-link"
-                href="#"
                 aria-label="Next"
                 onClick={() => {
                   if (pagination.start + 1 < pagination.allPag) {
@@ -202,7 +200,7 @@ const ProductListComponent = (props) => {
                 }}
               >
                 <span aria-hidden="true">&raquo;</span>
-              </Link>
+              </div>
             </li>
           </ul>
         </nav>

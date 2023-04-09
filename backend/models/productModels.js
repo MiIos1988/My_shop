@@ -7,6 +7,7 @@ const productSChema = new Mongoose.Schema({
   price: { type: Number },
   rating: { type: Number, default: 0 },
   userId: { type: String },
+  categoryId: { type: String },
   allRatings: { type: Array, default: [] },
 });
 

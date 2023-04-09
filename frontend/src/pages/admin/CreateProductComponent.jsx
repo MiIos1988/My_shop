@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import {
   addProductData,
   editProductData,
-  getImageUrl,
   getOneProductData,
 } from "../../service/productService";
 import { useDispatch } from "react-redux";
@@ -29,7 +28,6 @@ const CreateProductComponent = () => {
     params.id
       ? getOneProductData(params.id)
           .then((res) => {
-            console.log(res.data.data);
             setProduct(res.data.data);
           })
           .catch((err) => console.log(err))
@@ -40,7 +38,7 @@ const CreateProductComponent = () => {
           category: "",
           imgUrl: "",
         });
-  }, [params.id]);
+  }, [params.id, product.category]);
 
   const copyProduct = { ...product };
 
@@ -140,7 +138,7 @@ const CreateProductComponent = () => {
             <br />
             <select
               className="form-select"
-              name="category"
+              name="categoryId"
               aria-label="Default select example"
               defaultValue={params.id ? product.category : ""}
               onChange={handleChange}

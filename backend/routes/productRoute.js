@@ -24,11 +24,16 @@ productRoute.post("/search-product", async (req, res) => {
 });
 
 productRoute.post("/category-product", async (req, res) => {
+  let pagination = req.body.pagination;
   const countQuery = await ProductModel.where({
-    categoryId: req.body.category,
+    categoryId: req.body.categoryId,
   }).countDocuments();
-  ProductModel.find({ categoryId: req.body.category })
-    .then((data) => res.send({ data, countQuery }))
+  ProductModel.find( {categoryId: req.body.categoryId} )
+  .skip(pagination.start * pagination.perPage)
+    .limit(pagination.perPage)
+    .then((data) => {
+      res.send({ data, countQuery })
+    })
     .catch((err) => res.send(err));
 });
 

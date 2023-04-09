@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { isAdmin, isUserLogin } from "../service/authService";
+import { isAdmin } from "../service/authService";
 
 
 
