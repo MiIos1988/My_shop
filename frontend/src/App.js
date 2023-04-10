@@ -9,7 +9,7 @@ import GoToDashboard from "./pages/admin/GoToDashboard";
 import { saveUser } from "./redux/userSlicer";
 import { isAdmin } from "./service/authService";
 
-axios.defaults.baseURL = "http://localhost:5050/api"
+axios.defaults.baseURL = "https://my-shop-backend-2a3i.onrender.com/api"
 axios.interceptors.request.use((config) => {
   if (localStorage.hasOwnProperty("my_token")) {
     config.headers.Authorization = localStorage.getItem("my_token")
