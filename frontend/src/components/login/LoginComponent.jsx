@@ -7,8 +7,9 @@ import {
   isAdmin,
   loginData,
   setTokenInLocalStorage,
-  setUserInLocalStorage,
 } from "../../service/authService";
+import jwt_decode from 'jwt-decode';
+import { toggleLoader } from "../../redux/loaderSlicer";
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
@@ -21,15 +22,22 @@ const LoginComponent = () => {
   });
 
   const clickHandler = (data) => {
+    console.log("1")
     loginData(data)
       .then((res) => {
-        setUserInLocalStorage(res.data.data);
+        console.log("2")
+        const decodedToken = jwt_decode(res.data.token);
         setTokenInLocalStorage(res.data.token);
-        dispatch(saveUser(res.data.data));
+        dispatch(saveUser(decodedToken._doc));
+        console.log("3")
         if(isAdmin()) {
            navigate("/dashboard");
           dispatch(isAdminLogin(true) );
-        } else {navigate(-1)}
+          console.log("4")
+        } else {
+          console.log("5")
+          navigate("/checkout")
+        }
       })
       .catch((err) => console.log(err));
   };

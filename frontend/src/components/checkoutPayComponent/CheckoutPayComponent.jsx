@@ -3,15 +3,21 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { isUserLogin } from "../../service/authService";
 import { Outlet, useNavigate } from "react-router-dom";
+import jwt_decode from 'jwt-decode';
+import { useDispatch } from "react-redux";
+import { toggleLoader } from "../../redux/loaderSlicer";
 
 const CheckoutPayComponent = () => {
 
     const [loginUser, setLoginUser] = useState()
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
       let user = isUserLogin()
-      setLoginUser(JSON.parse(user))
+      const decodedToken = jwt_decode(user);
+      setLoginUser(decodedToken._doc)
+      dispatch(toggleLoader(false))
     },[]
     )
 

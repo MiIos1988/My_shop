@@ -8,6 +8,7 @@ import TopHeaderComponent from "./components/topHaderComponent/TopHeaderComponen
 import GoToDashboard from "./pages/admin/GoToDashboard";
 import { saveUser } from "./redux/userSlicer";
 import { isAdmin } from "./service/authService";
+import jwt_decode from 'jwt-decode';
 
 axios.defaults.baseURL = "https://my-shop-backend-2a3i.onrender.com/api"
 axios.interceptors.request.use((config) => {
@@ -21,8 +22,10 @@ function App() {
   const userStore = useSelector((store) => store.userSlicer.active);
   
   useEffect(() => {
-    if (localStorage.getItem("my_user")) {
-      dispatch(saveUser(JSON.parse(localStorage.getItem("my_user"))));
+    if (localStorage.getItem("my_token")) {
+      const token = localStorage.getItem("my_token");
+      const decodedToken = jwt_decode(token);
+      dispatch(saveUser(decodedToken._doc));
     }
   }, []
   )

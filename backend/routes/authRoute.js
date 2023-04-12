@@ -44,11 +44,11 @@ authRoute.post("/login", (req, res) => {
           );
       } else {
         let ts = new Date().getTime();
-        let token = jwt.sign({ ...data, ts }, "log");
         data.password = undefined;
-        // data.isAdmin = undefined;
         data.isActive = undefined;
-        res.send({ data, token });
+        let token = jwt.sign({ ...data, ts }, "log");
+        // data.isAdmin = undefined;
+        res.send({ token });
       }
     })
     .catch((err) => console.log(err));

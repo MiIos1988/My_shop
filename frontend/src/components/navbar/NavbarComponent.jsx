@@ -21,7 +21,6 @@ const NavbarComponent = () => {
   });
 
   const onLogout = () => {
-    removeLocalStorage("my_user");
     removeLocalStorage("my_token");
     dispatch(removeUser());
     dispatch(isAdminLogin(false));
