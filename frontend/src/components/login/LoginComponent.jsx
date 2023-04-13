@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { saveUser, isAdminLogin } from "../../redux/userSlicer";
 import {
   isAdmin,
@@ -10,11 +10,18 @@ import {
 } from "../../service/authService";
 import jwt_decode from 'jwt-decode';
 import { toggleLoader } from "../../redux/loaderSlicer";
+import { useEffect, useState } from "react";
 
 const LoginComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+  const [queryParams] = useSearchParams()
+  const [query, setQuery] = useState(0)
+
+  useEffect(() => {
+    setQuery(queryParams.get("id"))
+  },[]
+  )
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().email("Invalid email").required("Required"),
@@ -22,21 +29,16 @@ const LoginComponent = () => {
   });
 
   const clickHandler = (data) => {
-    console.log("1")
     loginData(data)
       .then((res) => {
-        console.log("2")
         const decodedToken = jwt_decode(res.data.token);
         setTokenInLocalStorage(res.data.token);
         dispatch(saveUser(decodedToken._doc));
-        console.log("3")
-        if(isAdmin()) {
-           navigate("/dashboard");
-          dispatch(isAdminLogin(true) );
-          console.log("4")
+        if (isAdmin()) {
+          navigate("/dashboard");
+          dispatch(isAdminLogin(true));
         } else {
-          console.log("5")
-          navigate("/checkout")
+        query ? navigate("/checkout") : navigate(-1)
         }
       })
       .catch((err) => console.log(err));

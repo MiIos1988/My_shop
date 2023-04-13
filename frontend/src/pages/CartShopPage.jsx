@@ -11,9 +11,9 @@ const CartShopPage = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        const totalPrice =   cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
+        const totalPrice = cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
         dispatch(addTotalPrice(totalPrice));
-    },[]
+    }, []
     )
 
     return (
@@ -44,7 +44,7 @@ const CartShopPage = () => {
                                         <div className="d-flex justify-content-between">
                                             {el.price * el.quantity}
                                             <button onClick={() => {
-                                                dispatch(removeProduct(el.id ))
+                                                dispatch(removeProduct(el.id))
                                             }}>X</button>
                                         </div>
                                     </td>
@@ -57,8 +57,8 @@ const CartShopPage = () => {
                     <tr>
                         <td colSpan="3" className="text-end pe-5"><b>Total for pay:</b></td>
                         <td ><b>{
-                           cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
-                           
+                            cartSlicer.map(el => el.price * el.quantity).reduce((acc, curr) => acc + curr, 0)
+
                         }</b></td>
                     </tr>
                 </tfoot>
