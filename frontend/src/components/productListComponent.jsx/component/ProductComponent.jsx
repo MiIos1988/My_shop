@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { addToCart } from "../../../redux/cartSlicer";
 import { deleteProductData, getProductInLocalStorage, setProductInLocalStorage } from "../../../service/productService";
+import { toggleLoader } from "../../../redux/loaderSlicer";
 
 function ProductComponent(props) {
   const { imgUrl, title, price, id, dashboard } = props;
@@ -27,7 +28,7 @@ function ProductComponent(props) {
     <div className=" d-flex flex-column product mt-4">
 
       <div className="border border-secondary imgSection">
-        <Link to={`/show-product?id=${id}`}>
+        <Link to={`/show-product?id=${id}` } onClick={() => dispatch(toggleLoader(true))}>
           <img
             src={imgUrl}
             alt="product"

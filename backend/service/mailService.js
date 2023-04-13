@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const path = require("path");
+
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -7,7 +8,6 @@ const transporter = nodemailer.createTransport({
         pass: "tzuhspkfqkzbsbes",
     }
 })
-
 const sendMail = function (from, to, subject, html) {
 
     let mailOptions = {
@@ -16,6 +16,7 @@ const sendMail = function (from, to, subject, html) {
         subject: subject, // Subject line
         html: html, // html body
     }
+    console.log(mailOptions)
     return transporter.sendMail(mailOptions)
 }
 

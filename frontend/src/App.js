@@ -10,7 +10,7 @@ import { saveUser } from "./redux/userSlicer";
 import { isAdmin } from "./service/authService";
 import jwt_decode from 'jwt-decode';
 
-axios.defaults.baseURL = "https://my-shop-backend-2a3i.onrender.com/api"
+axios.defaults.baseURL = "http://localhost:5050/api"
 axios.interceptors.request.use((config) => {
   if (localStorage.hasOwnProperty("my_token")) {
     config.headers.Authorization = localStorage.getItem("my_token")
@@ -20,7 +20,7 @@ axios.interceptors.request.use((config) => {
 function App() {
   const dispatch = useDispatch();
   const userStore = useSelector((store) => store.userSlicer.active);
-  
+
   useEffect(() => {
     if (localStorage.getItem("my_token")) {
       const token = localStorage.getItem("my_token");
@@ -35,7 +35,7 @@ function App() {
       <LoaderComponent />
       <TopHeaderComponent />
       <NavbarComponent />
-     {userStore ? <GoToDashboard/> : null} 
+      {userStore ? <GoToDashboard /> : null}
       <Outlet />
     </div>
   );

@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlicer";
 import QuantityProductComponent from "./component/QuantityProductComponent";
 import ModalProductComponent from "./component/ModalProductComponent";
+import { toggleLoader } from "../../redux/loaderSlicer";
 
 const ShowProductComponent = () => {
   const [queryParams] = useSearchParams();
@@ -18,7 +19,7 @@ const ShowProductComponent = () => {
   const [moveY, setMoveY] = useState();
   const [zoomOut, setZoomOut] = useState(false);
   const dispatch = useDispatch();
-  const [viewModal, setViewModal] =  useState(false);
+  const [viewModal, setViewModal] = useState(false);
 
   let idParams = queryParams.get("id");
 
@@ -27,6 +28,7 @@ const ShowProductComponent = () => {
     getOneProductData(id)
       .then((res) => {
         setProduct(res.data.data);
+        dispatch(toggleLoader(false))
       })
       .catch((err) => console.log(err));
   }, [idParams]);
@@ -48,8 +50,8 @@ const ShowProductComponent = () => {
     setViewModal(true)
 
   }
-  
-   return (
+
+  return (
     <>
       <div className="container d-flex my-5 mx-auto showProduct">
         <div
@@ -107,8 +109,8 @@ const ShowProductComponent = () => {
           </div>
         </div>
       </div>
-      <div className={viewModal ? "d-block ": "d-none"}>
-      <ModalProductComponent product={product} quantity={quantity} setViewModal={setViewModal}/>
+      <div className={viewModal ? "d-block " : "d-none"}>
+        <ModalProductComponent product={product} quantity={quantity} setViewModal={setViewModal} />
       </div>
     </>
   );

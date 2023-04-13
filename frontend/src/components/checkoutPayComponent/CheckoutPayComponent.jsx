@@ -104,7 +104,7 @@ const CheckoutPayComponent = () => {
           onChange={formik.handleChange}
           value={formik.values.city || ""}
           /><br/>
-        <button type="submit" className="form-control btn btn-primary">Continue payment</button>
+        <button type="submit" className="form-control btn btn-primary" onClick={() => dispatch(toggleLoader(true))}>Continue payment</button>
       </form>
           </div>
       <Outlet/>

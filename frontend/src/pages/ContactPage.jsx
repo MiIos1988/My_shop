@@ -26,7 +26,7 @@ const ContactPage = () => {
     });
 
     const sendMail = (mess) => {
-        sendContactMail(mess).then(res => console.log(res))
+        sendContactMail(mess).then(res => console.log(res.config.data))
     }
 
     return (

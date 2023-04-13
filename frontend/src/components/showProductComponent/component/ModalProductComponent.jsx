@@ -1,9 +1,11 @@
 import { BsCheckLg } from 'react-icons/bs'
 import { RiCloseFill } from 'react-icons/ri'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { toggleLoader } from '../../../redux/loaderSlicer'
 
 const ModalProductComponent = ({ product, quantity, setViewModal }) => {
-
+    const dispatch = useDispatch();
 
     return (
         <div className="modalDialog row d-flex align-items-center ">
@@ -34,7 +36,7 @@ const ModalProductComponent = ({ product, quantity, setViewModal }) => {
                         </div>
                         <div className='allBtn' >
                             <Link className='btn btn-secondary me-5' to={"/shop"}>Continue Shopping </Link>
-                            <Link className='btn btn-dark' to={"/checkout"}>Pay products</Link>
+                            <Link className='btn btn-dark' to={"/checkout"} onClick={() => dispatch(toggleLoader(true))}>Pay products</Link>
                         </div>
                     </div>
                 </div>
