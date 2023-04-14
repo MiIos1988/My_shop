@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../service/mailService");
 const htmlActivation = require("../template/mailTemplate");
+const { JWT_SECRET_KEY } = require("../config/configToken");
 
 authRoute.post("/register", registerValidation, async (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -13,18 +14,19 @@ authRoute.post("/register", registerValidation, async (req, res) => {
     const newUser = await UserModel.create(req.body);
     newUser.save();
 
-    const activationMailHtml = htmlActivation(`http://localhost:3000/activation-account/${newUser?._id}`)
+    const activationMailHtml = htmlActivation(
+      `http://localhost:3000/activation-account/${newUser?._id}`
+    );
     sendMail(
       "vojvoda19881@gmail.com",
       req.body.email,
       "Test email",
       activationMailHtml
-    ).then(() => res.send('User registered.'))
-      .catch(error => res.status(415).send(error))
-
-    
+    )
+      .then(() => res.send("User registered."))
+      .catch((error) => res.status(415).send(error));
   } catch {
-      res.status(416).send("Error creating new user");
+    res.status(416).send("Error creating new user");
   }
 });
 
@@ -46,7 +48,8 @@ authRoute.post("/login", (req, res) => {
         let ts = new Date().getTime();
         data.password = undefined;
         data.isActive = undefined;
-        let token = jwt.sign({ ...data, ts }, "log");
+        let token = jwt.sign({ ...data, ts }, JWT_SECRET_KEY);
+        console.log(typeof token);
         // data.isAdmin = undefined;
         res.send({ token });
       }
