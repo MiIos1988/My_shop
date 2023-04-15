@@ -49,7 +49,12 @@ authRoute.post("/login", (req, res) => {
         data.password = undefined;
         data.isActive = undefined;
         let token = jwt.sign({ ...data, ts }, JWT_SECRET_KEY);
-        console.log(typeof token);
+        console.log("******************************************")
+
+        const decodedToken = jwt.decode(token, JWT_SECRET_KEY)
+
+    console.log("----------", decodedToken)
+        
         // data.isAdmin = undefined;
         res.send({ token });
       }

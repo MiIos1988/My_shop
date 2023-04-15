@@ -22,10 +22,8 @@ userRoute.put("/is-active", (req, res) => {
     .catch((err) => res.send(err));
 });
 
-userRoute.post("/init-payment", async (req, res) => {
+userRoute.post("/init-payment", verifyUserLogin, async (req, res) => {
   try {
-    const token = req.headers.authorization;
-    console.log( token);
     const payment = await stripeObj.paymentIntents.create({
       amount: parseInt(req.body.amount),
       currency: req.body.currency,
