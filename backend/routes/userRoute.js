@@ -3,11 +3,12 @@ const UserModel = require("../models/userModels");
 const userRoute = express.Router();
 const stripe = require("stripe");
 const verifyUserLogin = require("../validation/verifyUserLogin");
+const verifyAdmin = require("../validation/verifyAdmin");
 const sk =
   "sk_test_51MgyLeAoAwiaPpyxcWshahWIHczrgJi1jlFR8AmPt0mTSjRE9Mi9S2qC2NnRc56sveI5o2M71oLMT1SooRsDKXLY006LAyfgfX";
 const stripeObj = stripe(sk);
 
-userRoute.get("/get-all-users", (req, res) => {
+userRoute.get("/get-all-users", verifyUserLogin, verifyAdmin, (req, res) => {
   UserModel.find({})
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
@@ -36,5 +37,9 @@ userRoute.post("/init-payment", verifyUserLogin, async (req, res) => {
     (err) => res.send(err);
   }
 });
+
+userRoute.get("/check-admin", verifyUserLogin, verifyAdmin, (req, res) => {
+  res.send(true)
+})
 
 module.exports = userRoute;

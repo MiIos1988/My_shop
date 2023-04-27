@@ -1,5 +1,6 @@
 import axios from "axios"
 import jwt_decode from 'jwt-decode';
+import { checkAdmin } from "./userService";
 
 export const userData = (data) => axios.post("/auth/register", data);
 
@@ -14,4 +15,10 @@ export const removeLocalStorage = (name) => localStorage.removeItem(name);
 
 export const isUserLogin = () => localStorage.getItem("my_token");
 
-export const isAdmin = () => isUserLogin() && jwt_decode(localStorage.getItem("my_token"))?.isAdmin;
+export const isAdmin =  async() =>{ 
+    let admin = false;
+    // await checkAdmin().then(el =>admin = el.data)
+    //     .catch(err => admin = false )
+
+  return  isUserLogin() && jwt_decode(localStorage.getItem("my_token"))?.isAdmin && admin
+};
