@@ -34,6 +34,7 @@ authRoute.post("/login", (req, res) => {
   const body = req.body;
   UserModel.findOne({ email: body.email })
     .then((data) => {
+      console.log(data)
       if (!data) {
         res.status(417).send("Email is not valid");
       } else if (!bcrypt.compareSync(body.password, data.password)) {
@@ -46,16 +47,18 @@ authRoute.post("/login", (req, res) => {
           );
       } else {
         let ts = new Date().getTime();
-        data.password = undefined;
-        data.isActive = undefined;
-        let token = jwt.sign({ ...data, ts }, JWT_SECRET_KEY);
-        console.log("******************************************")
+        let userData = {
+          email: data.email,
+          username: data.username,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          city: data.city,
+          isAdmin: data.isAdmin,
+          ts: ts
+        };
+        let token = jwt.sign(userData, JWT_SECRET_KEY);
 
-        const decodedToken = jwt.decode(token, JWT_SECRET_KEY)
-
-    console.log("----------", decodedToken)
-        
-        // data.isAdmin = undefined;
         res.send({ token });
       }
     })

@@ -25,7 +25,7 @@ function App() {
     if (localStorage.getItem("my_token")) {
       const token = localStorage.getItem("my_token");
       const decodedToken = jwt_decode(token);
-      dispatch(saveUser(decodedToken._doc));
+      dispatch(saveUser(decodedToken));
     }
   }, []
   )

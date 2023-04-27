@@ -16,7 +16,7 @@ const CheckoutPayComponent = () => {
     useEffect(() => {
       let user = isUserLogin()
       const decodedToken = jwt_decode(user);
-      setLoginUser(decodedToken._doc)
+      setLoginUser(decodedToken)
       dispatch(toggleLoader(false))
     },[]
     )
