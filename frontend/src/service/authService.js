@@ -1,6 +1,7 @@
 import axios from "axios"
 import jwt_decode from 'jwt-decode';
-import { checkAdmin } from "./userService";
+// import { checkAdmin } from "./userService";
+import { useSelector } from "react-redux";
 
 export const userData = (data) => axios.post("/auth/register", data);
 
@@ -13,12 +14,18 @@ export const setTokenInLocalStorage = (token) => localStorage.setItem("my_token"
 
 export const removeLocalStorage = (name) => localStorage.removeItem(name);
 
-export const isUserLogin = () => localStorage.getItem("my_token");
+export const IsUserLogin = () => {
+  const userStore = useSelector((store) => store.userSlicer.user);
+  return userStore;
+};
+export const IsAdminTrue = () => {
+  const adminStore = useSelector((store) => store.userSlicer.active);
+  return adminStore;
+};
 
-export const isAdmin =  async() =>{ 
-    let admin = false;
-    // await checkAdmin().then(el =>admin = el.data)
-    //     .catch(err => admin = false )
+export const IsAdmin = () => {
+  console.log(IsUserLogin())
+  console.log(IsAdminTrue())
 
-  return  isUserLogin() && jwt_decode(localStorage.getItem("my_token"))?.isAdmin && admin
+  // return IsUserLogin() && IsAdminTrue()
 };

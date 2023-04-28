@@ -7,7 +7,6 @@ import NavbarComponent from "./components/navbar/NavbarComponent";
 import TopHeaderComponent from "./components/topHaderComponent/TopHeaderComponent";
 import GoToDashboard from "./pages/admin/GoToDashboard";
 import { saveUser } from "./redux/userSlicer";
-import { isAdmin } from "./service/authService";
 import jwt_decode from 'jwt-decode';
 
 axios.defaults.baseURL = "http://localhost:5050/api"

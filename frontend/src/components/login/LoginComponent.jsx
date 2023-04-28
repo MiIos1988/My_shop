@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { saveUser, isAdminLogin } from "../../redux/userSlicer";
 import {
-  isAdmin,
+  IsAdmin,
   loginData,
   setTokenInLocalStorage,
 } from "../../service/authService";
@@ -34,7 +34,7 @@ const LoginComponent = () => {
         const decodedToken = jwt_decode(res.data.token);
         setTokenInLocalStorage(res.data.token);
         dispatch(saveUser(decodedToken));
-        if (isAdmin()) {
+        if (IsAdmin()) {
           navigate("/dashboard");
           dispatch(isAdminLogin(true));
         } else {
