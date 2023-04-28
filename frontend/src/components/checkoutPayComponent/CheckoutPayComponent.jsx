@@ -14,11 +14,16 @@ const CheckoutPayComponent = () => {
   const dispatch = useDispatch();
   let user = isUserLogin()
 
-  useEffect(() => {
-    setLoginUser(user)
-    dispatch(toggleLoader(false))
-  }, []
-  )
+
+    useEffect(() => {
+      let user = isUserLogin()
+      //user
+      const decodedToken = jwt_decode(user);
+      setLoginUser(decodedToken)
+      dispatch(toggleLoader(false))
+    },[]
+    )
+
 
   const SignUpSchema = Yup.object().shape({
 
