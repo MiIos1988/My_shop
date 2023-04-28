@@ -21,6 +21,9 @@ const CheckoutPayComponent = () => {
   )
 
   const SignUpSchema = Yup.object().shape({
+
+
+    
     email: Yup.string().email("Invalid email").required("Required"),
     firstName: Yup.string().required(),
     lastName: Yup.string().required(),
