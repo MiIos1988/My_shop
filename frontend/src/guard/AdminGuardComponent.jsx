@@ -1,13 +1,10 @@
 import { Navigate } from "react-router-dom";
-import { IsAdmin } from "../service/authService";
+import { isAdmin } from "../service/authService";
 
 
 
-export const AdminGuardComponent = ({ children }) => {
-    console.log(IsAdmin())
+export const AdminGuardComponent = ({ children }) => isAdmin() ? children : <Navigate to={"/"} />
 
-    return IsAdmin() ? children : <Navigate to={"/"} />
-}
 
 
 

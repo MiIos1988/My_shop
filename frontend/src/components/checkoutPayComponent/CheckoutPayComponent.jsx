@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { IsUserLogin } from "../../service/authService";
+import { isUserLogin } from "../../service/authService";
 import { Outlet, useNavigate } from "react-router-dom";
 import jwt_decode from 'jwt-decode';
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ const CheckoutPayComponent = () => {
   const [loginUser, setLoginUser] = useState()
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let user = IsUserLogin()
+  let user = isUserLogin()
 
   useEffect(() => {
     setLoginUser(user)
