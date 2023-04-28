@@ -38,8 +38,5 @@ userRoute.post("/init-payment", verifyUserLogin, async (req, res) => {
   }
 });
 
-userRoute.get("/check-admin", verifyUserLogin, verifyAdmin, (req, res) => {
-  res.send(true)
-})
 
 module.exports = userRoute;

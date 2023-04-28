@@ -6,5 +6,4 @@ export const isActive= (body) => axios.put("/user/is-active", body);
 
 export const paymentProduct= (body) => axios.post("/user/init-payment", body);
 
-export const checkAdmin= () => axios.get("/user/check-admin");
 
