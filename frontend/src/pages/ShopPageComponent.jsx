@@ -3,7 +3,6 @@ import ProductListComponent from "../components/productListComponent.jsx/Product
 
 
 const ShopPageComponent = () => {
-  console.log("work num")
   return (
     <div>
       <HeaderImageComponent title={"Shop"} link={"shop"} />
