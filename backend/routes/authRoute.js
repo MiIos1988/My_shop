@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../service/mailService");
 const htmlActivation = require("../template/mailTemplate");
+const { JWT_SECRET_KEY } = require("../config/configToken");
 
 authRoute.post("/register", registerValidation, async (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -13,18 +14,19 @@ authRoute.post("/register", registerValidation, async (req, res) => {
     const newUser = await UserModel.create(req.body);
     newUser.save();
 
-    const activationMailHtml = htmlActivation(`http://localhost:3000/activation-account/${newUser?._id}`)
+    const activationMailHtml = htmlActivation(
+      `http://localhost:3000/activation-account/${newUser?._id}`
+    );
     sendMail(
       "vojvoda19881@gmail.com",
       req.body.email,
       "Test email",
       activationMailHtml
-    ).then(() => res.send('User registered.'))
-      .catch(error => res.status(415).send(error))
-
-    
+    )
+      .then(() => res.send("User registered."))
+      .catch((error) => res.status(415).send(error));
   } catch {
-      res.status(416).send("Error creating new user");
+    res.status(416).send("Error creating new user");
   }
 });
 
@@ -32,6 +34,7 @@ authRoute.post("/login", (req, res) => {
   const body = req.body;
   UserModel.findOne({ email: body.email })
     .then((data) => {
+      console.log(data)
       if (!data) {
         res.status(417).send("Email is not valid");
       } else if (!bcrypt.compareSync(body.password, data.password)) {
@@ -44,10 +47,18 @@ authRoute.post("/login", (req, res) => {
           );
       } else {
         let ts = new Date().getTime();
-        data.password = undefined;
-        data.isActive = undefined;
-        let token = jwt.sign({ ...data, ts }, "log");
-        // data.isAdmin = undefined;
+        let userData = {
+          email: data.email,
+          username: data.username,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          city: data.city,
+          isAdmin: data.isAdmin,
+          ts: ts
+        };
+        let token = jwt.sign(userData, JWT_SECRET_KEY);
+
         res.send({ token });
       }
     })

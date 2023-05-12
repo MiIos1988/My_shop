@@ -7,7 +7,6 @@ import NavbarComponent from "./components/navbar/NavbarComponent";
 import TopHeaderComponent from "./components/topHaderComponent/TopHeaderComponent";
 import GoToDashboard from "./pages/admin/GoToDashboard";
 import { saveUser } from "./redux/userSlicer";
-import { isAdmin } from "./service/authService";
 import jwt_decode from 'jwt-decode';
 
 axios.defaults.baseURL = "http://localhost:5050/api"
@@ -25,7 +24,7 @@ function App() {
     if (localStorage.getItem("my_token")) {
       const token = localStorage.getItem("my_token");
       const decodedToken = jwt_decode(token);
-      dispatch(saveUser(decodedToken._doc));
+      dispatch(saveUser(decodedToken));
     }
   }, []
   )
