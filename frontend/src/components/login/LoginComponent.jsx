@@ -20,6 +20,7 @@ const LoginComponent = () => {
 
   useEffect(() => {
     setQuery(queryParams.get("id"))
+    dispatch(toggleLoader(false));
   }, []
   )
 
@@ -39,6 +40,7 @@ const LoginComponent = () => {
           dispatch(isAdminLogin(true));
         } else {
           query ? navigate("/checkout") : navigate(-1)
+          
         }
       })
       .catch((err) => console.log(err));
