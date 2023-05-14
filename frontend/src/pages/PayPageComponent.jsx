@@ -18,7 +18,7 @@ const PayPageComponent = () => {
     const totalPrice = useSelector(stor => stor.cartSlicer.totalPrice);
 
     useEffect(() => {
-        dispatch(toggleLoader(false));
+        // dispatch(toggleLoader(false));
      totalPrice &&  paymentProduct({amount: totalPrice, currency: "USD"}).then(res => {
         setCk(res.data.client_secret)
      }).catch(err => console.log(err))
