@@ -41,7 +41,6 @@ const NavbarComponent = () => {
   const selectedCategory = (e) => {
     navigate(`/category?category=${e.target.getAttribute("value")}`);
     dispatch(toggleLoader(true));
-    console.log("working")
   };
 
   return (

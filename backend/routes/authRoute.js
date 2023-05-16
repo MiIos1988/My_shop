@@ -34,7 +34,6 @@ authRoute.post("/login", (req, res) => {
   const body = req.body;
   UserModel.findOne({ email: body.email })
     .then((data) => {
-      console.log(data)
       if (!data) {
         res.status(417).send("Email is not valid");
       } else if (!bcrypt.compareSync(body.password, data.password)) {

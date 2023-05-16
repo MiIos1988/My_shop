@@ -20,7 +20,6 @@ const PaymentElementsComponent = ({ ck }) => {
 
   const onPay = () => {
     if (!stripe || !elements || !ck) {
-      console.log("Error while paying.")
       return
     }
     stripe.confirmPayment({

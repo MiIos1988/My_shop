@@ -54,8 +54,6 @@ const CreateProductComponent = () => {
     data.append("file", image);
     data.append("upload_preset", "my_shop");
     data.append("cloud_name", "drsg0huwp");
-    // getImageUrl(data).then(res => console.log(res))
-    // .catch(err => console.log(err))
     fetch("https://api.cloudinary.com/v1_1/drsg0huwp/image/upload", {
       method: "post",
       body: data,
