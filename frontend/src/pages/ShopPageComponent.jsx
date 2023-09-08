@@ -11,7 +11,6 @@ const ShopPageComponent = () => {
   useEffect(() => {
     dispatch(toggleLoader(true));
   },[]
-    
   )
   return (
     <div>
