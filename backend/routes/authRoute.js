@@ -15,7 +15,7 @@ authRoute.post("/register", registerValidation, async (req, res) => {
     newUser.save();
 
     const activationMailHtml = htmlActivation(
-      `http://localhost:3000/activation-account/${newUser?._id}`
+      `https://my-shop-nine-zeta.vercel.app/activation-account/${newUser?._id}`
     );
     sendMail(
       "vojvoda19881@gmail.com",
