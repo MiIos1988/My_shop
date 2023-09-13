@@ -1,6 +1,6 @@
-# E-shop website
+# E-shop
 
-## Full featured e-commerce store built with MERN stack and Paypal payments API. Admin page to manage customers, products & orders.
+## E-commerce store built with MERN stack and Paypal payments API. Admin page to manage customers, products & orders.
 
 <a href="https://my-shop-nine-zeta.vercel.app/">Demo</a>
 
