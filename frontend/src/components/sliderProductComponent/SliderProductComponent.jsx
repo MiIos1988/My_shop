@@ -37,15 +37,12 @@ const SliderProductComponent = () => {
         modules={[FreeMode, Navigation]}
         className="mySwiperProduct"
         breakpoints={{
-          // when window width is >= 640px
           500: {
             slidesPerView: 2,
           },
-          // when window width is >= 640px
           768: {
             slidesPerView: 3,
           },
-          // when window width is >= 768px
           992: {
             slidesPerView: 4,
           },
@@ -71,7 +68,6 @@ const SliderProductComponent = () => {
                     id={product[index + 8]?._id}
                   />
                 </div>
-                {/* </div> */}
               </div>
             </SwiperSlide>
           );
