@@ -7,6 +7,8 @@ import logo from "../../assets/image/logo-zurea.jpg";
 import { removeProduct } from "../../redux/cartSlicer";
 import { useState } from "react";
 import { toggleLoader } from "../../redux/loaderSlicer";
+import i18n from "../../i18n";
+import { useTranslation } from "react-i18next";
 
 const NavbarComponent = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,7 @@ const NavbarComponent = () => {
   const cartSlicer = useSelector((store) => store.cartSlicer);
   const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState("");
+  const { t } = useTranslation()
 
   let subtotal = 0;
 
@@ -68,7 +71,9 @@ const NavbarComponent = () => {
               aria-current="page"
               to={"/"}
             >
-              Home
+              {
+                t("home")
+              }
             </Link>
           </li>
 

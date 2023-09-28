@@ -1,5 +1,12 @@
+import i18n from "../../i18n";
 
 const TopHeaderComponent = () => {
+
+  const handleLanguageChange = (lang) => {
+    const newLanguage = lang;
+    i18n.changeLanguage(newLanguage);
+  }
+
   return (
     <div className="bg-dark mb-4 topHeader">
       <div className="topHeaderDiv d-flex justify-content-between mx-4">
@@ -10,10 +17,11 @@ const TopHeaderComponent = () => {
           <select
             className="form-select me-2 selectElement"
             aria-label="Default select example"
+            onChange={(e) => handleLanguageChange(e.target.value)}
           >
-            <option value="English">English</option>
-            <option value="Germany">Germany</option>
-            <option value="Serbia">Serbia</option>
+            <option value="en">English</option>
+            <option value="de">Germany</option>
+            <option value="sr">Serbia</option>
           </select>
 
           <select className="form-select selectElement selectElement2 " aria-label="Default select example">
