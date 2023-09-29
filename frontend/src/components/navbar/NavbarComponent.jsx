@@ -82,7 +82,7 @@ const NavbarComponent = () => {
               className="navigationLink nav-link animate__animated animate__backInLeft"
               to={"/shop"}
             >
-              Shop
+              {t("shop")}
             </Link>
           </li>
 
@@ -95,7 +95,7 @@ const NavbarComponent = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Category
+              {t("category")}
             </Link>
             <div
               className="dropdown-menu ulDiv"
@@ -132,7 +132,7 @@ const NavbarComponent = () => {
               aria-current="page"
               to={"/contact"}
             >
-              Contact
+              {t("contact")}
             </Link>
           </li>
         </ul>

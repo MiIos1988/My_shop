@@ -1,5 +1,6 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 // Import Swiper styles
 import "swiper/css";
@@ -13,6 +14,7 @@ import img1 from "../../assets/image/slider-img1.jpg";
 import img2 from "../../assets/image/slider-img2.jpg";
 
 const HomeSliderComponent = () => {
+  const { t } = useTranslation()
   return (
     <>
       <Swiper
@@ -30,8 +32,8 @@ const HomeSliderComponent = () => {
             </div>
             <div className="linkField d-flex ms-auto me-auto align-items-center">
               <div>
-                <h1 className="mb-3 display-5">GO TO THE SHOP</h1>
-                <Link to={"/shop"} className="btn btn-dark">SHOP NOW</Link>
+                <h1 className="mb-3 display-5">{t("goToTheShop")}</h1>
+                <Link to={"/shop"} className="btn btn-dark">{t("shopNow")}</Link>
               </div>
             </div>
           </div>
