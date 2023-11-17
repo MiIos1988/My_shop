@@ -62,7 +62,7 @@ productRoute.post("/add-product", async (req, res) => {
 });
 
 productRoute.delete("/product", (req, res) => {
-  ProductModel.findOneAndRemove(req.query)
+  ProductModel.findOneAndDelete(req.query)
     .then((data) => res.send("ok"))
     .catch((err) => console.log(err));
 });
