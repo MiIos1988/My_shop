@@ -3,16 +3,21 @@ const ProductModel = require("../models/productModels");
 const productRoute = express.Router();
 
 productRoute.post("/get-product", async (req, res) => {
-  const countQuery = await ProductModel.where({}).countDocuments();
-  let pagination = req.body;
-  ProductModel.find({})
-    .skip(pagination.start * pagination.perPage)
-    .limit(pagination.perPage)
-    .then((data) => {
-      res.send({ data, countQuery });
-    })
-    .catch((err) => console.log(err));
+  try {
+    const countQuery = await ProductModel.countDocuments({});
+    const pagination = req.body;
+    const data = await ProductModel.find({})
+      .skip(pagination.start * pagination.perPage)
+      .limit(pagination.perPage)
+      .lean();
+
+    res.send({ data, countQuery });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 });
+
 
 productRoute.post("/search-product", async (req, res) => {
   const countQuery = await ProductModel.where({
