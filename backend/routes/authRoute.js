@@ -12,7 +12,6 @@ authRoute.post("/register", registerValidation, async (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, 10);
   try {
     const newUser = await UserModel.create(req.body);
-    newUser.save();
 
     const activationMailHtml = htmlActivation(
       `https://my-shop-nine-zeta.vercel.app/activation-account/${newUser?._id}`
