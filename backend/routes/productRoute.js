@@ -28,7 +28,7 @@ productRoute.post("/search-product", async (req, res) => {
     });
     res.send({ data, countQuery });
   } catch (err) {
-    res.status(500).send({ error: "Došlo je do greške prilikom pretrage." });
+    res.status(500).send({ error: "An error occurred while searching." });
   }
 });
 
