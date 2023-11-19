@@ -20,7 +20,7 @@ productRoute.post("/get-product", async (req, res) => {
 
 productRoute.post("/search-product", async (req, res) => {
   try {
-    const countQuery = await ProductModel.where({
+    const countQuery = await ProductModel.find({
       title: { $regex: req.body.search, $options: "i" },
     }).countDocuments();
     const data = await ProductModel.find({
