@@ -18,14 +18,18 @@ productRoute.post("/get-product", async (req, res) => {
   }
 });
 
-
 productRoute.post("/search-product", async (req, res) => {
-  const countQuery = await ProductModel.where({
-    title: { $regex: req.body.search, $options: "i" },
-  }).countDocuments();
-  ProductModel.find({ title: { $regex: req.body.search, $options: "i" } })
-    .then((data) => res.send({ data, countQuery }))
-    .catch((err) => res.send(err));
+  try {
+    const countQuery = await ProductModel.where({
+      title: { $regex: req.body.search, $options: "i" },
+    }).countDocuments();
+    const data = await ProductModel.find({
+      title: { $regex: req.body.search, $options: "i" },
+    });
+    res.send({ data, countQuery });
+  } catch (err) {
+    res.status(500).send({ error: "Došlo je do greške prilikom pretrage." });
+  }
 });
 
 productRoute.post("/category-product", async (req, res) => {
@@ -33,11 +37,11 @@ productRoute.post("/category-product", async (req, res) => {
   const countQuery = await ProductModel.where({
     categoryId: req.body.categoryId,
   }).countDocuments();
-  ProductModel.find( {categoryId: req.body.categoryId} )
-  .skip(pagination.start * pagination.perPage)
+  ProductModel.find({ categoryId: req.body.categoryId })
+    .skip(pagination.start * pagination.perPage)
     .limit(pagination.perPage)
     .then((data) => {
-      res.send({ data, countQuery })
+      res.send({ data, countQuery });
     })
     .catch((err) => res.send(err));
 });
