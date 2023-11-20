@@ -42,34 +42,40 @@ productRoute.post("/category-product", async (req, res) => {
   }
 });
 
-productRoute.get("/get-one-product/:id", (req, res) => {
-  ProductModel.findOne({ _id: req.params.id })
-    .then((data) => {
-      res.send({ data });
-    })
-    .catch((err) => res.status(421).send(err));
+productRoute.get("/get-one-product/:id", async (req, res) => {
+  try{
+    const data = await ProductModel.findOne({ _id: req.params.id })
+    res.status(200).send({ data });
+  }catch(err){
+    res.status(421).send(err);
+  }
 });
 
-productRoute.put("/edit-product", (req, res) => {
-  ProductModel.findOneAndUpdate({ _id: req.body._id }, req.body)
-    .then((data) => res.send("ok"))
-    .catch((err) => console.log(err));
+productRoute.put("/edit-product", async (req, res) => {
+  try{
+    const data = await ProductModel.findOneAndUpdate({ _id: req.body._id }, req.body);
+    res.status(200).send("ok");
+  }catch(err){
+    console.log(err)
+  }
 });
 
 productRoute.post("/add-product", async (req, res) => {
   try {
-    const newProduct = await ProductModel.create(req.body);
-    newProduct.save();
-    res.send("ok");
+    await ProductModel.create(req.body);
+    res.status(200).send("ok");
   } catch (err) {
     res.status(420).send("Error in database");
   }
 });
 
-productRoute.delete("/product", (req, res) => {
-  ProductModel.findOneAndDelete(req.query)
-    .then((data) => res.send("ok"))
-    .catch((err) => console.log(err));
+productRoute.delete("/product", async (req, res) => {
+  try{
+    await ProductModel.findOneAndDelete(req.query);
+    res.status(200).send("ok");
+  }catch(err){
+    console.log(err)
+  }
 });
 
 module.exports = productRoute;
