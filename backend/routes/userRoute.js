@@ -8,19 +8,25 @@ const sk =
   "sk_test_51MgyLeAoAwiaPpyxcWshahWIHczrgJi1jlFR8AmPt0mTSjRE9Mi9S2qC2NnRc56sveI5o2M71oLMT1SooRsDKXLY006LAyfgfX";
 const stripeObj = stripe(sk);
 
-userRoute.get("/get-all-users", verifyUserLogin, verifyAdmin, (req, res) => {
-  UserModel.find({})
-    .then((data) => res.send(data))
-    .catch((err) => console.log(err));
+userRoute.get("/get-all-users", verifyUserLogin, verifyAdmin, async (req, res) => {
+  try{
+    const data = await UserModel.find({});
+    res.status(200).send("ok");
+  }catch(err){
+    console.log(err);
+  }
 });
 
-userRoute.put("/is-active", (req, res) => {
-  UserModel.findOneAndUpdate(
-    { _id: req.body.id },
-    { isActive: req.body.checked }
-  )
-    .then((data) => res.send("ok"))
-    .catch((err) => res.send(err));
+userRoute.put("/is-active", async (req, res) => {
+  try{
+    await UserModel.findOneAndUpdate(
+      { _id: req.body.id },
+      { isActive: req.body.checked }
+    );
+    res.status(200).send("ok");
+  }catch(err){
+    res.send(err)
+  }
 });
 
 userRoute.post("/init-payment", verifyUserLogin, async (req, res) => {
