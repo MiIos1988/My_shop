@@ -10,7 +10,6 @@ productRoute.post("/get-product", async (req, res) => {
       .skip(pagination.start * pagination.perPage)
       .limit(pagination.perPage)
       .lean();
-
     res.send({ data, countQuery });
   } catch (err) {
     console.error(err);
@@ -20,12 +19,10 @@ productRoute.post("/get-product", async (req, res) => {
 
 productRoute.post("/search-product", async (req, res) => {
   try {
-    const countQuery = await ProductModel.find({
-      title: { $regex: req.body.search, $options: "i" },
-    }).countDocuments();
     const data = await ProductModel.find({
       title: { $regex: req.body.search, $options: "i" },
     });
+    const countQuery = data.length;
     res.send({ data, countQuery });
   } catch (err) {
     res.status(500).send({ error: "An error occurred while searching." });
