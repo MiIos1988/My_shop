@@ -9,7 +9,7 @@ import GoToDashboard from "./pages/admin/GoToDashboard";
 import { saveUser } from "./redux/userSlicer";
 import jwt_decode from 'jwt-decode';
 
-axios.defaults.baseURL = "https://my-shop-backend-0hvd.onrender.com/api"
+axios.defaults.baseURL = "https://my-shop-backend-9708.onrender.com/api"
 axios.interceptors.request.use((config) => {
   if (localStorage.hasOwnProperty("my_token")) {
     config.headers.Authorization = localStorage.getItem("my_token")
