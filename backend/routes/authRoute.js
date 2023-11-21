@@ -12,28 +12,27 @@ authRoute.post("/register", registerValidation, async (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, 10);
   try {
     const newUser = await UserModel.create(req.body);
-
     const activationMailHtml = htmlActivation(
       `https://my-shop-nine-zeta.vercel.app/activation-account/${newUser?._id}`
     );
-    sendMail(
+    await sendMail(
       "vojvoda19881@gmail.com",
       req.body.email,
       "Test email",
       activationMailHtml
-    )
-      .then(() => res.send("User registered."))
-      .catch((error) => res.status(415).send(error));
+    );
+      res.send("User registered.");
+      
   } catch {
     res.status(416).send("Error creating new user");
   }
 });
 
-authRoute.post("/login", (req, res) => {
-  const body = req.body;
-  UserModel.findOne({ email: body.email })
-    .then((data) => {
-      if (!data) {
+authRoute.post("/login", async (req, res) => {
+  try{
+    const body = req.body;
+    const data = await UserModel.findOne({ email: body.email });
+       if (!data) {
         res.status(417).send("Email is not valid");
       } else if (!bcrypt.compareSync(body.password, data.password)) {
         res.status(417).send("Password is not valid");
@@ -59,16 +58,19 @@ authRoute.post("/login", (req, res) => {
 
         res.send({ token });
       }
-    })
-    .catch((err) => console.log(err));
+  }catch(err){
+    console.log(err)
+  }
 });
-authRoute.put("/active", (req, res) => {
-  const update = { isActive: true };
-  UserModel.findOneAndUpdate(req.body, update)
-    .then((data) => {
-      res.send("ok");
-    })
-    .catch((err) => console.log(err));
+
+authRoute.put("/active", async (req, res) => {
+  try{
+    const update = { isActive: true };
+    await UserModel.findOneAndUpdate(req.body, update);
+    res.send("ok");
+  }catch(err){
+    console.log(err)
+  }
 });
 
 module.exports = authRoute;
