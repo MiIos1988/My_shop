@@ -17,7 +17,6 @@ const NavbarComponent = () => {
   const navigate = useNavigate();
   const [inputSearch, setInputSearch] = useState("");
   const { t } = useTranslation()
-console.log(userStore )
   let subtotal = 0;
 
   cartSlicer.cart.map((el, index) => {
