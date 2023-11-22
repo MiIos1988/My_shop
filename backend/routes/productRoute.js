@@ -43,20 +43,23 @@ productRoute.post("/category-product", async (req, res) => {
 });
 
 productRoute.get("/get-one-product/:id", async (req, res) => {
-  try{
-    const data = await ProductModel.findOne({ _id: req.params.id })
+  try {
+    const data = await ProductModel.findOne({ _id: req.params.id });
     res.status(200).send({ data });
-  }catch(err){
+  } catch (err) {
     res.status(421).send(err);
   }
 });
 
 productRoute.put("/edit-product", async (req, res) => {
-  try{
-    const data = await ProductModel.findOneAndUpdate({ _id: req.body._id }, req.body);
+  try {
+    const data = await ProductModel.findOneAndUpdate(
+      { _id: req.body._id },
+      req.body
+    );
     res.status(200).send("ok");
-  }catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 });
 
@@ -70,11 +73,11 @@ productRoute.post("/add-product", async (req, res) => {
 });
 
 productRoute.delete("/product", async (req, res) => {
-  try{
+  try {
     await ProductModel.findOneAndDelete(req.query);
     res.status(200).send("ok");
-  }catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 });
 

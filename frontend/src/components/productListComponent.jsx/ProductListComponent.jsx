@@ -23,10 +23,9 @@ const ProductListComponent = (props) => {
   const [active, setActive] = useState(1);
   const dispatch = useDispatch();
 
-  const isMountedRef = useRef(false)
-  
+  const isMountedRef = useRef(false);
+
   useEffect(() => {
-    
     if (queryParams.get("search")) {
       onSearch();
     } else if (queryParams.get("category")) {
@@ -35,7 +34,6 @@ const ProductListComponent = (props) => {
       loadAllProducts();
     }
     dispatch(toggleLoader(false));
-
   }, [pagination.perPage, pagination.start, pagination.allPag, queryParams]);
 
   const loadAllProducts = () => {
@@ -52,7 +50,7 @@ const ProductListComponent = (props) => {
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   };
 
   const onSearch = () => {
@@ -91,8 +89,7 @@ const ProductListComponent = (props) => {
         // dispatch(toggleLoader(false));
       })
       .catch((err) => console.log(err))
-      .finally(() => {
-      });
+      .finally(() => {});
   };
 
   return (
