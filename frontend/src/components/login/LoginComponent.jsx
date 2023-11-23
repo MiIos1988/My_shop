@@ -29,21 +29,21 @@ const LoginComponent = () => {
     password: Yup.string().min(2, "Too Short!").required("Required"),
   });
 
-  const clickHandler = (data) => {
-    loginData(data)
-      .then((res) => {
-        const decodedToken = jwt_decode(res.data.token);
-        setTokenInLocalStorage(res.data.token);
-        dispatch(saveUser(decodedToken));
-        if (isAdmin()) {
-          navigate("/dashboard");
-          dispatch(isAdminLogin(true));
+  const clickHandler = async (data) => {
+    try {
+     const res = await loginData(data)
+     const decodedToken = jwt_decode(res.data.token);
+       setTokenInLocalStorage(res.data.token);
+       dispatch(saveUser(decodedToken));
+       if (isAdmin()) {
+         navigate("/dashboard");
+         dispatch(isAdminLogin(true));
         } else {
-          query ? navigate("/checkout") : navigate(-1)
-          
-        }
-      })
-      .catch((err) => console.log( err));
+              query ? navigate("/checkout") : navigate(-1)
+            }
+    } catch (error) {
+      console.log( error)
+    }
   };
 
   return (
