@@ -36,10 +36,10 @@ const ProductListComponent = (props) => {
     dispatch(toggleLoader(false));
   }, [pagination.perPage, pagination.start, pagination.allPag, queryParams]);
 
-  const loadAllProducts = () => {
-    getProductData(pagination)
-      .then((res) => {
-        let numberPagination = res.data.countQuery;
+  const loadAllProducts = async () => {
+    try {
+      const res = await getProductData(pagination)
+      let numberPagination = res.data.countQuery;
         setProduct(res.data.data);
         const paginationAllNumber = Math.ceil(
           numberPagination / pagination.perPage
@@ -49,47 +49,44 @@ const ProductListComponent = (props) => {
         setArrayPagination(
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
-      })
-      .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(err)
   };
 
-  const onSearch = () => {
-    searchProductData({ search: queryParams.get("search") })
-      .then((res) => {
-        let numberPagination = res.data.countQuery;
-        setProduct(res.data.data);
-        const paginationAllNumber = Math.ceil(
-          numberPagination / pagination.perPage
-        );
-        let copyPagination = { ...pagination, allPag: paginationAllNumber };
-        setPagination(copyPagination);
-        setArrayPagination(
-          Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
-        );
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        dispatch(toggleLoader(false));
-      });
+  const onSearch = async () => {
+    try {
+      const res = await searchProductData({ search: queryParams.get("search") });
+      let numberPagination = res.data.countQuery;
+      setProduct(res.data.data);
+      const paginationAllNumber = Math.ceil(numberPagination / pagination.perPage);
+      let copyPagination = { ...pagination, allPag: paginationAllNumber };
+      setPagination(copyPagination);
+      setArrayPagination(
+        Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
+      );
+    } catch (err) {
+      console.log(err);
+    } finally {
+      dispatch(toggleLoader(false));
+    }
   };
-
-  const onCategory = () => {
-    categoryProductData({ categoryId: queryParams.get("category"), pagination })
-      .then((res) => {
-        let numberPagination = res.data.countQuery;
-        setProduct(res.data.data);
-        const paginationAllNumber = Math.ceil(
-          numberPagination / pagination.perPage
-        );
-        let copyPagination = { ...pagination, allPag: paginationAllNumber };
-        setPagination(copyPagination);
-        setArrayPagination(
-          Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
-        );
-        // dispatch(toggleLoader(false));
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {});
+  
+  const onCategory = async () => {
+    try {
+      const res = await categoryProductData({ categoryId: queryParams.get("category"), pagination });
+      let numberPagination = res.data.countQuery;
+          setProduct(res.data.data);
+          const paginationAllNumber = Math.ceil(
+            numberPagination / pagination.perPage
+          );
+          let copyPagination = { ...pagination, allPag: paginationAllNumber };
+          setPagination(copyPagination);
+          setArrayPagination(
+            Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
+          );
+    } catch (error) {
+      console.log(err)
+    }
   };
 
   return (
@@ -206,5 +203,6 @@ const ProductListComponent = (props) => {
     </>
   );
 };
+}
 
 export default ProductListComponent;
