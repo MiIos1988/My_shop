@@ -42,14 +42,15 @@ const RegisterComponent = () => {
                             city: "",
                         }}
                         validationSchema={SignUpSchema}
-                        onSubmit={(values) => {
+                        onSubmit={async (values) => {
                             // same shape as initial values
-                            userData(values)
-                                .then((res) => {
-                                    console.log("working backend");
-                                    setIsRegister(true);
-                                })
-                                .catch((error) => console.log(error));
+                            try {
+                                const res = await userData(values);
+                                console.log("working backend");
+                                setIsRegister(true);
+                            } catch (error) {
+                                console.log(error)
+                            }
                         }}
                     >
                             <div className="row justify-content-center mx-2">

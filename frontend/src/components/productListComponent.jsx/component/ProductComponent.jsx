@@ -11,9 +11,13 @@ function ProductComponent(props) {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-  const deleteProduct = () => {
-    deleteProductData(id).then(data => navigate("/dashboard"))
-      .catch(err => console.log("error", err))
+  const deleteProduct = async () => {
+    try {
+      await deleteProductData(id);
+      navigate("/dashboard")
+    } catch (error) {
+      console.log("error", error)
+    }
   }
 
   const editProduct = () => {
