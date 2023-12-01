@@ -49,9 +49,10 @@ const ProductListComponent = (props) => {
         setArrayPagination(
           Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
         );
-    } catch (error) {
+    } catch (err) {
       console.log(err)
   };
+}
 
   const onSearch = async () => {
     try {
@@ -84,7 +85,7 @@ const ProductListComponent = (props) => {
           setArrayPagination(
             Array.from({ length: paginationAllNumber }, (v, k) => k + 1)
           );
-    } catch (error) {
+    } catch (err) {
       console.log(err)
     }
   };
@@ -203,6 +204,6 @@ const ProductListComponent = (props) => {
     </>
   );
 };
-}
+
 
 export default ProductListComponent;
