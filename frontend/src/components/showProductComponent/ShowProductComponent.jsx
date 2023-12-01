@@ -28,6 +28,7 @@ const ShowProductComponent = () => {
     getOneProductData(id)
       .then((res) => {
         setProduct(res.data.data);
+        
         dispatch(toggleLoader(false))
       })
       .catch((err) => console.log(err));
