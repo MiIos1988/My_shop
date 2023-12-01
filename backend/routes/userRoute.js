@@ -8,25 +8,29 @@ const sk =
   "sk_test_51MgyLeAoAwiaPpyxcWshahWIHczrgJi1jlFR8AmPt0mTSjRE9Mi9S2qC2NnRc56sveI5o2M71oLMT1SooRsDKXLY006LAyfgfX";
 const stripeObj = stripe(sk);
 
-userRoute.get("/get-all-users", verifyUserLogin, verifyAdmin, async (req, res) => {
-  try{
-    const data = await UserModel.find({});
-    console.log(data)
-    res.status(200).send({data});
-  }catch(err){
-    console.log(err);
+userRoute.get(
+  "/get-all-users",
+  verifyUserLogin,
+  verifyAdmin,
+  async (req, res) => {
+    try {
+      const data = await UserModel.find({});
+      res.status(200).send(data);
+    } catch (err) {
+      console.log(err);
+    }
   }
-});
+);
 
 userRoute.put("/is-active", async (req, res) => {
-  try{
+  try {
     await UserModel.findOneAndUpdate(
       { _id: req.body.id },
       { isActive: req.body.checked }
     );
     res.status(200).send("ok");
-  }catch(err){
-    res.send(err)
+  } catch (err) {
+    res.send(err);
   }
 });
 
@@ -44,6 +48,5 @@ userRoute.post("/init-payment", verifyUserLogin, async (req, res) => {
     (err) => res.send(err);
   }
 });
-
 
 module.exports = userRoute;
