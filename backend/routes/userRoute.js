@@ -11,7 +11,8 @@ const stripeObj = stripe(sk);
 userRoute.get("/get-all-users", verifyUserLogin, verifyAdmin, async (req, res) => {
   try{
     const data = await UserModel.find({});
-    res.status(200).send("ok");
+    console.log(data)
+    res.status(200).send({data});
   }catch(err){
     console.log(err);
   }

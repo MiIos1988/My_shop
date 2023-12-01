@@ -5,8 +5,17 @@ const UsersDashboardComponent = () => {
     const [allUser, setAllUser] = useState([]);
 
     useEffect(() => {
-      userData().then(res => setAllUser(res.data))
-      .catch(err => console.log(err))
+      const fetchData = async () => {
+      try {
+          const res = await userData();
+          setAllUser(res.data);
+          console.log(res);
+
+        } catch (err) {
+        console.log(err)
+      }
+      }
+      fetchData();
     },[]
     );
 
