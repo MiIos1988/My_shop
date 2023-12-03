@@ -21,55 +21,54 @@ authRoute.post("/register", registerValidation, async (req, res) => {
       "Test email",
       activationMailHtml
     );
-      res.send("User registered.");
-      
+    res.send("User registered.");
   } catch {
     res.status(416).send("Error creating new user");
   }
 });
 
 authRoute.post("/login", async (req, res) => {
-  try{
+  try {
     const body = req.body;
     const data = await UserModel.findOne({ email: body.email });
-       if (!data) {
-        res.status(417).send("Email is not valid");
-      } else if (!bcrypt.compareSync(body.password, data.password)) {
-        res.status(417).send("Password is not valid");
-      } else if (!data.isActive) {
-        res
-          .status(418)
-          .send(
-            "You must activate your account. Go to the email and click on the link."
-          );
-      } else {
-        let ts = new Date().getTime();
-        let userData = {
-          email: data.email,
-          username: data.username,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          phone: data.phone,
-          city: data.city,
-          isAdmin: data.isAdmin,
-          ts: ts
-        };
-        let token = jwt.sign(userData, JWT_SECRET_KEY);
+    if (!data) {
+      res.status(417).send("Email is not valid");
+    } else if (!bcrypt.compareSync(body.password, data.password)) {
+      res.status(417).send("Password is not valid");
+    } else if (!data.isActive) {
+      res
+        .status(418)
+        .send(
+          "You must activate your account. Go to the email and click on the link."
+        );
+    } else {
+      let ts = new Date().getTime();
+      let userData = {
+        email: data.email,
+        username: data.username,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        city: data.city,
+        isAdmin: data.isAdmin,
+        ts: ts,
+      };
+      let token = jwt.sign(userData, JWT_SECRET_KEY);
 
-        res.send({ token });
-      }
-  }catch(err){
-    console.log(err)
+      res.send({ token });
+    }
+  } catch (err) {
+    console.log(err);
   }
 });
 
 authRoute.put("/active", async (req, res) => {
-  try{
+  try {
     const update = { isActive: true };
     await UserModel.findOneAndUpdate(req.body, update);
     res.send("ok");
-  }catch(err){
-    console.log(err)
+  } catch (err) {
+    console.log(err);
   }
 });
 
