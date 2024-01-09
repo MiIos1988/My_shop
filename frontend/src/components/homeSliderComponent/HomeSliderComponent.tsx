@@ -1,3 +1,4 @@
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -6,15 +7,13 @@ import { useTranslation } from "react-i18next";
 import "swiper/css";
 import "swiper/css/navigation";
 
-// import "./styles.css";
-
 // import required modules
 import { Navigation } from "swiper";
 import img1 from "../../assets/image/slider-img1.jpg";
 import img2 from "../../assets/image/slider-img2.jpg";
 
 const HomeSliderComponent = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <>
       <Swiper
@@ -33,7 +32,9 @@ const HomeSliderComponent = () => {
             <div className="linkField d-flex ms-auto me-auto align-items-center">
               <div>
                 <h1 className="mb-3 display-5">{t("goToTheShop")}</h1>
-                <Link to={"/shop"} className="btn btn-dark">{t("shopNow")}</Link>
+                <Link to={"/shop"} className="btn btn-dark">
+                  {t("shopNow")}
+                </Link>
               </div>
             </div>
           </div>
@@ -46,7 +47,9 @@ const HomeSliderComponent = () => {
             <div className="linkField d-flex ms-auto me-auto align-items-center">
               <div>
                 <h1 className="mb-3 display-5">GO TO THE SHOP</h1>
-                <Link to={"/shop"} className="btn btn-dark">SHOP NOW</Link>
+                <Link to={"/shop"} className="btn btn-dark">
+                  SHOP NOW
+                </Link>
               </div>
             </div>
           </div>
