@@ -1,6 +1,12 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
-const HeaderImageComponent = (props) => {
+type HeaderImageComponentProps = {
+    title: string,
+    link: string
+}
+
+const HeaderImageComponent = (props: HeaderImageComponentProps) => {
     const { title, link } = props;
 
     return (
