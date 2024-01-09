@@ -1,6 +1,6 @@
 
 import React from "react";
-import InfoComponent from "./components/InfoComponent";
+import InfoComponent from "./component/InfoComponent";
 import imgBadge from "../../assets/imgs/basicInfo/badge.png";
 import headphone from "../../assets/imgs/basicInfo/headphones.png";
 import imgRocket from "../../assets/imgs/basicInfo/rocket.png";
