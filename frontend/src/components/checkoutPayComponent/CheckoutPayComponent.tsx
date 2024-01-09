@@ -1,34 +1,40 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+//@ts-ignore
 import { isUserLogin } from "../../service/authService";
 import { Outlet, useNavigate } from "react-router-dom";
-import jwt_decode from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
+//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 
-const CheckoutPayComponent = () => {
+type User = {
+  email: string;
+  username: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  city: string;
+  isAdmin: boolean;
+  ts: number;
+};
 
-  const [loginUser, setLoginUser] = useState()
+const CheckoutPayComponent = () => {
+  const [loginUser, setLoginUser] = useState<User>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  let user = isUserLogin()
+  let user = isUserLogin();
 
-
-    useEffect(() => {
-      let user = isUserLogin()
-      //user
-      const decodedToken = jwt_decode(user);
-      setLoginUser(decodedToken)
-      dispatch(toggleLoader(false))
-    },[]
-    )
-
+  useEffect(() => {
+    let user = isUserLogin();
+    //user
+    const decodedToken = jwt_decode(user) as User;
+    setLoginUser(decodedToken);
+    dispatch(toggleLoader(false));
+  }, []);
 
   const SignUpSchema = Yup.object().shape({
-
-
-    
     email: Yup.string().email("Invalid email").required("Required"),
     firstName: Yup.string().required(),
     lastName: Yup.string().required(),
@@ -55,7 +61,6 @@ const CheckoutPayComponent = () => {
   return (
     <div className="container">
       <div className="row justify-content-center">
-
         <form onSubmit={formik.handleSubmit} className="col-md-6  mt-5">
           <label htmlFor="firstName">First Name</label>
           <input
@@ -65,7 +70,8 @@ const CheckoutPayComponent = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.firstName || ""}
-          /><br />
+          />
+          <br />
           <label htmlFor="lastName">Last Name</label>
           <input
             className="form-control"
@@ -74,7 +80,8 @@ const CheckoutPayComponent = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.lastName || ""}
-          /><br />
+          />
+          <br />
           <label htmlFor="email">Email Address</label>
           <input
             className="form-control"
@@ -83,7 +90,8 @@ const CheckoutPayComponent = () => {
             type="email"
             onChange={formik.handleChange}
             value={formik.values.email || ""}
-          /><br />
+          />
+          <br />
           <label htmlFor="email">Phone</label>
           <input
             className="form-control"
@@ -92,7 +100,8 @@ const CheckoutPayComponent = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.phone || ""}
-          /><br />
+          />
+          <br />
           <label htmlFor="email">Address</label>
           <input
             className="form-control"
@@ -101,7 +110,8 @@ const CheckoutPayComponent = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.address || ""}
-          /><br />
+          />
+          <br />
           <label htmlFor="email">City</label>
           <input
             className="form-control"
@@ -110,8 +120,15 @@ const CheckoutPayComponent = () => {
             type="text"
             onChange={formik.handleChange}
             value={formik.values.city || ""}
-          /><br />
-          <button type="submit" className="form-control btn btn-primary" onClick={() => dispatch(toggleLoader(true))}>Continue payment</button>
+          />
+          <br />
+          <button
+            type="submit"
+            className="form-control btn btn-primary"
+            onClick={() => dispatch(toggleLoader(true))}
+          >
+            Continue payment
+          </button>
         </form>
       </div>
       <Outlet />
