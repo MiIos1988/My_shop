@@ -1,7 +1,9 @@
+import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+//@ts-ignore
 import { saveUser, isAdminLogin } from "../../redux/userSlicer";
 import {
   isAdmin,
@@ -9,6 +11,7 @@ import {
   setTokenInLocalStorage,
 } from "../../service/authService";
 import jwt_decode from 'jwt-decode';
+//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 import { useEffect, useState } from "react";
 
@@ -16,7 +19,7 @@ const LoginComponent = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [queryParams] = useSearchParams()
-  const [query, setQuery] = useState(0)
+  const [query, setQuery] = useState<null | string>()
 
   useEffect(() => {
     setQuery(queryParams.get("id"))
@@ -29,7 +32,12 @@ const LoginComponent = () => {
     password: Yup.string().min(2, "Too Short!").required("Required"),
   });
 
-  const clickHandler = async (data) => {
+  type Data = {
+      email: string,
+      password: string
+  }
+
+  const clickHandler = async (data: Data) => {
     try {
      const res = await loginData(data)
      const decodedToken = jwt_decode(res.data.token);
@@ -59,7 +67,7 @@ const LoginComponent = () => {
         }}
       >
         <div className="row justify-content-center mx-2">
-          <Form className="  col-lg-4 ">
+          <Form className="  col-lg-4 " >
             <Field
               className="form-control my-2"
               name="email"
@@ -73,7 +81,7 @@ const LoginComponent = () => {
               type="password"
               placeholder="Password"
             />
-            <ErrorMessage name="email" />
+            <ErrorMessage name="password" />
 
             <button className="btn btn-primary form-control" type="submit">
               Login
