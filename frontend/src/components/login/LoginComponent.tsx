@@ -69,7 +69,7 @@ const LoginComponent = () => {
       >
         <div className="row justify-content-center mx-2">
           <Form className="  col-lg-4 " >
-            <Field
+            <Field 
               className="form-control my-2"
               name="email"
               type="email"
@@ -80,7 +80,7 @@ const LoginComponent = () => {
               className="form-control my-2"
               name="password"
               type="password"
-              placeholder="Password"
+              placeholder="password"
             />
             <ErrorMessage name="password" />
 
