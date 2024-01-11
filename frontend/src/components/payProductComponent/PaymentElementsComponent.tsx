@@ -1,3 +1,4 @@
+import React from "react";
 import {
   PaymentElement,
   useElements,
@@ -5,10 +6,11 @@ import {
 } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 
-const PaymentElementsComponent = ({ ck }) => {
+const PaymentElementsComponent = ({ ck }: { ck: string }) => {
   const stripe = useStripe();
   const elements = useElements()
   const dispatch = useDispatch()
