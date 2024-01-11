@@ -40,6 +40,7 @@ const LoginComponent = () => {
   const clickHandler = async (data: Data) => {
     try {
      const res = await loginData(data)
+      console.log(data)
      const decodedToken = jwt_decode(res.data.token);
        setTokenInLocalStorage(res.data.token);
        dispatch(saveUser(decodedToken));
