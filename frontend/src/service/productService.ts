@@ -7,12 +7,18 @@ type GetProductData = {
 };
 
 type SearchProductData = {
-  search: string;
+  search: string | null;
+};
+
+type Pagination = {
+  start: number;
+  perPage: number;
+  allPag: number;
 };
 
 type CategoryProductData = {
-  categoryId: string;
-  pagination: number;
+  categoryId: string | null;
+  pagination: Pagination;
 };
 
 type ProductData = {
