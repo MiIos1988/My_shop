@@ -1,10 +1,26 @@
+import React from 'react'
 import { BsCheckLg } from 'react-icons/bs'
 import { RiCloseFill } from 'react-icons/ri'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { toggleLoader } from '../../../redux/loaderSlicer'
+//@ts-ignore
+import { toggleLoader } from '../../../redux/loaderSlicer';
 
-const ModalProductComponent = ({ product, quantity, setViewModal }) => {
+type Product = {
+    _id: number,
+    imgUrl: string, 
+    title: string, 
+    price: number,
+}
+
+
+type ModalProductComponentProps = {
+    product: Product,
+    quantity: number,
+    setViewModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const ModalProductComponent = ({ product, quantity, setViewModal }: ModalProductComponentProps) => {
     const dispatch = useDispatch();
 
     return (
