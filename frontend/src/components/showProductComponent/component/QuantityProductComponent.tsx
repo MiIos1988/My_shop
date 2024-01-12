@@ -1,10 +1,19 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useDispatch } from "react-redux";
+//@ts-ignore
 import { changeQuantity } from "../../../redux/cartSlicer";
 
-const QuantityProductComponent = (props) => {
+type QuantityProductComponentProps = {
+  cartShop: boolean;
+  quantity: number;
+  setQuantity: React.Dispatch<React.SetStateAction<number>>;
+  id: number;
+}
+
+const QuantityProductComponent = (props: QuantityProductComponentProps) => {
 
   const { cartShop, quantity, setQuantity, id } = props
   const [quantityCart, setQuantityCart] = useState(quantity)
