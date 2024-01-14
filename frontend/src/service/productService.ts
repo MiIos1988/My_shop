@@ -3,7 +3,7 @@ import axios from "axios";
 type GetProductData = {
   start: number;
   perPage: number;
-  allPag: number;
+  allPag?: number;
 };
 
 type SearchProductData = {

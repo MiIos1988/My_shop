@@ -1,3 +1,4 @@
+import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -8,11 +9,19 @@ import { FreeMode, Navigation } from "swiper";
 import { getProductData } from "../../service/productService";
 import { useEffect, useState } from "react";
 import ProductComponent from "../productListComponent.jsx/component/ProductComponent";
+//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 import { useDispatch } from "react-redux";
 
+type Product = {
+  imgUrl: string;
+  title: string;
+  price: number;
+  _id: number;
+};
+
 const SliderProductComponent = () => {
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState<Product[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {

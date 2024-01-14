@@ -14,7 +14,7 @@ type ProductComponentProps = {
   title: string;
   price: number;
   id: number;
-  dashboard: boolean;
+  dashboard?: boolean;
 };
 
 function ProductComponent(props: ProductComponentProps) {
