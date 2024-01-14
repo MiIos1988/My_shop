@@ -7,10 +7,10 @@ import { useDispatch } from "react-redux";
 import { changeQuantity } from "../../../redux/cartSlicer";
 
 type QuantityProductComponentProps = {
-  cartShop: boolean;
+  cartShop?: boolean;
   quantity: number;
   setQuantity: React.Dispatch<React.SetStateAction<number>>;
-  id: number;
+  id?: number;
 }
 
 const QuantityProductComponent = (props: QuantityProductComponentProps) => {

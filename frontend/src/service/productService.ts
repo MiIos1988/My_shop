@@ -38,7 +38,7 @@ export const searchProductData = (data: SearchProductData) =>
 export const categoryProductData = (data: CategoryProductData) =>
   axios.post("/product/category-product", data);
 
-export const getOneProductData = (id: number) =>
+export const getOneProductData = (id: string | null) =>
   axios.get("/product/get-one-product/" + id);
 
 export const editProductData = (data: ProductData) =>

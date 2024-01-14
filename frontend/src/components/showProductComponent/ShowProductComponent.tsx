@@ -1,22 +1,38 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getOneProductData } from "../../service/productService";
-
 import { SlBasket } from "react-icons/sl";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { TbArrowsCross } from "react-icons/tb";
 import { useDispatch } from "react-redux";
+//@ts-ignore
 import { addToCart } from "../../redux/cartSlicer";
 import QuantityProductComponent from "./component/QuantityProductComponent";
 import ModalProductComponent from "./component/ModalProductComponent";
+//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
+
+type Product = {
+  _id: number;
+  imgUrl: string;
+  title: string;
+  price: number;
+  description: string;
+};
 
 const ShowProductComponent = () => {
   const [queryParams] = useSearchParams();
-  const [product, setProduct] = useState();
+  const [product, setProduct] = useState<Product>({
+    _id: 0,
+    imgUrl: "",
+    title: "",
+    price: 0,
+    description: "",
+  });
   const [quantity, setQuantity] = useState(1);
-  const [moveX, setMoveX] = useState();
-  const [moveY, setMoveY] = useState();
+  const [moveX, setMoveX] = useState(0);
+  const [moveY, setMoveY] = useState(0);
   const [zoomOut, setZoomOut] = useState(false);
   const dispatch = useDispatch();
   const [viewModal, setViewModal] = useState(false);
@@ -28,18 +44,16 @@ const ShowProductComponent = () => {
     getOneProductData(id)
       .then((res) => {
         setProduct(res.data.data);
-        
-        dispatch(toggleLoader(false))
+
+        dispatch(toggleLoader(false));
       })
       .catch((err) => console.log(err));
   }, [idParams]);
 
-
-
-  const mouseMoveIn = (e) => {
+  const mouseMoveIn = (e: React.MouseEvent<HTMLDivElement>) => {
     setZoomOut(true);
-    setMoveX(e.clientX - e.target.offsetLeft);
-    setMoveY(e.clientY - e.target.offsetTop);
+    setMoveX(e.clientX - e.currentTarget.offsetLeft);
+    setMoveY(e.clientY - e.currentTarget.offsetTop);
   };
 
   const mouseMoveExit = () => {
@@ -47,10 +61,19 @@ const ShowProductComponent = () => {
   };
 
   const addProductInCart = () => {
-    dispatch(addToCart({ id: product._id, imgUrl: product.imgUrl, title: product.title, price: product.price, quantity: quantity }));
-    setViewModal(true)
-
-  }
+    if (product) {
+      dispatch(
+        addToCart({
+          id: product._id,
+          imgUrl: product.imgUrl,
+          title: product.title,
+          price: product.price,
+          quantity: quantity,
+        })
+      );
+      setViewModal(true);
+    }
+  };
 
   return (
     <>
@@ -66,9 +89,9 @@ const ShowProductComponent = () => {
             style={
               zoomOut
                 ? {
-                  transformOrigin: `${moveX}px ${moveY}px`,
-                  transform: "scale(2)",
-                }
+                    transformOrigin: `${moveX}px ${moveY}px`,
+                    transform: "scale(2)",
+                  }
                 : { transformOrigin: "center", transform: "scale(1)" }
             }
           />
@@ -78,7 +101,10 @@ const ShowProductComponent = () => {
           <p className="price">${product?.price}</p>
           <p className="description">{product?.description}</p>
 
-          <QuantityProductComponent quantity={quantity} setQuantity={setQuantity} />
+          <QuantityProductComponent
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
 
           <div className="productAction d-flex fs-5 mb-3 pb-3">
             <div className="border p-2" onClick={addProductInCart}>
@@ -111,7 +137,11 @@ const ShowProductComponent = () => {
         </div>
       </div>
       <div className={viewModal ? "d-block " : "d-none"}>
-        <ModalProductComponent product={product} quantity={quantity} setViewModal={setViewModal} />
+        <ModalProductComponent
+          product={product}
+          quantity={quantity}
+          setViewModal={setViewModal}
+        />
       </div>
     </>
   );
