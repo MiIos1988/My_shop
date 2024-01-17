@@ -10,18 +10,27 @@ import { useDispatch } from "react-redux";
 import { toggleLoader } from "../../redux/loaderSlicer";
 import { useNavigate, useParams } from "react-router-dom";
 
+type Product = {
+  title: string;
+  description: string;
+  price: string;
+  category: string;
+  imgUrl: string;
+  [key: string]: string;
+};
+
 const CreateProductComponent = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-  const [product, setProduct] = useState({
+  const [product, setProduct] = useState<Product>({
     title: "",
     description: "",
     price: "",
     category: "",
     imgUrl: "",
   });
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState<File | null>(null);
   const [productImage, setProductImage] = useState("");
   let validation = false;
   const dispatch = useDispatch();
@@ -44,32 +53,38 @@ const CreateProductComponent = () => {
 
   const copyProduct = { ...product };
 
-  const handleChange = (e) => {
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     copyProduct[e.target.name] = e.target.value;
     setProduct(copyProduct);
   };
 
-  const addImage = (e) => {
+  const addImage = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(toggleLoader(true));
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "my_shop");
-    data.append("cloud_name", "drsg0huwp");
-    fetch("https://api.cloudinary.com/v1_1/drsg0huwp/image/upload", {
-      method: "post",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setProduct({
-          ...product,
-          imgUrl: res.url,
-        });
-        setProductImage(res.url);
-        dispatch(toggleLoader(false));
+    if (image) {
+      dispatch(toggleLoader(true));
+      const data = new FormData();
+      data.append("file", image);
+      data.append("upload_preset", "my_shop");
+      data.append("cloud_name", "drsg0huwp");
+      fetch("https://api.cloudinary.com/v1_1/drsg0huwp/image/upload", {
+        method: "post",
+        body: data,
       })
-      .catch((err) => console.log(err));
+        .then((res) => res.json())
+        .then((res) => {
+          setProduct({
+            ...product,
+            imgUrl: res.url,
+          });
+          setProductImage(res.url);
+          dispatch(toggleLoader(false));
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   const validateInputProduct = () => {
@@ -82,7 +97,7 @@ const CreateProductComponent = () => {
     validation = true;
   };
 
-  const createProduct = (e) => {
+  const createProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     validateInputProduct();
     if (!validation) {
@@ -94,7 +109,7 @@ const CreateProductComponent = () => {
     }
   };
 
-  const editProduct = (e) => {
+  const editProduct = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     validateInputProduct();
     editProductData(product)
@@ -153,7 +168,12 @@ const CreateProductComponent = () => {
               type="file"
               name="imgUrl"
               className="form-control"
-              onChange={(e) => setImage(e.target.files[0])}
+              onChange={(e) => {
+                console.log(e);
+                if (e.target.files) {
+                  setImage(e.target.files[0]);
+                }
+              }}
             />
             <br />
             <div className="addImage d-flex align-items-center">
