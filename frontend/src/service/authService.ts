@@ -21,11 +21,15 @@ type DecodedToken = {
   isAdmin: boolean;
 };
 
+type UserActive = {
+  _id: number
+}
+
 export const userData = (data: UserData) => axios.post("/auth/register", data);
 
 export const loginData = (data: LoginData) => axios.post("/auth/login", data);
 
-export const userActive = (id: number) => axios.put("/auth/active", id);
+export const userActive = (id: UserActive) => axios.put("/auth/active", id);
 
 export const setTokenInLocalStorage = (token: string) =>
   localStorage.setItem("my_token", JSON.stringify(token));
