@@ -1,8 +1,21 @@
+import React from "react";
 import { useEffect, useState } from "react";
+//@ts-ignore
 import { isActive, userData } from "../../service/userService";
 
+type AllUser = {
+  username: string,
+  firstName: string,
+  lastName: string,
+  email: string,
+  phone: string,
+  city: string,
+  isActive: boolean,
+  _id: number
+}
+
 const UsersDashboardComponent = () => {
-  const [allUser, setAllUser] = useState([]);
+  const [allUser, setAllUser] = useState<AllUser[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,11 +29,11 @@ const UsersDashboardComponent = () => {
     fetchData();
   }, []);
 
-  const changeIsActive = (e, id) => {
+  const changeIsActive = (e: React.ChangeEvent<HTMLInputElement>, id: number) => {
     let checked = e.target.checked;
     isActive({ checked, id })
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res: any) => console.log(res))
+      .catch((err: any) => console.log(err));
   };
 
   return (
