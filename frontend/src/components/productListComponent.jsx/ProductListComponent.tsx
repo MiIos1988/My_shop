@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 type ProductListComponentProps = {
-  dashboard: boolean;
+  dashboard?: boolean;
 };
 
 const ProductListComponent = (props: ProductListComponentProps) => {
