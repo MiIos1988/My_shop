@@ -1,3 +1,4 @@
+import React from "react"
 import HomeSliderComponent from "../components/homeSliderComponent/HomeSliderComponent"
 import SliderProductComponent from "../components/sliderProductComponent/SliderProductComponent"
 
