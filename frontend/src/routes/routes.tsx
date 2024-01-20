@@ -1,3 +1,4 @@
+import React from "react";
 import AuthGuardComponent from "../guard/AuthGuardComponent";
 import App from "../App";
 import ActivationAccountPageComponent from "../pages/ActivationAccountPageComponent";

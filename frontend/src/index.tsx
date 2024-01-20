@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.scss';
-import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import router from './routes/routes';
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -19,7 +18,7 @@ const store = configureStore({
   reducer: { userSlicer, loaderSlicer, cartSlicer },
 })
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
 
   <React.StrictMode>
@@ -30,4 +29,4 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-reportWebVitals();
+
