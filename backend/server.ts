@@ -1,11 +1,11 @@
-const express = require("express");
+import express from "express"
 const app = express();
-const cors = require("cors");
-const authRoute = require("./routes/authRoute");
-const mongoose = require("mongoose");
-const productRoute = require("./routes/productRoute");
-const userRoute = require("./routes/userRoute");
-const mailRoute = require("./routes/mailRoute");
+import cors from "cors"
+import authRoute from "./routes/authRoute"
+import mongoose from "mongoose";
+import productRoute from "./routes/productRoute"
+import userRoute from "./routes/userRoute"
+import mailRoute from "./routes/mailRoute"
 const portNumber = 5050;
 
 mongoose
