@@ -66,7 +66,7 @@ const LoginComponent = () => {
         }}
       >
         <div className="row justify-content-center mx-2">
-          <Form className="  col-lg-4 " >
+          <div className="  col-lg-4 " >
             <Field 
               className="form-control my-2"
               name="email"
@@ -93,7 +93,7 @@ const LoginComponent = () => {
             >
               If you don't have an account, register
             </Link>
-          </Form>
+          </div>
         </div>
       </Formik>
     </div>

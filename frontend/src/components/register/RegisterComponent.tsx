@@ -55,7 +55,7 @@ const RegisterComponent = () => {
                         }}
                     >
                             <div className="row justify-content-center mx-2">
-                        <Form className="col-lg-4">
+                        <div className="col-lg-4">
                             <Field
                                 className="form-control my-2"
                                 name="email"
@@ -116,7 +116,7 @@ const RegisterComponent = () => {
                             <button className="btn btn-primary my-2 form-control" type="submit">
                                 Register
                             </button>
-                        </Form>
+                        </div>
                 </div>
                     </Formik>
                     </>
