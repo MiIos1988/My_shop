@@ -3,7 +3,6 @@ import { BsCheckLg } from 'react-icons/bs'
 import { RiCloseFill } from 'react-icons/ri'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-//@ts-ignore
 import { toggleLoader } from '../../../redux/loaderSlicer';
 
 type Product = {

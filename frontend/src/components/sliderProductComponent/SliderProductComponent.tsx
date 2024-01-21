@@ -3,13 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
-
-// import required modules
 import { FreeMode, Navigation } from "swiper";
 import { getProductData } from "../../service/productService";
 import { useEffect, useState } from "react";
 import ProductComponent from "../productListComponent.jsx/component/ProductComponent";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 import { useDispatch } from "react-redux";
 

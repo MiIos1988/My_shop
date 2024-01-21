@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-//@ts-ignore
 import { isUserLogin } from "../../service/authService";
 import { Outlet, useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 type User = {
@@ -28,10 +26,11 @@ const CheckoutPayComponent = () => {
 
   useEffect(() => {
     let user = isUserLogin();
-    //user
-    const decodedToken = jwt_decode(user) as User;
-    setLoginUser(decodedToken);
-    dispatch(toggleLoader(false));
+    if (user) {
+      const decodedToken = jwt_decode(user) as User;
+      setLoginUser(decodedToken);
+      dispatch(toggleLoader(false));
+    }
   }, []);
 
   const SignUpSchema = Yup.object().shape({

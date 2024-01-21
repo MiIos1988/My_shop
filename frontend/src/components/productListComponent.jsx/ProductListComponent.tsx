@@ -8,7 +8,6 @@ import {
 import ProductComponent from "./component/ProductComponent";
 import { Link, useSearchParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 type ProductListComponentProps = {

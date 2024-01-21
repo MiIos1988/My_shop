@@ -6,7 +6,6 @@ import {
   getOneProductData,
 } from "../../service/productService";
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 import { useNavigate, useParams } from "react-router-dom";
 

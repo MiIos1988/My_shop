@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { changeQuantity } from "../../../redux/cartSlicer";
 
 type QuantityProductComponentProps = {

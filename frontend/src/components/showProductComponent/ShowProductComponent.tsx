@@ -6,11 +6,9 @@ import { SlBasket } from "react-icons/sl";
 import { BsSuitHeartFill } from "react-icons/bs";
 import { TbArrowsCross } from "react-icons/tb";
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { addToCart } from "../../redux/cartSlicer";
 import QuantityProductComponent from "./component/QuantityProductComponent";
 import ModalProductComponent from "./component/ModalProductComponent";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 type Product = {

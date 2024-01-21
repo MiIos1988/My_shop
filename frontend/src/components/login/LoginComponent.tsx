@@ -3,7 +3,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-//@ts-ignore
 import { saveUser, isAdminLogin } from "../../redux/userSlicer";
 import {
   isAdmin,
@@ -11,7 +10,6 @@ import {
   setTokenInLocalStorage,
 } from "../../service/authService";
 import jwt_decode from 'jwt-decode';
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 import { useEffect, useState } from "react";
 

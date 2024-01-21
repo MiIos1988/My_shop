@@ -6,7 +6,6 @@ import {
 } from "@stripe/react-stripe-js";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
 
 

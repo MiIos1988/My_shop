@@ -1,18 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-//@ts-ignore
 import { isAdminLogin, removeUser } from "../../redux/userSlicer";
 import { removeLocalStorage } from "../../service/authService";
 import "animate.css";
 import logo from "../../assets/image/logo-zurea.jpg";
-//@ts-ignore
 import { removeProduct } from "../../redux/cartSlicer";
 import { useState } from "react";
-//@ts-ignore
 import { toggleLoader } from "../../redux/loaderSlicer";
-//@ts-ignore
-import i18n from "../../i18n";
 import { useTranslation } from "react-i18next";
 
 type Cart = {

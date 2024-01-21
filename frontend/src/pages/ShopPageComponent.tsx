@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import HeaderImageComponent from "../components/headerImageComponent/HeaderImageComponent"
 import ProductListComponent from "../components/productListComponent.jsx/ProductListComponent"
 import { useDispatch } from "react-redux";
-//@ts-ignore
 import { toggleLoader } from "../redux/loaderSlicer";
 
 

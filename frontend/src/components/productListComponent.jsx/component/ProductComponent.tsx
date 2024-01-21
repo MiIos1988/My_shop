@@ -2,11 +2,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-//@ts-ignore
 import { addToCart } from "../../../redux/cartSlicer";
-//@ts-ignore
 import { deleteProductData } from "../../../service/productService";
-//@ts-ignore
 import { toggleLoader } from "../../../redux/loaderSlicer";
 
 type ProductComponentProps = {
