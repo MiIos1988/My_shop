@@ -1,5 +1,5 @@
-const express = require("express");
-const sendMail = require("../service/mailService");
+import express from "express"
+import sendMail from "../service/mailService";
 const mailRoute = express.Router();
 
 mailRoute.post("/send-contact", async (req, res) => {
@@ -12,4 +12,4 @@ mailRoute.post("/send-contact", async (req, res) => {
   }
 });
 
-module.exports = mailRoute;
+export default mailRoute;

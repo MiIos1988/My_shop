@@ -1,6 +1,11 @@
-const UserModel = require("../models/userModels");
+import UserModel from "../models/userModels";
+import { Request, Response, NextFunction } from "express";
 
-const registerValidation = (req, res, next) => {
+const registerValidation = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   let body = req.body;
 
   //********* Email validation */
@@ -46,4 +51,4 @@ const registerValidation = (req, res, next) => {
     .catch((error) => res.status(415).send("Error in DB"));
 };
 
-module.exports = registerValidation;
+export default registerValidation;

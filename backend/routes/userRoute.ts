@@ -1,12 +1,12 @@
-const express = require("express");
-const UserModel = require("../models/userModels");
+import express from "express"
+import UserModel from "../models/userModels";
 const userRoute = express.Router();
-const stripe = require("stripe");
-const verifyUserLogin = require("../validation/verifyUserLogin");
-const verifyAdmin = require("../validation/verifyAdmin");
+import stripe from "stripe";
+import verifyUserLogin from "../validation/verifyUserLogin";
+import verifyAdmin from "../validation/verifyAdmin";
 const sk =
   "sk_test_51MgyLeAoAwiaPpyxcWshahWIHczrgJi1jlFR8AmPt0mTSjRE9Mi9S2qC2NnRc56sveI5o2M71oLMT1SooRsDKXLY006LAyfgfX";
-const stripeObj = stripe(sk);
+const stripeObj = new stripe(sk, {apiVersion: "2022-11-15",});
 
 userRoute.get(
   "/get-all-users",
@@ -45,8 +45,8 @@ userRoute.post("/init-payment", verifyUserLogin, async (req, res) => {
     });
     res.send(payment);
   } catch {
-    (err) => res.send(err);
+    (error?: any) => res.send(error);
   }
 });
 
-module.exports = userRoute;
+export default userRoute;

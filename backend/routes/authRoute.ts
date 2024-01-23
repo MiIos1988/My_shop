@@ -1,12 +1,12 @@
-const express = require("express");
-const UserModel = require("../models/userModels");
-const registerValidation = require("../validation/registerValidation");
+import express from "express"
+import UserModel from "../models/userModels";
+import registerValidation from "../validation/registerValidation";
 const authRoute = express.Router();
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const sendMail = require("../service/mailService");
-const htmlActivation = require("../template/mailTemplate");
-const { JWT_SECRET_KEY } = require("../config/configToken");
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import sendMail from "../service/mailService"
+import htmlActivation from "../template/mailTemplate"
+import  JWT_SECRET_KEY  from "../config/configToken";
 
 authRoute.post("/register", registerValidation, async (req, res) => {
   req.body.password = bcrypt.hashSync(req.body.password, 10);
@@ -33,7 +33,7 @@ authRoute.post("/login", async (req, res) => {
     const data = await UserModel.findOne({ email: body.email });
     if (!data) {
       res.status(417).send("Email is not valid");
-    } else if (!bcrypt.compareSync(body.password, data.password)) {
+    } else if (data.password && !bcrypt.compareSync(body.password, data.password)) {
       res.status(417).send("Password is not valid");
     } else if (!data.isActive) {
       res
@@ -72,4 +72,4 @@ authRoute.put("/active", async (req, res) => {
   }
 });
 
-module.exports = authRoute;
+export default authRoute;

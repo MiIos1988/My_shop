@@ -1,5 +1,5 @@
-const htmlActivation = (activationLink) => {
-    return `<table style="width: 90%;margin: 0 auto;">
+const htmlActivation = (activationLink: string) => {
+  return `<table style="width: 90%;margin: 0 auto;">
                 <tr>
                     <td style="
                         font-size: 16px;
@@ -19,7 +19,7 @@ const htmlActivation = (activationLink) => {
                         ">Activate your account!</a>
                     </td>
                 </tr>
-            </table>`.trim()
-}
+            </table>`.trim();
+};
 
-module.exports = htmlActivation 
+export default htmlActivation;

@@ -23,7 +23,7 @@ app.use("/api/product", productRoute);
 app.use("/api/user", userRoute);
 app.use("/api/mail", mailRoute);
 
-app.listen(portNumber, (error) => {
+app.listen(portNumber, (error?: any) => {
   error
     ? console.log("Error on server start.")
     : console.log(`Server is running on port ${portNumber}... `);

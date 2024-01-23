@@ -1,5 +1,5 @@
-const express = require("express");
-const ProductModel = require("../models/productModels");
+import express from "express";
+import ProductModel from "../models/productModels";
 const productRoute = express.Router();
 
 productRoute.post("/get-product", async (req, res) => {
@@ -81,4 +81,4 @@ productRoute.delete("/product", async (req, res) => {
   }
 });
 
-module.exports = productRoute;
+export default productRoute;

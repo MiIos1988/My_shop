@@ -1,4 +1,4 @@
-const Mongoose = require("mongoose");
+import Mongoose from "mongoose";
 
 const productSChema = new Mongoose.Schema({
   imgUrl: { type: String },
@@ -12,4 +12,4 @@ const productSChema = new Mongoose.Schema({
 });
 
 const ProductModel = Mongoose.model("product", productSChema);
-module.exports = ProductModel;
+export default ProductModel;
