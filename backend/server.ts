@@ -1,17 +1,17 @@
-import express from "express"
+import express from "express";
+import * as dotenv from "dotenv";
+dotenv.config();
 const app = express();
-import cors from "cors"
-import authRoute from "./routes/authRoute"
+import cors from "cors";
+import authRoute from "./routes/authRoute";
 import mongoose from "mongoose";
-import productRoute from "./routes/productRoute"
-import userRoute from "./routes/userRoute"
-import mailRoute from "./routes/mailRoute"
+import productRoute from "./routes/productRoute";
+import userRoute from "./routes/userRoute";
+import mailRoute from "./routes/mailRoute";
 const portNumber = 5050;
 
 mongoose
-  .connect(
-    "mongodb+srv://mongo:mongo@cluster0.gbtuujv.mongodb.net/?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MONGO_URL as string)
   .then((data) => console.log("MongoDB is connecting..."))
   .catch((error) => console.log(error));
 
